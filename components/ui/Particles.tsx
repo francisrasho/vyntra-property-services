@@ -1,18 +1,23 @@
-// Deterministic decorative particle field for dark sections. Positions are
-// generated from a fixed seed so server and client markup match (no hydration
-// mismatch), and it's static so it stays performant and screenshot-friendly.
-const seeded = (i: number, salt: number) => {
-  const v = Math.sin(i * salt) * 43758.5453;
-  return v - Math.floor(v);
-};
+// Deterministic decorative particle field for dark sections. Uses an integer
+// LCG (bit-identical across server and client, unlike Math.sin) and rounds the
+// output, so SSR and hydration markup match exactly. Static => performant and
+// screenshot-friendly.
+function makeDots(count: number) {
+  let s = 1337 >>> 0;
+  const next = () => {
+    s = (s * 1664525 + 1013904223) >>> 0;
+    return s / 4294967296;
+  };
+  return Array.from({ length: count }, (_, i) => ({
+    x: +(next() * 100).toFixed(2),
+    y: +(next() * 100).toFixed(2),
+    r: +(0.4 + next() * 1.6).toFixed(2),
+    o: +(0.05 + next() * 0.35).toFixed(3),
+    gold: i % 6 === 0,
+  }));
+}
 
-const DOTS = Array.from({ length: 64 }, (_, i) => ({
-  x: seeded(i + 1, 12.9898) * 100,
-  y: seeded(i + 1, 78.233) * 100,
-  r: 0.4 + seeded(i + 1, 37.719) * 1.6,
-  o: 0.05 + seeded(i + 1, 9.137) * 0.35,
-  gold: i % 6 === 0,
-}));
+const DOTS = makeDots(64);
 
 export function Particles({ className }: { className?: string }) {
   return (
