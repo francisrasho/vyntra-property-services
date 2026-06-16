@@ -83,8 +83,8 @@ export default function AboutPage() {
                     We bring together vetted, trained contractors and modern
                     technology to deliver a consistently premium standard across
                     cleaning, maintenance and property care. Documented scopes,
-                    photo-verified quality and clear communication aren't extras —
-                    they're how we work as standard.
+                    photo-verified quality and clear communication aren&apos;t
+                    extras — they&apos;re how we work as standard.
                   </p>
                   <p>
                     The result is a property partner you can rely on: one point of

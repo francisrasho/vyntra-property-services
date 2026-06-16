@@ -34,8 +34,8 @@ export default function ContactPage() {
                 Send us a message
               </h2>
               <p className="mt-2 text-sm text-ink-600">
-                Tell us about your property and what you need — we'll be in touch
-                shortly.
+                Tell us about your property and what you need — we&apos;ll be in
+                touch shortly.
               </p>
               <div className="mt-8">
                 <ContactForm />
