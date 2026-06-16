@@ -8,10 +8,13 @@ import { ServiceAreaMap } from "@/components/sections/ServiceAreaMap";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
+import { JsonLd, faqSchema } from "@/lib/seo";
+import { faqs } from "@/data/faqs";
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={faqSchema(faqs)} />
       <Hero />
       <Stats />
       <ServicesGrid />

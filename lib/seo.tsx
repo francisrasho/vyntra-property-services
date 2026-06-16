@@ -1,4 +1,5 @@
 import { company } from "@/data/company";
+import { serviceAreas } from "@/data/serviceAreas";
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -11,6 +12,31 @@ export function JsonLd({ data }: { data: Record<string, unknown> }) {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
   );
+}
+
+export function localBusinessSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": SITE_URL,
+    name: company.name,
+    image: `${SITE_URL}/opengraph-image`,
+    url: SITE_URL,
+    telephone: company.phone,
+    email: company.email,
+    priceRange: "$$",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: company.address.street,
+      addressLocality: company.address.suburb,
+      addressRegion: company.address.state,
+      postalCode: company.address.postcode,
+      addressCountry: "AU",
+    },
+    areaServed: serviceAreas.map((a) => ({ "@type": "City", name: a.name })),
+    openingHours: ["Mo-Fr 07:00-18:00", "Sa 08:00-16:00"],
+    sameAs: company.socials.map((s) => s.href).filter((h) => h && h !== "#"),
+  };
 }
 
 export function serviceSchema(s: {
@@ -31,6 +57,18 @@ export function serviceSchema(s: {
       telephone: company.phone,
     },
     url: `${SITE_URL}/services/${s.slug}`,
+  };
+}
+
+export function faqSchema(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
   };
 }
 
