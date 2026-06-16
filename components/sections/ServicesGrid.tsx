@@ -7,17 +7,19 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/icon";
 import { QuoteButton } from "@/components/forms/QuoteButton";
 
-export function ServicesGrid() {
+export function ServicesGrid({ showHeading = true }: { showHeading?: boolean }) {
   return (
     <section id="services" className="py-24">
       <Container>
-        <SectionHeading
-          eyebrow="What we do"
-          title="Property services, done to a premium standard"
-          subtitle="One trusted partner for cleaning, maintenance and property care across Sydney — delivered with documented scopes and total accountability."
-        />
+        {showHeading && (
+          <SectionHeading
+            eyebrow="What we do"
+            title="Property services, done to a premium standard"
+            subtitle="One trusted partner for cleaning, maintenance and property care across Sydney — delivered with documented scopes and total accountability."
+          />
+        )}
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className={`grid gap-5 sm:grid-cols-2 lg:grid-cols-3 ${showHeading ? "mt-14" : ""}`}>
           {services.map((s, i) => (
             <Reveal key={s.slug} delay={i * 0.04}>
               <Link
