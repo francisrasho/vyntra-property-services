@@ -1,0 +1,124 @@
+{
+  "planPath": "docs/superpowers/plans/2026-06-16-vyntra-marketing-site.md",
+  "tasks": [
+    {
+      "id": 1,
+      "subject": "Task 0: Scaffold + brand tokens + base layout",
+      "status": "pending",
+      "description": "**Goal:** Running Next.js 15 + TS + Tailwind v4 app with Vyntra brand tokens, Inter font, base layout shell.\n\n```json:metadata\n{\"files\":[\"package.json\",\"app/layout.tsx\",\"app/globals.css\",\"lib/cn.ts\",\".env.example\"],\"verifyCommand\":\"npm run build\",\"acceptanceCriteria\":[\"dev serves / no console errors\",\"build succeeds\",\"brand tokens utilities\",\"Inter via next/font\"]}\n```"
+    },
+    {
+      "id": 2,
+      "subject": "Task 1: UI primitives + motion system",
+      "status": "pending",
+      "blockedBy": [1],
+      "description": "**Goal:** Reusable brand-consistent UI primitives + reduced-motion-aware motion variants.\n\n```json:metadata\n{\"files\":[\"lib/motion.ts\",\"components/ui/Button.tsx\",\"components/ui/Reveal.tsx\",\"components/ui/AnimatedCounter.tsx\",\"components/ui/GlassCard.tsx\",\"components/ui/Modal.tsx\"],\"verifyCommand\":\"npx vitest run tests/animated-counter.test.tsx tests/button.test.tsx\",\"acceptanceCriteria\":[\"Button variants + href anchor\",\"Reveal reduced-motion noop\",\"AnimatedCounter reaches target\",\"GlassCard frosted\",\"tests pass\"]}\n```"
+    },
+    {
+      "id": 3,
+      "subject": "Task 2: Typed content data layer",
+      "status": "pending",
+      "blockedBy": [1],
+      "description": "**Goal:** Single source of truth content as typed TS modules with realistic placeholder copy.\n\n```json:metadata\n{\"files\":[\"data/types.ts\",\"data/company.ts\",\"data/services.ts\",\"data/stats.ts\",\"data/whyChoose.ts\",\"data/testimonials.ts\",\"data/caseStudies.ts\",\"data/serviceAreas.ts\",\"data/faqs.ts\"],\"verifyCommand\":\"npx vitest run tests/data.test.ts\",\"acceptanceCriteria\":[\"9 services unique slugs\",\"company placeholders flagged\",\"typed tsc clean\",\"data.test passes\"]}\n```"
+    },
+    {
+      "id": 4,
+      "subject": "Task 3: Layout chrome — nav, footer, floating CTAs",
+      "status": "pending",
+      "blockedBy": [2, 3],
+      "description": "**Goal:** Sticky glass nav, mobile menu, footer, floating quote button, sticky mobile call bar.\n\n```json:metadata\n{\"files\":[\"components/layout/GlassNav.tsx\",\"components/layout/MobileMenu.tsx\",\"components/layout/Footer.tsx\",\"components/layout/FloatingQuoteButton.tsx\",\"components/layout/MobileCallBar.tsx\",\"app/layout.tsx\"],\"verifyCommand\":\"npm run build\",\"acceptanceCriteria\":[\"sticky glass on scroll\",\"nav links + anchors\",\"accessible mobile menu\",\"floating quote + call bar\",\"footer coming-soon portal chips\"]}\n```"
+    },
+    {
+      "id": 5,
+      "subject": "Task 4: Lead pipeline core (schema, supabase, API route, estimate) — TESTED",
+      "status": "pending",
+      "blockedBy": [1],
+      "description": "**Goal:** Validated lead intake endpoint (supabase or log demo) + instant-estimate calc, unit-tested.\n\n```json:metadata\n{\"files\":[\"lib/schema.ts\",\"lib/supabase.ts\",\"lib/estimate.ts\",\"app/api/lead/route.ts\"],\"verifyCommand\":\"npx vitest run tests/schema.test.ts tests/estimate.test.ts tests/lead-route.test.ts\",\"acceptanceCriteria\":[\"leadSchema validates + honeypot\",\"estimateRange deterministic\",\"POST log 200 / invalid 400\",\"supabase insert mapped columns\",\"tests pass\"]}\n```"
+    },
+    {
+      "id": 6,
+      "subject": "Task 5: Forms — contact, multi-step quote, instant estimate, exit-intent",
+      "status": "pending",
+      "blockedBy": [2, 3, 5],
+      "description": "**Goal:** All lead-capture UIs wired to /api/lead with premium UX + success states.\n\n```json:metadata\n{\"files\":[\"components/forms/useLeadSubmit.ts\",\"components/forms/Field.tsx\",\"components/forms/ContactForm.tsx\",\"components/forms/QuoteForm.tsx\",\"components/forms/InstantEstimate.tsx\",\"components/forms/ExitIntentPopup.tsx\",\"components/forms/QuoteModalProvider.tsx\"],\"verifyCommand\":\"npx vitest run tests/quote-form.test.tsx\",\"acceptanceCriteria\":[\"useLeadSubmit status\",\"QuoteForm 4-step gated\",\"ContactForm all fields + upload UI\",\"InstantEstimate live range\",\"ExitIntent throttled\",\"modal global\",\"test passes\"]}\n```"
+    },
+    {
+      "id": 7,
+      "subject": "Task 6: Home sections — Hero, TrustBar, Stats",
+      "status": "pending",
+      "blockedBy": [2, 3, 6],
+      "description": "**Goal:** Cinematic top of homepage.\n\n```json:metadata\n{\"files\":[\"components/sections/Hero.tsx\",\"components/sections/TrustBar.tsx\",\"components/sections/Stats.tsx\",\"components/ui/Particles.tsx\",\"app/page.tsx\"],\"verifyCommand\":\"npm run build\",\"acceptanceCriteria\":[\"full-viewport hero 3 CTAs anim\",\"trust indicators row\",\"animated stat counters\",\"responsive premium\"]}\n```"
+    },
+    {
+      "id": 8,
+      "subject": "Task 7: Home sections — Services grid, Why Choose, Case Study feature",
+      "status": "pending",
+      "blockedBy": [2, 3],
+      "description": "**Goal:** Core mid-page conversion sections.\n\n```json:metadata\n{\"files\":[\"components/sections/ServicesGrid.tsx\",\"components/sections/WhyChoose.tsx\",\"components/sections/CaseStudyFeature.tsx\",\"app/page.tsx\"],\"verifyCommand\":\"npm run build\",\"acceptanceCriteria\":[\"9 service cards + hover\",\"8 why-choose id=why\",\"case study feature CTA\",\"section CTAs\"]}\n```"
+    },
+    {
+      "id": 9,
+      "subject": "Task 8: Home sections — Gallery preview, Testimonials, FAQ, CTA + assemble",
+      "status": "pending",
+      "blockedBy": [2, 3, 6],
+      "description": "**Goal:** Complete homepage, lock section order + anchors.\n\n```json:metadata\n{\"files\":[\"components/sections/GalleryPreview.tsx\",\"components/sections/Testimonials.tsx\",\"components/sections/FAQ.tsx\",\"components/sections/CTASection.tsx\",\"app/page.tsx\"],\"verifyCommand\":\"npm run build\",\"acceptanceCriteria\":[\"gallery teaser\",\"testimonials >=6 + video placeholder\",\"FAQ accordion id=faq\",\"reusable CTA band\",\"home order per spec\"]}\n```"
+    },
+    {
+      "id": 10,
+      "subject": "Task 9: Interactive Sydney service-area map + /service-areas page",
+      "status": "pending",
+      "blockedBy": [2, 3],
+      "description": "**Goal:** Custom animated SVG Sydney map + dedicated page.\n\n```json:metadata\n{\"files\":[\"components/sections/ServiceAreaMap.tsx\",\"app/service-areas/page.tsx\",\"app/page.tsx\"],\"verifyCommand\":\"npm run build\",\"acceptanceCriteria\":[\"SVG map pulsing markers tooltips\",\"reduced-motion disables pulse\",\"/service-areas page + metadata\",\"keyboard accessible\"]}\n```"
+    },
+    {
+      "id": 11,
+      "subject": "Task 10: Services pages — index + dynamic detail",
+      "status": "pending",
+      "blockedBy": [2, 3],
+      "description": "**Goal:** /services index + 9 static /services/[slug] pages.\n\n```json:metadata\n{\"files\":[\"app/services/page.tsx\",\"app/services/[slug]/page.tsx\"],\"verifyCommand\":\"npm run build\",\"acceptanceCriteria\":[\"/services lists 9\",\"generateStaticParams + per-service metadata\",\"detail layout\",\"bad slug notFound\",\"Service JSON-LD\"]}\n```"
+    },
+    {
+      "id": 12,
+      "subject": "Task 11: Gallery page — filter, lightbox, before/after slider",
+      "status": "pending",
+      "blockedBy": [2, 3],
+      "description": "**Goal:** Interactive gallery with filtering, lightbox, before/after sliders.\n\n```json:metadata\n{\"files\":[\"app/gallery/page.tsx\",\"components/gallery/GalleryGrid.tsx\",\"components/gallery/Lightbox.tsx\",\"components/ui/BeforeAfterSlider.tsx\",\"data/gallery.ts\"],\"verifyCommand\":\"npx vitest run tests/before-after.test.tsx\",\"acceptanceCriteria\":[\"filterable animated grid\",\"lightbox accessible\",\"before/after clamps 0-100\",\"test passes\"]}\n```"
+    },
+    {
+      "id": 13,
+      "subject": "Task 12: Case studies — index + detail",
+      "status": "pending",
+      "blockedBy": [2, 3],
+      "description": "**Goal:** /case-studies index + /case-studies/[slug] detail.\n\n```json:metadata\n{\"files\":[\"app/case-studies/page.tsx\",\"app/case-studies/[slug]/page.tsx\"],\"verifyCommand\":\"npm run build\",\"acceptanceCriteria\":[\"index lists case studies\",\"detail problem/solution/results/before-after/testimonial\",\"generateStaticParams + metadata\",\"bad slug notFound\"]}\n```"
+    },
+    {
+      "id": 14,
+      "subject": "Task 13: About, Contact, Quote pages",
+      "status": "pending",
+      "blockedBy": [2, 3, 6],
+      "description": "**Goal:** Brand story, full contact (+maps), standalone quote.\n\n```json:metadata\n{\"files\":[\"app/about/page.tsx\",\"app/contact/page.tsx\",\"app/quote/page.tsx\"],\"verifyCommand\":\"npm run build\",\"acceptanceCriteria\":[\"about brand story + metadata\",\"contact form + maps embed + hours/emergency\",\"quote page hosts QuoteForm\",\"per-page metadata\"]}\n```"
+    },
+    {
+      "id": 15,
+      "subject": "Task 14: SEO infrastructure — metadata, JSON-LD, sitemap, robots",
+      "status": "pending",
+      "blockedBy": [3, 9, 11, 13],
+      "description": "**Goal:** Site-wide SEO/schema, sitemap, robots, OG.\n\n```json:metadata\n{\"files\":[\"lib/seo.ts\",\"app/sitemap.ts\",\"app/robots.ts\",\"app/layout.tsx\"],\"verifyCommand\":\"npx vitest run tests/seo.test.ts\",\"acceptanceCriteria\":[\"LocalBusiness JSON-LD\",\"Service/FAQPage/BreadcrumbList\",\"sitemap + robots\",\"OG/Twitter defaults\",\"seo.test passes\"]}\n```"
+    },
+    {
+      "id": 16,
+      "subject": "Task 15: Supabase website_leads migration + env/docs",
+      "status": "pending",
+      "blockedBy": [5],
+      "description": "**Goal:** Migration + docs so leads persist once creds supplied. Live apply gated on user.\n\n```json:metadata\n{\"files\":[\"supabase/migrations/website_leads.sql\",\"README.md\",\".env.example\"],\"verifyCommand\":\"npm run build\",\"acceptanceCriteria\":[\"website_leads table + RLS no-anon-policy\",\"README run/env/demo-vs-live/migration/swap docs\",\"live apply gated on user\"]}\n```"
+    },
+    {
+      "id": 17,
+      "subject": "Task 16: Final verification — build, lint, types, Lighthouse, responsive QA",
+      "status": "pending",
+      "blockedBy": [4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+      "description": "**Goal:** Confirm production-ready via build, lint, types, tests, Lighthouse, responsive QA.\n\n```json:metadata\n{\"files\":[],\"verifyCommand\":\"npm run build && npx tsc --noEmit && npm run lint && npx vitest run\",\"acceptanceCriteria\":[\"build/tsc/lint/vitest clean\",\"responsive QA no breakage\",\"Lighthouse >=90 recorded\",\"forms success in demo mode\"]}\n```"
+    }
+  ],
+  "lastUpdated": "2026-06-16T00:00:00Z"
+}
