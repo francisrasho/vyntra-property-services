@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "images.pexels.com" },
+      // Placeholder photography (swap for real Vyntra imagery later).
+      { protocol: "https", hostname: "picsum.photos" },
     ],
   },
 };
