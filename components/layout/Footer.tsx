@@ -1,0 +1,153 @@
+import Link from "next/link";
+import { Clock, Mail, MapPin, PhoneCall, Siren } from "lucide-react";
+import { company } from "@/data/company";
+import { services } from "@/data/services";
+import { Container } from "@/components/ui/Container";
+
+const companyLinks = [
+  { label: "About", href: "/about" },
+  { label: "Service Areas", href: "/service-areas" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Contact", href: "/contact" },
+];
+
+export function Footer() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="bg-ink pb-[calc(env(safe-area-inset-bottom)+5.5rem)] pt-16 text-white/80 md:pb-16">
+      <Container>
+        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+          {/* Brand */}
+          <div>
+            <span className="text-xl font-bold tracking-tight text-white">
+              VYNTRA<span className="text-gold">.</span>
+            </span>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
+              {company.tagline}. Premium property maintenance and cleaning,
+              trusted by property managers, strata managers and businesses across
+              Sydney.
+            </p>
+            <div className="mt-5 flex gap-2">
+              {company.socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  aria-label={s.label}
+                  className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-xs font-medium text-white/70 transition-colors hover:border-gold hover:text-gold"
+                >
+                  {s.label.charAt(0)}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h3 className="text-sm font-semibold text-white">Services</h3>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              {services.slice(0, 6).map((s) => (
+                <li key={s.slug}>
+                  <Link
+                    href={`/services/${s.slug}`}
+                    className="text-white/60 transition-colors hover:text-gold"
+                  >
+                    {s.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h3 className="text-sm font-semibold text-white">Company</h3>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              {companyLinks.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="text-white/60 transition-colors hover:text-gold"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Portals — coming soon */}
+            <h3 className="mt-6 text-sm font-semibold text-white">Portals</h3>
+            <ul className="mt-3 space-y-2 text-sm">
+              {["Client Portal", "Contractor Portal"].map((p) => (
+                <li
+                  key={p}
+                  className="flex items-center gap-2 text-white/40"
+                  title="Coming soon"
+                >
+                  {p}
+                  <span className="rounded-full border border-white/15 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-white/50">
+                    Soon
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="text-sm font-semibold text-white">Get in touch</h3>
+            <ul className="mt-4 space-y-3 text-sm text-white/60">
+              <li className="flex items-start gap-2.5">
+                <PhoneCall className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                <a href={`tel:${company.phone}`} className="hover:text-gold">
+                  {company.phoneDisplay}
+                </a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                <a href={`mailto:${company.email}`} className="hover:text-gold">
+                  {company.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Siren className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                <span>
+                  24/7 emergency:{" "}
+                  <a href={`tel:${company.emergencyPhone}`} className="hover:text-gold">
+                    {company.emergencyPhoneDisplay}
+                  </a>
+                </span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                <span>
+                  {company.address.suburb}, {company.address.state}{" "}
+                  {company.address.postcode}
+                </span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                <span>Mon–Fri 7am–6pm · Sat 8am–4pm</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {year} {company.legalName}. ABN {company.abn}. All rights reserved.
+          </p>
+          <div className="flex gap-4">
+            <Link href="#" className="hover:text-gold">
+              Privacy Policy
+            </Link>
+            <Link href="#" className="hover:text-gold">
+              Terms
+            </Link>
+          </div>
+        </div>
+      </Container>
+    </footer>
+  );
+}

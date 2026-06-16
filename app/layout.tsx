@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { GlassNav } from "@/components/layout/GlassNav";
+import { Footer } from "@/components/layout/Footer";
+import { FloatingQuoteButton } from "@/components/layout/FloatingQuoteButton";
+import { MobileCallBar } from "@/components/layout/MobileCallBar";
+import { QuoteModalProvider } from "@/components/forms/QuoteModalProvider";
+import { ExitIntentPopup } from "@/components/forms/ExitIntentPopup";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +29,16 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <QuoteModalProvider>
+          <GlassNav />
+          <main>{children}</main>
+          <Footer />
+          <FloatingQuoteButton />
+          <MobileCallBar />
+          <ExitIntentPopup />
+        </QuoteModalProvider>
+      </body>
     </html>
   );
 }
