@@ -1,7 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
-const insertMock = vi.fn(() => Promise.resolve({ error: null }));
-const fromMock = vi.fn(() => ({ insert: insertMock }));
+const insertMock = vi.fn((_row: Record<string, unknown>) =>
+  Promise.resolve({ error: null }),
+);
+const fromMock = vi.fn((_table: string) => ({ insert: insertMock }));
 
 vi.mock("@/lib/supabase", () => ({
   getServiceClient: () => ({ from: fromMock }),
