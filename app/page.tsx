@@ -3,6 +3,10 @@ import { Stats } from "@/components/sections/Stats";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { WhyChoose } from "@/components/sections/WhyChoose";
 import { CaseStudyFeature } from "@/components/sections/CaseStudyFeature";
+import { GalleryPreview } from "@/components/sections/GalleryPreview";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { FAQ } from "@/components/sections/FAQ";
+import { CTASection } from "@/components/sections/CTASection";
 
 export default function Home() {
   return (
@@ -12,6 +16,10 @@ export default function Home() {
       <ServicesGrid />
       <WhyChoose />
       <CaseStudyFeature />
+      <GalleryPreview />
+      <Testimonials />
+      <FAQ />
+      <CTASection />
     </>
   );
 }
