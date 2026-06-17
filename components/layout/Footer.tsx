@@ -1,8 +1,24 @@
 import Link from "next/link";
-import { Clock, Mail, MapPin, PhoneCall, Siren } from "lucide-react";
+import {
+  Clock,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  PhoneCall,
+  Siren,
+  type LucideIcon,
+} from "lucide-react";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
 import { Container } from "@/components/ui/Container";
+
+const socialIcons: Record<string, LucideIcon> = {
+  LinkedIn: Linkedin,
+  Instagram: Instagram,
+  Facebook: Facebook,
+};
 
 const companyLinks = [
   { label: "About", href: "/about" },
@@ -31,16 +47,19 @@ export function Footer() {
               Sydney.
             </p>
             <div className="mt-5 flex gap-2">
-              {company.socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-xs font-medium text-white/70 transition-colors hover:border-gold hover:text-gold"
-                >
-                  {s.label.charAt(0)}
-                </a>
-              ))}
+              {company.socials.map((s) => {
+                const Ico = socialIcons[s.label];
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    aria-label={s.label}
+                    className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-gold hover:text-gold"
+                  >
+                    {Ico ? <Ico className="h-4 w-4" /> : s.label.charAt(0)}
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -136,9 +155,16 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} {company.legalName}. ABN {company.abn}. All rights reserved.
-          </p>
+          <div className="space-y-1">
+            <p>
+              © {year} {company.legalName}. ABN {company.abn}. All rights
+              reserved.
+            </p>
+            <p>
+              Powered by{" "}
+              <span className="font-semibold text-gold/80">Vyntra OS</span>
+            </p>
+          </div>
           <div className="flex gap-4">
             <Link href="#" className="hover:text-gold">
               Privacy Policy
