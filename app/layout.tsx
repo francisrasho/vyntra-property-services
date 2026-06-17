@@ -10,7 +10,6 @@ import { ExitIntentPopup } from "@/components/forms/ExitIntentPopup";
 import { JsonLd, localBusinessSchema } from "@/lib/seo";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import { CustomCursor } from "@/components/ui/CustomCursor";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -61,7 +60,6 @@ export default function RootLayout({
         <JsonLd data={localBusinessSchema()} />
         <SmoothScroll>
           <ScrollProgress />
-          <CustomCursor />
           <QuoteModalProvider>
             <GlassNav />
             <main>{children}</main>
