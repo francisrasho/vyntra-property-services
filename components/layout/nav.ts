@@ -7,9 +7,8 @@ export interface NavLink {
 export const primaryNav: NavLink[] = [
   { label: "Services", href: "/services" },
   { label: "Service Areas", href: "/service-areas" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Case Studies", href: "/case-studies" },
   { label: "About", href: "/about" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -20,8 +19,6 @@ export const fullNav: NavLink[] = [
   { label: "About", href: "/about" },
   { label: "Why Choose Us", href: "/about#why" },
   { label: "Service Areas", href: "/service-areas" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Case Studies", href: "/case-studies" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];

@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { serviceSlugs } from "@/data/services";
-import { caseStudySlugs } from "@/data/caseStudies";
 import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,9 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/services",
     "/service-areas",
-    "/gallery",
-    "/case-studies",
     "/about",
+    "/faq",
     "/contact",
     "/quote",
   ].map((route) => ({
@@ -29,12 +27,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const caseRoutes = caseStudySlugs.map((slug) => ({
-    url: `${SITE_URL}/case-studies/${slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
-
-  return [...staticRoutes, ...serviceRoutes, ...caseRoutes];
+  return [...staticRoutes, ...serviceRoutes];
 }
