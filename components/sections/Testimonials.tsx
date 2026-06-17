@@ -4,7 +4,15 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function Testimonials() {
+export function Testimonials({
+  limit,
+  showVideoPlaceholder = true,
+}: {
+  limit?: number;
+  showVideoPlaceholder?: boolean;
+} = {}) {
+  const items = limit ? testimonials.slice(0, limit) : testimonials;
+
   return (
     <section className="py-24">
       <Container>
@@ -15,7 +23,7 @@ export function Testimonials() {
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t, i) => (
+          {items.map((t, i) => (
             <Reveal key={t.name} delay={i * 0.04}>
               <figure className="flex h-full flex-col rounded-2xl border border-ink/[0.08] bg-surface p-7 shadow-sm">
                 <div className="flex gap-0.5 text-gold" aria-label={`${t.rating} out of 5 stars`}>
@@ -41,15 +49,17 @@ export function Testimonials() {
             </Reveal>
           ))}
 
-          <Reveal delay={0.12}>
-            <div className="flex h-full min-h-[230px] flex-col items-center justify-center rounded-2xl border border-dashed border-ink/15 bg-ink/[0.02] p-7 text-center">
-              <PlayCircle className="h-10 w-10 text-gold-dark" />
-              <p className="mt-3 text-sm font-semibold text-ink">Video testimonials</p>
-              <p className="mt-1 text-xs text-ink-600">
-                Coming soon — hear from our clients in their own words.
-              </p>
-            </div>
-          </Reveal>
+          {showVideoPlaceholder && (
+            <Reveal delay={0.12}>
+              <div className="flex h-full min-h-[230px] flex-col items-center justify-center rounded-2xl border border-dashed border-ink/15 bg-ink/[0.02] p-7 text-center">
+                <PlayCircle className="h-10 w-10 text-gold-dark" />
+                <p className="mt-3 text-sm font-semibold text-ink">Video testimonials</p>
+                <p className="mt-1 text-xs text-ink-600">
+                  Coming soon — hear from our clients in their own words.
+                </p>
+              </div>
+            </Reveal>
+          )}
         </div>
       </Container>
     </section>

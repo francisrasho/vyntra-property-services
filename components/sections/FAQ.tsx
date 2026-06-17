@@ -8,19 +8,23 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { cn } from "@/lib/cn";
 
-export function FAQ() {
+export function FAQ({ showHeading = true }: { showHeading?: boolean } = {}) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section id="faq" className="bg-bg py-24">
       <Container>
-        <SectionHeading
-          eyebrow="FAQ"
-          title="Questions, answered"
-          subtitle="Everything you need to know about working with Vyntra. Can't find your answer? Just ask."
-        />
+        {showHeading && (
+          <SectionHeading
+            eyebrow="FAQ"
+            title="Questions, answered"
+            subtitle="Everything you need to know about working with Vyntra. Can't find your answer? Just ask."
+          />
+        )}
 
-        <div className="mx-auto mt-12 max-w-3xl overflow-hidden rounded-2xl border border-ink/10 bg-surface">
+        <div
+          className={`mx-auto max-w-3xl overflow-hidden rounded-2xl border border-ink/10 bg-surface ${showHeading ? "mt-12" : ""}`}
+        >
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (

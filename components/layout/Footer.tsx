@@ -9,6 +9,7 @@ const companyLinks = [
   { label: "Service Areas", href: "/service-areas" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Gallery", href: "/gallery" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
 

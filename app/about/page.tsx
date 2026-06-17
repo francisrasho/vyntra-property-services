@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Cpu, Handshake, ShieldCheck, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { CTASection } from "@/components/sections/CTASection";
+import { WhyChoose } from "@/components/sections/WhyChoose";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
@@ -13,35 +12,6 @@ export const metadata: Metadata = {
     "Vyntra Property Services is a modern, technology-driven property maintenance and cleaning company built for property managers, strata managers and businesses across Sydney.",
   alternates: { canonical: "/about" },
 };
-
-const values = [
-  {
-    icon: "Cpu",
-    title: "Technology-driven",
-    description:
-      "Digital checklists, photo verification and live job tracking bring transparency to every visit — you don't just trust the work was done, you can see it.",
-  },
-  {
-    icon: "ShieldCheck",
-    title: "Genuinely accountable",
-    description:
-      "Documented scopes, audited quality and a single point of contact mean nothing falls through the cracks and someone always owns the outcome.",
-  },
-  {
-    icon: "Handshake",
-    title: "Built for partnerships",
-    description:
-      "We invest in understanding your properties and grow with you. We're not chasing one-off jobs — we're building long-term relationships.",
-  },
-  {
-    icon: "Sparkles",
-    title: "A premium standard",
-    description:
-      "From the first quote to the final inspection, every detail is handled with the polish your properties and reputation deserve.",
-  },
-];
-
-const iconMap = { Cpu, ShieldCheck, Handshake, Sparkles };
 
 export default function AboutPage() {
   return (
@@ -98,35 +68,8 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* Values */}
-      <section className="bg-bg py-20">
-        <Container>
-          <SectionHeading
-            eyebrow="What we stand for"
-            title="The principles behind every job"
-          />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {values.map((v, i) => {
-              const Ico = iconMap[v.icon as keyof typeof iconMap];
-              return (
-                <Reveal key={v.title} delay={i * 0.05}>
-                  <div className="flex h-full gap-5 rounded-2xl border border-ink/[0.08] bg-surface p-7">
-                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-ink text-gold">
-                      <Ico className="h-6 w-6" />
-                    </span>
-                    <div>
-                      <h3 className="text-lg font-bold text-ink">{v.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-ink-600">
-                        {v.description}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
+      {/* Why choose Vyntra */}
+      <WhyChoose />
 
       <CTASection
         title="Experience a better property partner"
