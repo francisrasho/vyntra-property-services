@@ -9,6 +9,8 @@ import { QuoteModalProvider } from "@/components/forms/QuoteModalProvider";
 import { ExitIntentPopup } from "@/components/forms/ExitIntentPopup";
 import { JsonLd, localBusinessSchema } from "@/lib/seo";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -57,15 +59,18 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
         <JsonLd data={localBusinessSchema()} />
-        <QuoteModalProvider>
+        <SmoothScroll>
           <ScrollProgress />
-          <GlassNav />
-          <main>{children}</main>
-          <Footer />
-          <FloatingQuoteButton />
-          <MobileCallBar />
-          <ExitIntentPopup />
-        </QuoteModalProvider>
+          <CustomCursor />
+          <QuoteModalProvider>
+            <GlassNav />
+            <main>{children}</main>
+            <Footer />
+            <FloatingQuoteButton />
+            <MobileCallBar />
+            <ExitIntentPopup />
+          </QuoteModalProvider>
+        </SmoothScroll>
       </body>
     </html>
   );

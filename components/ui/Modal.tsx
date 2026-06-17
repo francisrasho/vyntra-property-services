@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
+import { useScrollLock } from "@/lib/useScrollLock";
 
 /** Accessible centered dialog. Closes on Esc and backdrop click, locks body
  *  scroll while open, and animates in/out. */
@@ -25,6 +26,7 @@ export function Modal({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
+  useScrollLock(open);
 
   useEffect(() => {
     if (!open) return;
@@ -32,12 +34,9 @@ export function Modal({
       if (e.key === "Escape") onClose();
     };
     document.addEventListener("keydown", onKey);
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     panelRef.current?.focus();
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prevOverflow;
     };
   }, [open, onClose]);
 

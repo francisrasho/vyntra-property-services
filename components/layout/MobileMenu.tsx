@@ -9,6 +9,7 @@ import { fullNav } from "./nav";
 import { company } from "@/data/company";
 import { Button } from "@/components/ui/Button";
 import { useQuoteModal } from "@/components/forms/QuoteModalProvider";
+import { useScrollLock } from "@/lib/useScrollLock";
 
 export function MobileMenu({
   open,
@@ -21,6 +22,7 @@ export function MobileMenu({
   const { open: openQuote } = useQuoteModal();
 
   useEffect(() => setMounted(true), []);
+  useScrollLock(open);
 
   useEffect(() => {
     if (!open) return;
@@ -28,11 +30,8 @@ export function MobileMenu({
       if (e.key === "Escape") onClose();
     };
     document.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
     };
   }, [open, onClose]);
 

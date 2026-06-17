@@ -13,6 +13,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Particles } from "@/components/ui/Particles";
 import { QuoteButton } from "@/components/forms/QuoteButton";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { company } from "@/data/company";
 import { ease, wordReveal } from "@/lib/motion";
 import { cn } from "@/lib/cn";
@@ -124,9 +125,11 @@ export function Hero() {
           </motion.p>
 
           <motion.div {...itemProps} className="mt-8 flex flex-wrap items-center gap-3">
-            <QuoteButton size="lg">
-              Get Free Quote <ArrowRight className="h-4 w-4" />
-            </QuoteButton>
+            <Magnetic>
+              <QuoteButton size="lg">
+                Get Free Quote <ArrowRight className="h-4 w-4" />
+              </QuoteButton>
+            </Magnetic>
             <Button
               href="/contact"
               variant="outline"

@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Particles } from "@/components/ui/Particles";
 import { Button } from "@/components/ui/Button";
 import { QuoteButton } from "@/components/forms/QuoteButton";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { company } from "@/data/company";
 
 /** Reusable full-width conversion band. */
@@ -25,7 +26,9 @@ export function CTASection({
             </h2>
             <p className="mt-4 text-white/70">{subtitle}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <QuoteButton size="lg">Get Free Quote</QuoteButton>
+              <Magnetic>
+                <QuoteButton size="lg">Get Free Quote</QuoteButton>
+              </Magnetic>
               <Button
                 href={`tel:${company.phone}`}
                 external
