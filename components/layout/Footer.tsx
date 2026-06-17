@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   Clock,
@@ -35,9 +36,13 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           {/* Brand */}
           <div>
-            <span className="text-xl font-bold tracking-tight text-white">
-              VYNTRA<span className="text-gold">.</span>
-            </span>
+            <Image
+              src="/logo-full.png"
+              alt="Vyntra Property Services"
+              width={796}
+              height={165}
+              className="h-12 w-auto"
+            />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
               {company.tagline}. Premium property maintenance and cleaning,
               trusted by property managers, strata managers and businesses across

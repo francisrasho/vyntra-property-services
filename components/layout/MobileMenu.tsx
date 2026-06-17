@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { PhoneCall, X } from "lucide-react";
@@ -62,8 +63,17 @@ export function MobileMenu({
             className="absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col bg-surface p-6 shadow-2xl"
           >
             <div className="flex items-center justify-between">
-              <span className="text-lg font-bold tracking-tight text-ink">
-                VYNTRA<span className="text-gold">.</span>
+              <span className="inline-flex items-center gap-2.5">
+                <Image
+                  src="/logo-mark.png"
+                  alt=""
+                  width={214}
+                  height={160}
+                  className="h-8 w-auto rounded-md"
+                />
+                <span className="text-lg font-bold tracking-tight text-ink">
+                  VYNTRA<span className="text-gold">.</span>
+                </span>
               </span>
               <button
                 type="button"
