@@ -17,11 +17,12 @@ export function Logo({
       className={cn("group inline-flex items-center gap-2.5", className)}
     >
       <Image
-        src="/logo-mark.png"
+        src="/logo-mark.svg"
         alt=""
-        width={214}
-        height={160}
+        width={191}
+        height={133}
         priority
+        unoptimized
         className="h-9 w-auto rounded-lg ring-1 ring-gold/20"
       />
       <span

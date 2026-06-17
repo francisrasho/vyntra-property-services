@@ -65,10 +65,11 @@ export function MobileMenu({
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-2.5">
                 <Image
-                  src="/logo-mark.png"
+                  src="/logo-mark.svg"
                   alt=""
-                  width={214}
-                  height={160}
+                  width={191}
+                  height={133}
+                  unoptimized
                   className="h-8 w-auto rounded-md"
                 />
                 <span className="text-lg font-bold tracking-tight text-ink">

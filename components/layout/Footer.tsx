@@ -37,10 +37,11 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Image
-              src="/logo-full.png"
+              src="/logo-full.svg"
               alt="Vyntra Property Services"
-              width={796}
-              height={165}
+              width={953}
+              height={176}
+              unoptimized
               className="h-12 w-auto"
             />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
