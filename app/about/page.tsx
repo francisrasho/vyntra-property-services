@@ -28,9 +28,10 @@ export default function AboutPage() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-[var(--shadow-glass)]">
+                {/* Premium stock photo — swap for real Vyntra project photography. */}
                 <Image
-                  src="https://picsum.photos/seed/vyntra-about/1200/900"
-                  alt="The Vyntra team at work"
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+                  alt="A premium Sydney property maintained to the Vyntra standard"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
