@@ -8,7 +8,7 @@ import {
   type Variants,
 } from "framer-motion";
 import { ArrowRight, CalendarCheck, PhoneCall } from "lucide-react";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Particles } from "@/components/ui/Particles";
@@ -92,21 +92,25 @@ export function Hero() {
             </h1>
           ) : (
             <motion.h1
-              className="mt-6 flex flex-wrap text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.5rem]"
+              className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.5rem]"
               initial="hidden"
               animate="show"
               variants={{
-                show: { transition: { staggerChildren: 0.09, delayChildren: 0.25 } },
+                show: {
+                  transition: { staggerChildren: 0.09, delayChildren: 0.25 },
+                },
               }}
             >
               {HEADLINE.map((w, i) => (
-                <motion.span
-                  key={i}
-                  variants={wordReveal}
-                  className={cn("mr-[0.28em] inline-block", w.gold && "text-gold")}
-                >
-                  {w.t}
-                </motion.span>
+                <Fragment key={i}>
+                  <motion.span
+                    variants={wordReveal}
+                    className={cn("inline-block", w.gold && "text-gold")}
+                  >
+                    {w.t}
+                  </motion.span>
+                  {i < HEADLINE.length - 1 ? " " : null}
+                </Fragment>
               ))}
             </motion.h1>
           )}
