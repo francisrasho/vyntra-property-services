@@ -32,6 +32,15 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* Respect users who prefer reduced motion: neutralize animations/transitions. */
 @media (prefers-reduced-motion: reduce) {
   html {

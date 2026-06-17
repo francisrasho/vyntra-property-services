@@ -1,18 +1,26 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
 import { ArrowRight, CalendarCheck, PhoneCall } from "lucide-react";
+import { useRef } from "react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Particles } from "@/components/ui/Particles";
 import { QuoteButton } from "@/components/forms/QuoteButton";
 import { company } from "@/data/company";
-import { ease } from "@/lib/motion";
+import { ease, wordReveal } from "@/lib/motion";
+import { cn } from "@/lib/cn";
 import { TrustBar } from "./TrustBar";
 
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 };
 
 const item: Variants = {
@@ -20,14 +28,45 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
 };
 
+const HEADLINE = [
+  { t: "Sydney's" },
+  { t: "Premium" },
+  { t: "Property", gold: true },
+  { t: "Services", gold: true },
+  { t: "Partner" },
+];
+
 export function Hero() {
   const reduced = useReducedMotion();
   const itemProps = reduced ? {} : { variants: item };
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const glowX = useMotionValue(50);
+  const glowY = useMotionValue(24);
+  const spotlight = useMotionTemplate`radial-gradient(650px circle at ${glowX}% ${glowY}%, rgba(212,175,55,0.16), transparent 60%)`;
+
+  function handleMouseMove(e: React.MouseEvent) {
+    if (reduced) return;
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    glowX.set(((e.clientX - rect.left) / rect.width) * 100);
+    glowY.set(((e.clientY - rect.top) / rect.height) * 100);
+  }
+
   return (
-    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-ink pb-24 pt-28 text-white">
+    <section
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-ink pb-24 pt-28 text-white"
+    >
       <Particles />
-      {/* Soft gradient glows */}
+      {!reduced && (
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{ background: spotlight }}
+        />
+      )}
       <div className="pointer-events-none absolute -left-40 top-10 h-[30rem] w-[30rem] rounded-full bg-gold/10 blur-2xl" />
       <div className="pointer-events-none absolute -right-32 bottom-0 h-[26rem] w-[26rem] rounded-full bg-gold/[0.06] blur-2xl" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/0 via-ink/0 to-ink" />
@@ -46,13 +85,31 @@ export function Hero() {
             Sydney-wide property services
           </motion.span>
 
-          <motion.h1
-            {...itemProps}
-            className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-[4.5rem]"
-          >
-            Sydney&apos;s Premium{" "}
-            <span className="text-gold">Property Services</span> Partner
-          </motion.h1>
+          {reduced ? (
+            <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-[4.5rem]">
+              Sydney&apos;s Premium{" "}
+              <span className="text-gold">Property Services</span> Partner
+            </h1>
+          ) : (
+            <motion.h1
+              className="mt-6 flex flex-wrap text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.5rem]"
+              initial="hidden"
+              animate="show"
+              variants={{
+                show: { transition: { staggerChildren: 0.09, delayChildren: 0.25 } },
+              }}
+            >
+              {HEADLINE.map((w, i) => (
+                <motion.span
+                  key={i}
+                  variants={wordReveal}
+                  className={cn("mr-[0.28em] inline-block", w.gold && "text-gold")}
+                >
+                  {w.t}
+                </motion.span>
+              ))}
+            </motion.h1>
+          )}
 
           <motion.p
             {...itemProps}

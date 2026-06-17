@@ -24,7 +24,7 @@ export function ServicesGrid({ showHeading = true }: { showHeading?: boolean }) 
             <Reveal key={s.slug} delay={i * 0.04}>
               <Link
                 href={`/services/${s.slug}`}
-                className="group flex h-full flex-col rounded-2xl border border-ink/[0.08] bg-surface p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[var(--shadow-glass)]"
+                className="group flex h-full flex-col rounded-2xl border border-ink/[0.08] bg-surface p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_22px_44px_-16px_rgba(212,175,55,0.35)]"
               >
                 <span className="grid h-12 w-12 place-items-center rounded-xl bg-ink text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-ink">
                   <Icon name={s.icon} className="h-6 w-6" />

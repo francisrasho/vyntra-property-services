@@ -8,6 +8,7 @@ import { MobileCallBar } from "@/components/layout/MobileCallBar";
 import { QuoteModalProvider } from "@/components/forms/QuoteModalProvider";
 import { ExitIntentPopup } from "@/components/forms/ExitIntentPopup";
 import { JsonLd, localBusinessSchema } from "@/lib/seo";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -57,6 +58,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <JsonLd data={localBusinessSchema()} />
         <QuoteModalProvider>
+          <ScrollProgress />
           <GlassNav />
           <main>{children}</main>
           <Footer />
