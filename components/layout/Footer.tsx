@@ -39,10 +39,10 @@ export function Footer() {
             <Image
               src="/logo-full.svg"
               alt="Vyntra Property Services"
-              width={953}
-              height={176}
+              width={1536}
+              height={1024}
               unoptimized
-              className="h-12 w-auto"
+              className="h-20 w-auto"
             />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
               {company.tagline}. Premium property maintenance and cleaning,

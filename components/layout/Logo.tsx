@@ -16,15 +16,17 @@ export function Logo({
       aria-label="Vyntra Property Services — home"
       className={cn("group inline-flex items-center gap-2.5", className)}
     >
-      <Image
-        src="/logo-mark.svg"
-        alt=""
-        width={191}
-        height={133}
-        priority
-        unoptimized
-        className="h-9 w-auto rounded-lg ring-1 ring-gold/20"
-      />
+      <span className="grid h-9 w-9 place-items-center rounded-lg bg-ink ring-1 ring-gold/20">
+        <Image
+          src="/logo-mark.svg"
+          alt=""
+          width={810}
+          height={554}
+          priority
+          unoptimized
+          className="h-5 w-auto"
+        />
+      </span>
       <span
         className={cn(
           "text-lg font-bold tracking-tight",
