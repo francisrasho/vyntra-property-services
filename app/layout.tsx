@@ -10,6 +10,7 @@ import { ExitIntentPopup } from "@/components/forms/ExitIntentPopup";
 import { JsonLd, localBusinessSchema } from "@/lib/seo";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -67,6 +68,7 @@ export default function RootLayout({
             <FloatingQuoteButton />
             <MobileCallBar />
             <ExitIntentPopup />
+            <ChatWidget />
           </QuoteModalProvider>
         </SmoothScroll>
       </body>
