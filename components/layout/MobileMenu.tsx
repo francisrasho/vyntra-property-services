@@ -63,19 +63,22 @@ export function MobileMenu({
             className="absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col bg-surface p-6 shadow-2xl"
           >
             <div className="flex items-center justify-between">
-              <span className="inline-flex items-center gap-2.5">
-                <span className="grid h-8 w-8 place-items-center rounded-md bg-ink ring-1 ring-gold/20">
-                  <Image
-                    src="/logo-mark.svg"
-                    alt=""
-                    width={810}
-                    height={554}
-                    unoptimized
-                    className="h-4 w-auto"
-                  />
-                </span>
-                <span className="text-lg font-bold tracking-tight text-ink">
-                  VYNTRA<span className="text-gold">.</span>
+              <span className="inline-flex items-center gap-3">
+                <Image
+                  src="/logo-mark.svg"
+                  alt=""
+                  width={810}
+                  height={554}
+                  unoptimized
+                  className="h-11 w-auto"
+                />
+                <span className="flex flex-col leading-none">
+                  <span className="text-2xl font-bold tracking-tight text-ink">
+                    VYNTRA
+                  </span>
+                  <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.26em] text-gold-dark">
+                    Property Services
+                  </span>
                 </span>
               </span>
               <button
