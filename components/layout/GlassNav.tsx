@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { primaryNav } from "./nav";
 import { QuoteButton } from "@/components/forms/QuoteButton";
@@ -32,7 +31,21 @@ export function GlassNav() {
         )}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
-          <Logo />
+          <Link
+            href="/"
+            aria-label="Vyntra Property Services — home"
+            className="inline-flex shrink-0 items-center rounded-xl bg-ink px-3 py-1.5 ring-1 ring-gold/20"
+          >
+            <Image
+              src="/logo-full.svg"
+              alt="Vyntra Property Services"
+              width={1536}
+              height={1024}
+              priority
+              unoptimized
+              className="h-9 w-auto"
+            />
+          </Link>
 
           <nav className="hidden items-center gap-0.5 lg:flex">
             {primaryNav.map((l) => {
@@ -54,24 +67,10 @@ export function GlassNav() {
             })}
           </nav>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2">
             <QuoteButton size="sm" className="hidden sm:inline-flex">
               Get Quote
             </QuoteButton>
-            <Link
-              href="/"
-              aria-label="Vyntra Property Services — home"
-              className="hidden items-center rounded-xl bg-ink px-3 py-1.5 ring-1 ring-gold/20 md:inline-flex"
-            >
-              <Image
-                src="/logo-full.svg"
-                alt="Vyntra Property Services"
-                width={1536}
-                height={1024}
-                unoptimized
-                className="h-8 w-auto"
-              />
-            </Link>
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
