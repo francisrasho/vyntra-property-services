@@ -1,0 +1,64 @@
+<h2>Quote button — how it works in chat</h2>
+<p class="subtitle">Claude signals when to show the button; the frontend renders it as a real interactive element.</p>
+
+<div class="mockup">
+  <div class="mockup-header">Chat panel — quote button in action</div>
+  <div class="mockup-body" style="background:#0f172a;border-radius:10px;padding:16px;font-family:sans-serif;max-width:320px;">
+
+    <!-- assistant message -->
+    <div style="display:flex;gap:8px;margin-bottom:12px;align-items:flex-start;">
+      <div style="width:28px;height:28px;background:#1e293b;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(245,158,11,0.3);">
+        <span style="color:#f59e0b;font-size:10px;font-weight:700;">VP</span>
+      </div>
+      <div style="flex:1;">
+        <div style="background:#1e293b;border-radius:0 10px 10px 10px;padding:10px 12px;font-size:11px;color:#e2e8f0;line-height:1.5;">
+          Office cleaning for a 500m² space can vary quite a bit depending on frequency and scope. I can't give you exact pricing here, but our team will put together a tailored proposal.
+        </div>
+        <!-- the quote button -->
+        <div style="margin-top:8px;">
+          <button style="background:#f59e0b;color:#0f172a;border:none;border-radius:8px;padding:8px 16px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;">
+            <span>📋</span> Get a Free Quote
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- user message -->
+    <div style="display:flex;justify-content:flex-end;margin-bottom:12px;">
+      <div style="background:#f59e0b;border-radius:10px 0 10px 10px;padding:10px 12px;font-size:11px;color:#0f172a;max-width:75%;">
+        That sounds great, yes please
+      </div>
+    </div>
+
+    <!-- assistant follow-up -->
+    <div style="display:flex;gap:8px;align-items:flex-start;">
+      <div style="width:28px;height:28px;background:#1e293b;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(245,158,11,0.3);">
+        <span style="color:#f59e0b;font-size:10px;font-weight:700;">VP</span>
+      </div>
+      <div style="background:#1e293b;border-radius:0 10px 10px 10px;padding:10px 12px;font-size:11px;color:#e2e8f0;line-height:1.5;">
+        Perfect — the button above will open the quote form. The team will follow up within one business day.
+      </div>
+    </div>
+
+    <!-- input bar -->
+    <div style="margin-top:14px;background:#1e293b;border-radius:8px;padding:8px 12px;display:flex;gap:6px;border:1px solid rgba(255,255,255,0.06);">
+      <span style="font-size:10px;color:#475569;flex:1;">Type a message…</span>
+      <span style="color:#f59e0b;font-size:13px;">➤</span>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <h3>How it works technically</h3>
+  <p class="subtitle">Claude includes a hidden marker <code style="background:#1e293b;color:#f59e0b;padding:2px 6px;border-radius:4px;font-size:12px;">[SHOW_QUOTE_BUTTON]</code> at the end of its response when relevant. The frontend strips the marker and renders the real button — which opens the existing Quote Modal already on the site.</p>
+</div>
+
+<div class="section">
+  <h3>When does Claude show the button?</h3>
+  <ul style="font-size:13px;color:#64748b;line-height:2;">
+    <li>User asks about pricing or cost</li>
+    <li>User describes a specific job or scope</li>
+    <li>User asks how to book or get started</li>
+    <li>User says they're ready to proceed</li>
+  </ul>
+</div>

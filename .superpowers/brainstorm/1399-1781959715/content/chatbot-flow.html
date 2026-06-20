@@ -1,0 +1,64 @@
+<h2>How should the chatbot collect info?</h2>
+<p class="subtitle">Before chatting, users need to give their name, email & mobile. Pick the flow that feels right for Vyntra.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f172a;padding:16px;border-radius:8px;font-family:sans-serif;">
+      <div style="background:#1e293b;border-radius:12px;padding:14px;max-width:280px;margin:0 auto;">
+        <div style="color:#f59e0b;font-weight:700;font-size:13px;margin-bottom:10px;">👋 Hi! Before we chat…</div>
+        <div style="background:#334155;border-radius:6px;padding:8px 10px;margin-bottom:6px;font-size:11px;color:#94a3b8;">Full name</div>
+        <div style="background:#334155;border-radius:6px;padding:8px 10px;margin-bottom:6px;font-size:11px;color:#94a3b8;">Email address</div>
+        <div style="background:#334155;border-radius:6px;padding:8px 10px;margin-bottom:10px;font-size:11px;color:#94a3b8;">Mobile number</div>
+        <div style="background:#f59e0b;border-radius:6px;padding:8px;text-align:center;color:#0f172a;font-size:11px;font-weight:700;">Start Chatting →</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Form-first splash</h3>
+      <p>A tidy intake form appears first, then the chat opens after submission.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f172a;padding:16px;border-radius:8px;font-family:sans-serif;">
+      <div style="background:#1e293b;border-radius:12px;padding:14px;max-width:280px;margin:0 auto;">
+        <div style="color:#f59e0b;font-weight:700;font-size:13px;margin-bottom:10px;">Vyntra AI</div>
+        <div style="background:#334155;border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:11px;color:#e2e8f0;max-width:80%;">Hi! What's your name?</div>
+        <div style="background:#f59e0b;border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:11px;color:#0f172a;max-width:70%;margin-left:auto;">James</div>
+        <div style="background:#334155;border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:11px;color:#e2e8f0;max-width:80%;">Great! And your email?</div>
+        <div style="background:#475569;border-radius:6px;padding:6px 10px;display:flex;gap:6px;margin-top:4px;">
+          <span style="font-size:10px;color:#94a3b8;flex:1;">Type your answer…</span>
+          <span style="color:#f59e0b;font-size:12px;">➤</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Conversational onboarding</h3>
+      <p>The AI asks for name, email & mobile in a natural chat flow before answering questions.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f172a;padding:16px;border-radius:8px;font-family:sans-serif;">
+      <div style="background:#1e293b;border-radius:12px;padding:14px;max-width:280px;margin:0 auto;">
+        <div style="color:#f59e0b;font-weight:700;font-size:13px;margin-bottom:6px;">Vyntra AI</div>
+        <div style="background:#334155;border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:11px;color:#e2e8f0;max-width:80%;">Hello! How can I help you today?</div>
+        <div style="background:#f59e0b;border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:11px;color:#0f172a;max-width:70%;margin-left:auto;">I need a quote for office cleaning</div>
+        <div style="background:#334155;border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:11px;color:#e2e8f0;max-width:80%;">Happy to help! Can I grab your name and contact details?</div>
+        <div style="background:#475569;border-radius:6px;padding:6px 10px;display:flex;gap:6px;">
+          <span style="font-size:10px;color:#94a3b8;flex:1;">Type here…</span>
+          <span style="color:#f59e0b;font-size:12px;">➤</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Chat first, collect later</h3>
+      <p>Chat opens straight away; AI asks for details naturally mid-conversation when needed.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="section" style="margin-top:24px;font-size:13px;color:#64748b;">
+  All options save name, email & mobile to Supabase. The chat history is also stored per session.
+</div>
