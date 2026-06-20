@@ -103,11 +103,10 @@ export async function POST(req: Request) {
             controller.enqueue(encoder.encode(text));
           }
         }
+        controller.close();
       } catch (err) {
         controller.error(err);
         return;
-      } finally {
-        controller.close();
       }
 
       // Best-effort persistence after stream closes
