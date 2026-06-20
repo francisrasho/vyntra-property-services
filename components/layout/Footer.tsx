@@ -8,7 +8,6 @@ import {
   Mail,
   MapPin,
   PhoneCall,
-  Siren,
   type LucideIcon,
 } from "lucide-react";
 import { company } from "@/data/company";
@@ -129,15 +128,6 @@ export function Footer() {
                 <a href={`mailto:${company.email}`} className="hover:text-gold">
                   {company.email}
                 </a>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <Siren className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                <span>
-                  24/7 emergency:{" "}
-                  <a href={`tel:${company.emergencyPhone}`} className="hover:text-gold">
-                    {company.emergencyPhoneDisplay}
-                  </a>
-                </span>
               </li>
               <li className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />

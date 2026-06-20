@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Clock, Mail, MapPin, PhoneCall, Siren } from "lucide-react";
+import { Clock, Mail, MapPin, PhoneCall } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
@@ -83,21 +83,6 @@ export default function ContactPage() {
                 </ul>
               </div>
 
-              <div className="rounded-2xl border border-gold/30 bg-gold/5 p-6">
-                <h3 className="flex items-center gap-2 text-sm font-semibold text-ink">
-                  <Siren className="h-4 w-4 text-gold-dark" /> 24/7 emergency support
-                </h3>
-                <p className="mt-2 text-sm text-ink-600">
-                  Flood, break-in, storm damage or biohazard? We respond fast,
-                  any time.
-                </p>
-                <a
-                  href={`tel:${company.emergencyPhone}`}
-                  className="mt-3 inline-block text-lg font-bold text-ink hover:text-gold-dark"
-                >
-                  {company.emergencyPhoneDisplay}
-                </a>
-              </div>
             </div>
           </div>
 
