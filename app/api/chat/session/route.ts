@@ -9,12 +9,22 @@ export async function PATCH(req: Request) {
   const body = await req.json().catch(() => null);
   const { sessionId, name, email, phone } = body ?? {};
 
-  if (!sessionId || !SESSION_UUID_RE.test(String(sessionId))) {
+  if (typeof sessionId !== "string" || !SESSION_UUID_RE.test(sessionId)) {
     return NextResponse.json({ error: "Invalid sessionId" }, { status: 400 });
+  }
+
+  // Validate field lengths
+  if (
+    (name !== undefined && name !== null && String(name).length > 200) ||
+    (email !== undefined && email !== null && String(email).length > 200) ||
+    (phone !== undefined && phone !== null && String(phone).length > 50)
+  ) {
+    return NextResponse.json({ error: "Field too long" }, { status: 400 });
   }
 
   const supabase = getServiceClient();
   if (!supabase) {
+    // Demo mode — no credentials configured, degrade safely
     return NextResponse.json({ ok: true });
   }
 
