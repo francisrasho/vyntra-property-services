@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -53,10 +54,24 @@ export function GlassNav() {
             })}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <QuoteButton size="sm" className="hidden sm:inline-flex">
               Get Quote
             </QuoteButton>
+            <Link
+              href="/"
+              aria-label="Vyntra Property Services — home"
+              className="hidden items-center rounded-xl bg-ink px-3 py-1.5 ring-1 ring-gold/20 md:inline-flex"
+            >
+              <Image
+                src="/logo-full.svg"
+                alt="Vyntra Property Services"
+                width={1536}
+                height={1024}
+                unoptimized
+                className="h-8 w-auto"
+              />
+            </Link>
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
