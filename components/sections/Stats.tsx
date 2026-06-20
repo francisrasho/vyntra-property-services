@@ -5,13 +5,13 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function Stats() {
   return (
-    <section className="relative z-20 -mt-16">
+    <section className="bg-ink py-14 border-t border-white/[0.06]">
       <Container>
         <Reveal>
-          <div className="glass grid grid-cols-2 gap-6 rounded-3xl px-6 py-8 shadow-[var(--shadow-glass)] md:grid-cols-4 md:px-10">
+          <dl className="grid grid-cols-2 gap-10 md:grid-cols-4">
             {stats.map((s) => (
               <div key={s.label} className="text-center">
-                <div className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+                <dt className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
                   {s.value !== null ? (
                     <AnimatedCounter
                       value={s.value}
@@ -20,13 +20,13 @@ export function Stats() {
                       decimals={s.decimals}
                     />
                   ) : (
-                    <span className="text-gold-dark">{s.display}</span>
+                    <span className="text-gold">{s.display}</span>
                   )}
-                </div>
-                <div className="mt-1.5 text-sm text-ink-600">{s.label}</div>
+                </dt>
+                <dd className="mt-2 text-xs font-semibold uppercase tracking-widest text-white/50">{s.label}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </Reveal>
       </Container>
     </section>
