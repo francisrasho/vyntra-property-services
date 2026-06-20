@@ -18,6 +18,11 @@ export function ChatPanel({ sessionId }: { sessionId: string }) {
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    return () => abortRef.current?.abort();
+  }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -31,17 +36,28 @@ export function ChatPanel({ sessionId }: { sessionId: string }) {
     // Build history excluding the static welcome message
     const history = messages
       .slice(1)
-      .map((m) => ({ role: m.role, content: m.content }));
+      .map((m) => ({
+        role: m.role,
+        content: m.content
+          .replace(/\[CONTACT:[^\]]*\]/g, "")
+          .replace(/\[SHOW_QUOTE_BUTTON\]/g, "")
+          .trim(),
+      }));
 
     setMessages((prev) => [...prev, userMsg, { role: "assistant", content: "" }]);
     setInput("");
     setStreaming(true);
 
     try {
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
+
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sessionId, message: text, history }),
+        signal: controller.signal,
       });
 
       if (!res.ok || !res.body) {
@@ -69,6 +85,16 @@ export function ChatPanel({ sessionId }: { sessionId: string }) {
         ]);
       }
 
+      // Flush any remaining buffered bytes in the decoder
+      const tail = decoder.decode();
+      if (tail) {
+        accumulated += tail;
+        setMessages((prev) => [
+          ...prev.slice(0, -1),
+          { role: "assistant", content: accumulated },
+        ]);
+      }
+
       // Fire contact upsert if Claude signalled it collected all three fields
       const match = CONTACT_RE.exec(accumulated);
       if (match) {
@@ -84,7 +110,8 @@ export function ChatPanel({ sessionId }: { sessionId: string }) {
           }),
         }).catch(() => {});
       }
-    } catch {
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") return;
       setMessages((prev) => [
         ...prev.slice(0, -1),
         {
@@ -140,6 +167,7 @@ export function ChatPanel({ sessionId }: { sessionId: string }) {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKey}
           placeholder="Ask about our services…"
+          aria-label="Message input"
           rows={1}
           className={cn(
             "max-h-24 flex-1 resize-none rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm text-ink",
