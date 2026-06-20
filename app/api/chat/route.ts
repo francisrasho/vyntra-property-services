@@ -45,17 +45,35 @@ export async function POST(req: Request) {
   const history: { role: "user" | "assistant"; content: string }[] =
     Array.isArray(body.history) ? body.history : [];
 
+  if (message.length > 2000) {
+    return new Response(JSON.stringify({ error: "Message too long" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
+  const sanitizedHistory = history
+    .filter(
+      (m) =>
+        (m.role === "user" || m.role === "assistant") &&
+        typeof m.content === "string",
+    )
+    .slice(-40); // cap at 40 entries (~20 turns)
+
   const supabase = getServiceClient();
 
   // Upsert session row so foreign key constraint on chat_messages is satisfied
   if (supabase) {
-    await supabase
+    const { error: upsertErr } = await supabase
       .from("chat_sessions")
       .upsert({ id: sessionId }, { onConflict: "id" });
+    if (upsertErr) {
+      console.error("[chat] session upsert failed:", upsertErr.message);
+    }
   }
 
   const messages: Anthropic.MessageParam[] = [
-    ...history.map((m) => ({
+    ...sanitizedHistory.map((m) => ({
       role: m.role as "user" | "assistant",
       content: m.content,
     })),
@@ -85,16 +103,22 @@ export async function POST(req: Request) {
             controller.enqueue(encoder.encode(text));
           }
         }
+      } catch (err) {
+        controller.error(err);
+        return;
       } finally {
         controller.close();
       }
 
       // Best-effort persistence after stream closes
       if (supabase && fullText) {
-        await supabase.from("chat_messages").insert([
+        const { error: insertErr } = await supabase.from("chat_messages").insert([
           { session_id: sessionId, role: "user", content: message },
           { session_id: sessionId, role: "assistant", content: fullText },
         ]);
+        if (insertErr) {
+          console.error("[chat] message persistence failed:", insertErr.message);
+        }
       }
     },
   });
