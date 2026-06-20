@@ -31,17 +31,25 @@ export function GlassNav() {
           <Link
             href="/"
             aria-label="Vyntra Property Services — home"
-            className="inline-flex shrink-0 items-center rounded-xl bg-ink px-3 py-1.5 ring-1 ring-gold/20"
+            className="inline-flex shrink-0 items-center gap-3"
           >
             <Image
-              src="/logo-full.svg"
-              alt="Vyntra Property Services"
-              width={1536}
-              height={1024}
+              src="/logo-mark.svg"
+              alt=""
+              width={810}
+              height={554}
               priority
               unoptimized
-              className="h-12 w-auto"
+              className="h-11 w-auto"
             />
+            <span className="flex flex-col leading-none">
+              <span className="text-2xl font-bold tracking-tight text-ink">
+                VYNTRA
+              </span>
+              <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.26em] text-gold-dark">
+                Property Services
+              </span>
+            </span>
           </Link>
 
           <div className="flex items-center gap-2">
