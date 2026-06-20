@@ -78,14 +78,14 @@ export function GlassNav() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <QuoteButton size="md" className="hidden sm:inline-flex">
+            <QuoteButton size="md" className="glow-pulse hidden sm:inline-flex">
               Get Quote
             </QuoteButton>
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
-              className="grid h-11 w-11 place-items-center rounded-full text-ink transition-colors hover:bg-ink/5 lg:hidden"
+              className="grid h-11 w-11 place-items-center rounded-full text-ink transition-colors hover:bg-ink/5"
             >
               <Menu className="h-6 w-6" />
             </button>
