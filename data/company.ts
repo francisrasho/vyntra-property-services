@@ -22,7 +22,7 @@ export const company: Company = {
     country: "Australia",
   },
 
-  abn: "00 000 000 000", // TODO: real ABN
+  abn: "69 252 402 831",
 
   hours: [
     { days: "Monday – Friday", time: "7:00am – 6:00pm" },

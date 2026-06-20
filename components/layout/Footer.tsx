@@ -36,14 +36,28 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           {/* Brand */}
           <div>
-            <Image
-              src="/logo-full.svg"
-              alt="Vyntra Property Services"
-              width={1536}
-              height={1024}
-              unoptimized
-              className="h-20 w-auto"
-            />
+            <Link
+              href="/"
+              aria-label="Vyntra Property Services — home"
+              className="inline-flex items-center gap-3"
+            >
+              <Image
+                src="/logo-mark.svg"
+                alt=""
+                width={810}
+                height={554}
+                unoptimized
+                className="h-11 w-auto"
+              />
+              <span className="flex flex-col leading-none">
+                <span className="text-2xl font-bold tracking-tight text-white">
+                  VYNTRA
+                </span>
+                <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.26em] text-gold-soft">
+                  Property Services
+                </span>
+              </span>
+            </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
               {company.tagline}. Premium property maintenance and cleaning,
               trusted by property managers, strata managers and businesses across
@@ -95,23 +109,6 @@ export function Footer() {
                   >
                     {l.label}
                   </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* Portals — coming soon */}
-            <h3 className="mt-6 text-sm font-semibold text-white">Portals</h3>
-            <ul className="mt-3 space-y-2 text-sm">
-              {["Client Portal", "Contractor Portal"].map((p) => (
-                <li
-                  key={p}
-                  className="flex items-center gap-2 text-white/40"
-                  title="Coming soon"
-                >
-                  {p}
-                  <span className="rounded-full border border-white/15 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-white/50">
-                    Soon
-                  </span>
                 </li>
               ))}
             </ul>
