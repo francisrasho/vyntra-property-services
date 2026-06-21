@@ -1,0 +1,54 @@
+{
+  "planPath": "docs/superpowers/plans/2026-06-20-ai-chatbot.md",
+  "tasks": [
+    {
+      "id": 0,
+      "subject": "Task 1: Install Anthropic SDK and add env var",
+      "status": "pending",
+      "description": "**Goal:** Add `@anthropic-ai/sdk` to dependencies and add `ANTHROPIC_API_KEY` placeholder to `.env.local`.\n\n**Files:**\n- Modify: `package.json` (via npm install)\n- Modify: `.env.local`\n\n**Acceptance Criteria:**\n- [ ] `@anthropic-ai/sdk` appears in `package.json` dependencies\n- [ ] `.env.local` has an `ANTHROPIC_API_KEY=` line\n- [ ] `npm run typecheck` exits 0\n\n**Verify:** `npm run typecheck` → no errors\n\n```json:metadata\n{\"files\": [\"package.json\", \".env.local\"], \"verifyCommand\": \"npm run typecheck\", \"acceptanceCriteria\": [\"@anthropic-ai/sdk in package.json\", \".env.local has ANTHROPIC_API_KEY\", \"typecheck exits 0\"]}\n```"
+    },
+    {
+      "id": 1,
+      "subject": "Task 2: Supabase migration — chat tables",
+      "status": "pending",
+      "blockedBy": [0],
+      "description": "**Goal:** Create `chat_sessions` and `chat_messages` tables in Supabase.\n\n**Files:**\n- Create: `supabase/migrations/20260620000000_chat_tables.sql`\n\n**Acceptance Criteria:**\n- [ ] Migration file exists with correct schema\n- [ ] Tables applied in Supabase dashboard\n\n**Verify:** Supabase dashboard shows both tables under Table Editor.\n\n```json:metadata\n{\"files\": [\"supabase/migrations/20260620000000_chat_tables.sql\"], \"verifyCommand\": \"ls supabase/migrations/\", \"acceptanceCriteria\": [\"chat_sessions table exists in Supabase\", \"chat_messages table exists in Supabase\"]}\n```"
+    },
+    {
+      "id": 2,
+      "subject": "Task 3: Chat streaming API route",
+      "status": "pending",
+      "blockedBy": [0, 1],
+      "description": "**Goal:** Create `app/api/chat/route.ts` — POST handler that streams Claude responses back to the client.\n\n**Files:**\n- Create: `app/api/chat/route.ts`\n\n**Acceptance Criteria:**\n- [ ] POST with valid body returns streaming plain-text response\n- [ ] Invalid body returns 400\n- [ ] Markers passed through in stream\n- [ ] `npm run typecheck` exits 0\n\n**Verify:** `npm run typecheck` → exits 0\n\n```json:metadata\n{\"files\": [\"app/api/chat/route.ts\"], \"verifyCommand\": \"npm run typecheck\", \"acceptanceCriteria\": [\"POST returns streaming response\", \"invalid body returns 400\", \"typecheck exits 0\"]}\n```"
+    },
+    {
+      "id": 3,
+      "subject": "Task 4: Session PATCH API route",
+      "status": "pending",
+      "blockedBy": [1],
+      "description": "**Goal:** Create `app/api/chat/session/route.ts` — PATCH handler for contact upsert.\n\n**Files:**\n- Create: `app/api/chat/session/route.ts`\n\n**Acceptance Criteria:**\n- [ ] PATCH with valid body returns `{ ok: true }`\n- [ ] Missing/invalid sessionId returns 400\n- [ ] Degrades safely when Supabase unavailable\n- [ ] `npm run typecheck` exits 0\n\n**Verify:** `npm run typecheck` → exits 0\n\n```json:metadata\n{\"files\": [\"app/api/chat/session/route.ts\"], \"verifyCommand\": \"npm run typecheck\", \"acceptanceCriteria\": [\"PATCH returns ok:true\", \"invalid sessionId returns 400\", \"typecheck exits 0\"]}\n```"
+    },
+    {
+      "id": 4,
+      "subject": "Task 5: ChatMessage component",
+      "status": "pending",
+      "blockedBy": [],
+      "description": "**Goal:** Create `components/chat/ChatMessage.tsx` — single message bubble with marker stripping and quote button.\n\n**Files:**\n- Create: `components/chat/ChatMessage.tsx`\n\n**Acceptance Criteria:**\n- [ ] User messages right-aligned with gold background\n- [ ] Assistant messages left-aligned with white background\n- [ ] [SHOW_QUOTE_BUTTON] stripped and replaced with button that opens QuoteModal\n- [ ] [CONTACT:...] stripped silently\n- [ ] `npm run typecheck` exits 0\n\n**Verify:** `npm run typecheck` → exits 0\n\n```json:metadata\n{\"files\": [\"components/chat/ChatMessage.tsx\"], \"verifyCommand\": \"npm run typecheck\", \"acceptanceCriteria\": [\"user messages gold right-aligned\", \"assistant messages white left-aligned\", \"SHOW_QUOTE_BUTTON renders button\", \"typecheck exits 0\"]}\n```"
+    },
+    {
+      "id": 5,
+      "subject": "Task 6: ChatPanel component",
+      "status": "pending",
+      "blockedBy": [4],
+      "description": "**Goal:** Create `components/chat/ChatPanel.tsx` — scrollable message list, typing indicator, input bar with streaming.\n\n**Files:**\n- Create: `components/chat/ChatPanel.tsx`\n\n**Acceptance Criteria:**\n- [ ] Welcome message shown on open\n- [ ] Streaming fills assistant bubble progressively\n- [ ] Typing dots shown while streaming with empty content\n- [ ] Enter submits, Shift+Enter newline\n- [ ] CONTACT marker detected → PATCH fired\n- [ ] Network errors show friendly error bubble\n- [ ] `npm run typecheck` exits 0\n\n**Verify:** `npm run typecheck` → exits 0\n\n```json:metadata\n{\"files\": [\"components/chat/ChatPanel.tsx\"], \"verifyCommand\": \"npm run typecheck\", \"acceptanceCriteria\": [\"welcome message shown\", \"streaming works\", \"typing dots shown\", \"CONTACT detection fires PATCH\", \"typecheck exits 0\"]}\n```"
+    },
+    {
+      "id": 6,
+      "subject": "Task 7: ChatWidget + layout integration",
+      "status": "pending",
+      "blockedBy": [2, 3, 5],
+      "description": "**Goal:** Create `components/chat/ChatWidget.tsx` and add it to `app/layout.tsx`.\n\n**Files:**\n- Create: `components/chat/ChatWidget.tsx`\n- Modify: `app/layout.tsx`\n\n**Acceptance Criteria:**\n- [ ] Floating bubble appears on all pages\n- [ ] Bubble opens/closes panel with framer-motion animation\n- [ ] sessionId managed in sessionStorage\n- [ ] `npm run typecheck` exits 0\n- [ ] `npm run build` exits 0\n\n**Verify:** `npm run build` → exits 0\n\n```json:metadata\n{\"files\": [\"components/chat/ChatWidget.tsx\", \"app/layout.tsx\"], \"verifyCommand\": \"npm run build\", \"acceptanceCriteria\": [\"bubble on all pages\", \"open/close animation works\", \"sessionId in sessionStorage\", \"build exits 0\"]}\n```"
+    }
+  ],
+  "lastUpdated": "2026-06-20T00:00:00.000Z"
+}

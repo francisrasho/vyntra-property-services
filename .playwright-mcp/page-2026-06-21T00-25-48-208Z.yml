@@ -1,0 +1,341 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Vyntra Property Services — home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]:
+          - generic [ref=e6]: VYNTRA
+          - generic [ref=e7]: Property Services
+      - generic [ref=e8]:
+        - button "Get Quote" [ref=e9]
+        - button "Open menu" [ref=e10]:
+          - img [ref=e11]
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - generic:
+          - img
+        - generic [ref=e16]:
+          - generic [ref=e17]: Sydney-wide property services
+          - heading "Sydney's Premium Property Services Partner" [level=1] [ref=e18]:
+            - generic [ref=e19]: Sydney's
+            - generic [ref=e20]: Premium
+            - generic [ref=e21]: Property
+            - generic [ref=e22]: Services
+            - generic [ref=e23]: Partner
+          - paragraph [ref=e24]: Professional cleaning, maintenance and property solutions trusted by property managers, strata managers and businesses across Sydney.
+          - generic [ref=e25]:
+            - button "Get Free Quote" [ref=e27]:
+              - text: Get Free Quote
+              - img [ref=e28]
+            - link "Book a Consultation" [ref=e30] [cursor=pointer]:
+              - /url: /contact
+              - img [ref=e31]
+              - text: Book a Consultation
+            - link "Call Now" [ref=e34] [cursor=pointer]:
+              - /url: tel:0451 510 026
+              - img [ref=e35]
+              - text: Call Now
+          - list [ref=e40]:
+            - listitem [ref=e41]:
+              - img [ref=e42]
+              - text: Fully Insured
+            - listitem [ref=e45]:
+              - img [ref=e46]
+              - text: Professional Contractors
+            - listitem [ref=e49]:
+              - img [ref=e50]
+              - text: Fast Response Times
+            - listitem [ref=e53]:
+              - img [ref=e54]
+              - text: Sydney Wide
+            - listitem [ref=e57]:
+              - img [ref=e58]
+              - text: Quality Guaranteed
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - term [ref=e66]:
+            - generic [ref=e67]: 0+
+          - definition [ref=e68]: Projects Completed
+        - generic [ref=e69]:
+          - term [ref=e70]:
+            - generic [ref=e71]: 0%
+          - definition [ref=e72]: Customer Satisfaction
+        - generic [ref=e73]:
+          - term [ref=e74]:
+            - generic [ref=e75]: 0hr
+          - definition [ref=e76]: Response Time
+        - generic [ref=e77]:
+          - term [ref=e78]: Sydney
+          - definition [ref=e79]: Wide Service Area
+      - generic [ref=e81]:
+        - generic [ref=e82]:
+          - text: Reliable
+          - img [ref=e83]
+        - generic [ref=e85]:
+          - text: Fully Insured
+          - img [ref=e86]
+        - generic [ref=e88]:
+          - text: Professional
+          - img [ref=e89]
+        - generic [ref=e91]:
+          - text: Technology-Powered
+          - img [ref=e92]
+        - generic [ref=e94]:
+          - text: Sydney-Wide
+          - img [ref=e95]
+        - generic [ref=e97]:
+          - text: Quality Guaranteed
+          - img [ref=e98]
+        - generic [ref=e100]:
+          - text: Fast Response
+          - img [ref=e101]
+        - generic [ref=e103]:
+          - text: Transparent Pricing
+          - img [ref=e104]
+        - generic [ref=e106]:
+          - text: Reliable
+          - img [ref=e107]
+        - generic [ref=e109]:
+          - text: Fully Insured
+          - img [ref=e110]
+        - generic [ref=e112]:
+          - text: Professional
+          - img [ref=e113]
+        - generic [ref=e115]:
+          - text: Technology-Powered
+          - img [ref=e116]
+        - generic [ref=e118]:
+          - text: Sydney-Wide
+          - img [ref=e119]
+        - generic [ref=e121]:
+          - text: Quality Guaranteed
+          - img [ref=e122]
+        - generic [ref=e124]:
+          - text: Fast Response
+          - img [ref=e125]
+        - generic [ref=e127]:
+          - text: Transparent Pricing
+          - img [ref=e128]
+      - generic [ref=e131]:
+        - generic [ref=e132]:
+          - paragraph [ref=e133]: What we do
+          - heading "Property services, done to a premium standard" [level=2] [ref=e134]
+          - paragraph [ref=e135]: One trusted partner for cleaning, maintenance and property care across Sydney — delivered with documented scopes and total accountability.
+        - generic [ref=e136]:
+          - link "Commercial Cleaning Reliable, presentation-perfect cleaning for retail, hospitality, medical and commercial premises across Sydney. Learn more" [ref=e138] [cursor=pointer]:
+            - /url: /services/commercial-cleaning
+            - img [ref=e140]
+            - heading "Commercial Cleaning" [level=3] [ref=e144]
+            - paragraph [ref=e145]: Reliable, presentation-perfect cleaning for retail, hospitality, medical and commercial premises across Sydney.
+            - generic [ref=e146]:
+              - text: Learn more
+              - img [ref=e147]
+          - link "Office Cleaning Discreet, detail-driven office cleaning that keeps workspaces healthy, hygienic and professional. Learn more" [ref=e150] [cursor=pointer]:
+            - /url: /services/office-cleaning
+            - img [ref=e152]
+            - heading "Office Cleaning" [level=3] [ref=e155]
+            - paragraph [ref=e156]: Discreet, detail-driven office cleaning that keeps workspaces healthy, hygienic and professional.
+            - generic [ref=e157]:
+              - text: Learn more
+              - img [ref=e158]
+          - link "Strata Cleaning Comprehensive strata and common-area cleaning that protects asset value and keeps residents happy. Learn more" [ref=e161] [cursor=pointer]:
+            - /url: /services/strata-cleaning
+            - img [ref=e163]
+            - heading "Strata Cleaning" [level=3] [ref=e166]
+            - paragraph [ref=e167]: Comprehensive strata and common-area cleaning that protects asset value and keeps residents happy.
+            - generic [ref=e168]:
+              - text: Learn more
+              - img [ref=e169]
+          - link "Property Maintenance Planned and reactive maintenance that keeps your portfolio safe, compliant and running smoothly. Learn more" [ref=e172] [cursor=pointer]:
+            - /url: /services/property-maintenance
+            - img [ref=e174]
+            - heading "Property Maintenance" [level=3] [ref=e176]
+            - paragraph [ref=e177]: Planned and reactive maintenance that keeps your portfolio safe, compliant and running smoothly.
+            - generic [ref=e178]:
+              - text: Learn more
+              - img [ref=e179]
+          - link "Handyman Services Skilled, reliable handyman work for the repairs and improvements that keep properties presentable. Learn more" [ref=e182] [cursor=pointer]:
+            - /url: /services/handyman-services
+            - img [ref=e184]
+            - heading "Handyman Services" [level=3] [ref=e188]
+            - paragraph [ref=e189]: Skilled, reliable handyman work for the repairs and improvements that keep properties presentable.
+            - generic [ref=e190]:
+              - text: Learn more
+              - img [ref=e191]
+          - link "Pressure Washing High-pressure cleaning that strips away grime from facades, car parks, paths and outdoor areas. Learn more" [ref=e194] [cursor=pointer]:
+            - /url: /services/pressure-washing
+            - img [ref=e196]
+            - heading "Pressure Washing" [level=3] [ref=e199]
+            - paragraph [ref=e200]: High-pressure cleaning that strips away grime from facades, car parks, paths and outdoor areas.
+            - generic [ref=e201]:
+              - text: Learn more
+              - img [ref=e202]
+          - link "Garden Maintenance Regular grounds and garden upkeep that keeps the exterior of your property sharp year-round. Learn more" [ref=e205] [cursor=pointer]:
+            - /url: /services/garden-maintenance
+            - img [ref=e207]
+            - heading "Garden Maintenance" [level=3] [ref=e210]
+            - paragraph [ref=e211]: Regular grounds and garden upkeep that keeps the exterior of your property sharp year-round.
+            - generic [ref=e212]:
+              - text: Learn more
+              - img [ref=e213]
+          - link "End of Lease Cleaning Thorough end-of-lease cleans that meet agent and landlord standards and protect the bond. Learn more" [ref=e216] [cursor=pointer]:
+            - /url: /services/end-of-lease-cleaning
+            - img [ref=e218]
+            - heading "End of Lease Cleaning" [level=3] [ref=e220]
+            - paragraph [ref=e221]: Thorough end-of-lease cleans that meet agent and landlord standards and protect the bond.
+            - generic [ref=e222]:
+              - text: Learn more
+              - img [ref=e223]
+          - link "Emergency Property Support Rapid-response support for urgent property issues — available when you need it most. Learn more" [ref=e226] [cursor=pointer]:
+            - /url: /services/emergency-property-support
+            - img [ref=e228]
+            - heading "Emergency Property Support" [level=3] [ref=e233]
+            - paragraph [ref=e234]: Rapid-response support for urgent property issues — available when you need it most.
+            - generic [ref=e235]:
+              - text: Learn more
+              - img [ref=e236]
+        - generic [ref=e238]:
+          - paragraph [ref=e239]: Not sure which service you need?
+          - button "Get a Free Quote" [ref=e240]
+      - generic [ref=e242]:
+        - generic [ref=e243]:
+          - paragraph [ref=e244]: Testimonials
+          - heading "Trusted by Sydney's property professionals" [level=2] [ref=e245]
+          - paragraph [ref=e246]: Property managers, strata managers and business owners rely on Vyntra to protect their assets and their reputation.
+        - generic [ref=e247]:
+          - figure "SM Sarah Mitchell Strata Manager, Harbourline Strata" [ref=e249]:
+            - generic "5 out of 5 stars" [ref=e250]:
+              - img [ref=e251]
+              - img [ref=e253]
+              - img [ref=e255]
+              - img [ref=e257]
+              - img [ref=e259]
+            - blockquote [ref=e261]: “Vyntra transformed the presentation of our buildings. The reporting alone has saved us countless owner complaints — we always know exactly what was done.”
+            - generic [ref=e262]:
+              - generic [ref=e263]: SM
+              - generic [ref=e264]:
+                - generic [ref=e265]: Sarah Mitchell
+                - generic [ref=e266]: Strata Manager, Harbourline Strata
+          - figure "JD James Donovan Facilities Manager, Meridian Commercial" [ref=e268]:
+            - generic "5 out of 5 stars" [ref=e269]:
+              - img [ref=e270]
+              - img [ref=e272]
+              - img [ref=e274]
+              - img [ref=e276]
+              - img [ref=e278]
+            - blockquote [ref=e280]: “Finally a property partner that actually answers the phone and turns up. Their response times on maintenance are the best we've worked with in Sydney.”
+            - generic [ref=e281]:
+              - generic [ref=e282]: JD
+              - generic [ref=e283]:
+                - generic [ref=e284]: James Donovan
+                - generic [ref=e285]: Facilities Manager, Meridian Commercial
+          - figure "PN Priya Nair Operations Manager, Northbridge Partners" [ref=e287]:
+            - generic "5 out of 5 stars" [ref=e288]:
+              - img [ref=e289]
+              - img [ref=e291]
+              - img [ref=e293]
+              - img [ref=e295]
+              - img [ref=e297]
+            - blockquote [ref=e299]: “Our offices have never looked better. The team is discreet, consistent and genuinely professional. It feels like having an in-house crew.”
+            - generic [ref=e300]:
+              - generic [ref=e301]: PN
+              - generic [ref=e302]:
+                - generic [ref=e303]: Priya Nair
+                - generic [ref=e304]: Operations Manager, Northbridge Partners
+      - generic [ref=e307]:
+        - generic:
+          - img
+        - generic [ref=e308]:
+          - heading "Ready for property care done properly?" [level=2] [ref=e309]
+          - paragraph [ref=e310]: Get a free, no-obligation quote today and see why Sydney's property professionals choose Vyntra.
+          - generic [ref=e311]:
+            - button "Get Free Quote" [ref=e313]
+            - link "0451 510 026" [ref=e314] [cursor=pointer]:
+              - /url: tel:0451 510 026
+              - img [ref=e315]
+              - text: 0451 510 026
+  - contentinfo [ref=e319]:
+    - generic [ref=e320]:
+      - generic [ref=e321]:
+        - generic [ref=e322]:
+          - link "Vyntra Property Services — home" [ref=e323] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e324]:
+              - generic [ref=e325]: VYNTRA
+              - generic [ref=e326]: Property Services
+          - paragraph [ref=e327]: Premium Property Maintenance & Cleaning Solutions. Premium property maintenance and cleaning, trusted by property managers, strata managers and businesses across Sydney.
+          - generic [ref=e328]:
+            - link "LinkedIn" [ref=e329] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e330]
+            - link "Instagram" [ref=e334] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e335]
+            - link "Facebook" [ref=e338] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e339]
+        - generic [ref=e341]:
+          - heading "Services" [level=3] [ref=e342]
+          - list [ref=e343]:
+            - listitem [ref=e344]:
+              - link "Commercial Cleaning" [ref=e345] [cursor=pointer]:
+                - /url: /services/commercial-cleaning
+            - listitem [ref=e346]:
+              - link "Office Cleaning" [ref=e347] [cursor=pointer]:
+                - /url: /services/office-cleaning
+            - listitem [ref=e348]:
+              - link "Strata Cleaning" [ref=e349] [cursor=pointer]:
+                - /url: /services/strata-cleaning
+            - listitem [ref=e350]:
+              - link "Property Maintenance" [ref=e351] [cursor=pointer]:
+                - /url: /services/property-maintenance
+            - listitem [ref=e352]:
+              - link "Handyman Services" [ref=e353] [cursor=pointer]:
+                - /url: /services/handyman-services
+            - listitem [ref=e354]:
+              - link "Pressure Washing" [ref=e355] [cursor=pointer]:
+                - /url: /services/pressure-washing
+        - generic [ref=e356]:
+          - heading "Company" [level=3] [ref=e357]
+          - list [ref=e358]:
+            - listitem [ref=e359]:
+              - link "About" [ref=e360] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e361]:
+              - link "FAQ" [ref=e362] [cursor=pointer]:
+                - /url: /faq
+            - listitem [ref=e363]:
+              - link "Contact" [ref=e364] [cursor=pointer]:
+                - /url: /contact
+        - generic [ref=e365]:
+          - heading "Get in touch" [level=3] [ref=e366]
+          - list [ref=e367]:
+            - listitem [ref=e368]:
+              - img [ref=e369]
+              - link "0451 510 026" [ref=e373] [cursor=pointer]:
+                - /url: tel:0451 510 026
+            - listitem [ref=e374]:
+              - img [ref=e375]
+              - link "info@vyntrapropertyservices.com" [ref=e378] [cursor=pointer]:
+                - /url: mailto:info@vyntrapropertyservices.com
+            - listitem [ref=e379]:
+              - img [ref=e380]
+              - generic [ref=e383]: Sydney, NSW 2000
+            - listitem [ref=e384]:
+              - img [ref=e385]
+              - generic [ref=e388]: Mon–Fri 7am–6pm · Sat 8am–4pm
+      - generic [ref=e389]:
+        - generic [ref=e390]:
+          - paragraph [ref=e391]: © 2026 Vyntra Property Services Pty Ltd. ABN 69 252 402 831. All rights reserved.
+          - paragraph [ref=e392]: Powered by Vyntra OS
+        - generic [ref=e393]:
+          - link "Privacy Policy" [ref=e394] [cursor=pointer]:
+            - /url: "#"
+          - link "Terms" [ref=e395] [cursor=pointer]:
+            - /url: "#"
+  - button "Get a Free Quote":
+    - img
+    - text: Get a Free Quote
+  - button "Chat with Vyntra" [ref=e396]:
+    - img [ref=e397]
