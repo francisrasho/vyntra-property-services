@@ -98,3 +98,22 @@ html.lenis body {
   -webkit-backdrop-filter: blur(16px) saturate(160%);
   border: 1px solid color-mix(in srgb, var(--color-gold) 18%, transparent);
 }
+
+/* Extruded 3D gold lettering for the hero heading. */
+.text-3d-gold {
+  text-shadow:
+    0 1px 0 #c9a227,
+    0 2px 0 #b8941f,
+    0 3px 0 #9c7d18,
+    0 4px 0 #836811,
+    0 5px 0 #6b540d,
+    0 7px 16px rgba(0, 0, 0, 0.55);
+}
+
+/* Same extrusion tuned to sit behind the gold-gradient span. */
+.text-3d-gold-soft {
+  text-shadow:
+    0 1px 0 #9c7d18,
+    0 2px 0 #836811,
+    0 4px 10px rgba(0, 0, 0, 0.5);
+}

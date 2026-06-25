@@ -3,6 +3,7 @@ import { testimonials } from "@/data/testimonials";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 export function Testimonials({
   limit,
@@ -25,27 +26,29 @@ export function Testimonials({
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {items.map((t, i) => (
             <Reveal key={t.name} delay={i * 0.04}>
-              <figure className="flex h-full flex-col rounded-2xl border border-ink/[0.08] bg-surface p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gold/30 hover:shadow-[0_22px_44px_-16px_rgba(212,175,55,0.25)]">
-                <div className="flex gap-0.5 text-gold" aria-label={`${t.rating} out of 5 stars`}>
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} className="h-4 w-4 fill-current" />
-                  ))}
-                </div>
-                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-ink-700">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-6 flex items-center gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-ink text-sm font-semibold text-gold">
-                    {t.initials}
-                  </span>
-                  <span>
-                    <span className="block text-sm font-semibold text-ink">{t.name}</span>
-                    <span className="block text-xs text-ink-600">
-                      {t.role}, {t.company}
+              <TiltCard intensity={7} className="h-full rounded-2xl">
+                <figure className="flex h-full flex-col rounded-2xl border border-ink/[0.08] bg-surface p-7 shadow-sm transition-colors duration-300 hover:border-gold/30 hover:shadow-[0_22px_44px_-16px_rgba(212,175,55,0.25)]">
+                  <div className="flex gap-0.5 text-gold" aria-label={`${t.rating} out of 5 stars`}>
+                    {Array.from({ length: t.rating }).map((_, j) => (
+                      <Star key={j} className="h-4 w-4 fill-current" />
+                    ))}
+                  </div>
+                  <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-ink-700">
+                    &ldquo;{t.quote}&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-6 flex items-center gap-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-full bg-ink text-sm font-semibold text-gold">
+                      {t.initials}
                     </span>
-                  </span>
-                </figcaption>
-              </figure>
+                    <span>
+                      <span className="block text-sm font-semibold text-ink">{t.name}</span>
+                      <span className="block text-xs text-ink-600">
+                        {t.role}, {t.company}
+                      </span>
+                    </span>
+                  </figcaption>
+                </figure>
+              </TiltCard>
             </Reveal>
           ))}
 
