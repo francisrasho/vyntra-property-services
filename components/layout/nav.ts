@@ -17,7 +17,6 @@ export const fullNav: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "Why Choose Us", href: "/about#why" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];

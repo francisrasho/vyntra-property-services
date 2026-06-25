@@ -44,7 +44,7 @@ export function ChatPanel({ sessionId }: { sessionId: string }) {
           .trim(),
       }));
 
-    setMessages((prev) => [...prev, userMsg, { role: "assistant", content: "" }]);
+    setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setStreaming(true);
 
@@ -62,7 +62,7 @@ export function ChatPanel({ sessionId }: { sessionId: string }) {
 
       if (!res.ok || !res.body) {
         setMessages((prev) => [
-          ...prev.slice(0, -1),
+          ...prev,
           {
             role: "assistant",
             content: "Sorry, something went wrong. Please try again.",
@@ -79,21 +79,15 @@ export function ChatPanel({ sessionId }: { sessionId: string }) {
         const { done, value } = await reader.read();
         if (done) break;
         accumulated += decoder.decode(value, { stream: true });
-        setMessages((prev) => [
-          ...prev.slice(0, -1),
-          { role: "assistant", content: accumulated },
-        ]);
       }
 
-      // Flush any remaining buffered bytes in the decoder
       const tail = decoder.decode();
-      if (tail) {
-        accumulated += tail;
-        setMessages((prev) => [
-          ...prev.slice(0, -1),
-          { role: "assistant", content: accumulated },
-        ]);
-      }
+      if (tail) accumulated += tail;
+
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: accumulated },
+      ]);
 
       // Fire contact upsert if Claude signalled it collected all three fields
       const match = CONTACT_RE.exec(accumulated);
@@ -113,7 +107,7 @@ export function ChatPanel({ sessionId }: { sessionId: string }) {
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") return;
       setMessages((prev) => [
-        ...prev.slice(0, -1),
+        ...prev,
         {
           role: "assistant",
           content:
@@ -132,17 +126,14 @@ export function ChatPanel({ sessionId }: { sessionId: string }) {
     }
   };
 
-  const lastIsEmpty =
-    messages.length > 0 && messages[messages.length - 1].content === "";
-
   return (
     <div className="flex h-full flex-col">
       {/* Message list */}
-      <div className="flex-1 space-y-3 overflow-y-auto p-4">
+      <div data-lenis-prevent className="flex-1 space-y-3 overflow-y-auto overscroll-contain p-4">
         {messages.map((msg, i) => (
           <ChatMessage key={i} message={msg} />
         ))}
-        {streaming && lastIsEmpty && (
+        {streaming && (
           <div className="flex justify-start">
             <div className="rounded-2xl rounded-bl-sm border border-ink/10 bg-white px-4 py-3 shadow-sm">
               <span className="flex gap-1">

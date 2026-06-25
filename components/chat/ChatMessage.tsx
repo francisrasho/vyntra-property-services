@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import ReactMarkdown from "react-markdown";
 import { useQuoteModal } from "@/components/forms/QuoteModalProvider";
 import { cn } from "@/lib/cn";
@@ -9,7 +10,11 @@ export interface Message {
   content: string;
 }
 
-export function ChatMessage({ message }: { message: Message }) {
+export const ChatMessage = memo(function ChatMessage({
+  message,
+}: {
+  message: Message;
+}) {
   const { open } = useQuoteModal();
   const isUser = message.role === "user";
 
@@ -66,4 +71,4 @@ export function ChatMessage({ message }: { message: Message }) {
       </div>
     </div>
   );
-}
+});
