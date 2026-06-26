@@ -9,7 +9,7 @@ declaration page.
 
 | File | What it is |
 | --- | --- |
-| `Vyntra-Subcontractor-Onboarding-Pack.pdf` | **Interactive PDF** — the version you send to subcontractors. 16 pages, 23 fillable AcroForm fields (8 document-checklist boxes on p.9, plus 8 declaration checkboxes incl. an accuracy/currency confirmation, 6 detail fields and a signature box on p.15). Fill on screen in any PDF reader, or print and sign. |
+| `Vyntra-Subcontractor-Onboarding-Pack.pdf` | **Interactive PDF** — the version you send to subcontractors. 19 pages, 24 fillable AcroForm fields (9 document-checklist boxes incl. availability, plus 8 declaration checkboxes incl. an accuracy/currency confirmation, 6 detail fields and a signature box). Fill on screen in any PDF reader, or print and sign. Footer page numbers auto-increment (CSS counter). |
 | `Vyntra-Subcontractor-Onboarding-Pack.docx` | **Editable Microsoft Word** version for future updates — branded headings, tables, callouts and checklists. Opens in Word or Google Docs. |
 
 ## Editable design master (`src/`)
@@ -74,9 +74,10 @@ build scripts if your environment differs.
 ## Page map
 
 1. Cover · 2. Welcome · 3. How Vyntra Works (flow) · 4–6. Code of Conduct ·
-7–8. Payment Policy · 9. Required Documents · 10–13. Independent Contractor
-Agreement · 14. FAQ · 15. Declaration & Agreement (fillable) · 16. What Happens Next
-(onboarding process + Contact Vyntra).
+7–8. Payment Policy (subcontractor) · 9. Customer Payments & Approval to Proceed ·
+10. Break Policy · 11. Vyntra Subcontractor Portal · 12. Required Documents ·
+13–16. Independent Contractor Agreement · 17. FAQ · 18. Declaration & Agreement
+(fillable) · 19. What Happens Next (onboarding process + Contact Vyntra).
 
 ## Editable placeholders to confirm
 

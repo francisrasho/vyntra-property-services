@@ -210,7 +210,7 @@ steps = [
     ('1', 'Client requests work', 'A property owner or manager books a job through Vyntra.'),
     ('2', 'Vyntra schedules the job', 'We confirm scope, timing and the agreed rate.'),
     ('3', 'Allocated to your availability', 'We book the job into your nominated working days and send the brief, address and access details.'),
-    ('4', 'Attend the scheduled job', 'Turn up at the booked time, ready to complete the work.'),
+    ('4', 'Attend the scheduled job', 'Once Vyntra confirms the job is approved to proceed, turn up at the booked time ready to work.'),
     ('5', 'Complete the work', 'Deliver to Vyntra’s quality and safety standards.'),
     ('6', 'Upload before & after photos', 'Required evidence for every job, no exceptions.'),
     ('7', 'Client approval', 'The client signs off that the work meets expectations.'),
@@ -259,6 +259,8 @@ h2('Representing Vyntra')
 checklist(['Act honestly and ethically at all times.', 'Refer all quotes and bookings back to Vyntra.', 'Raise any client concern with Vyntra immediately.'])
 h2('Prohibited behaviour — strictly not permitted')
 checklist([
+    'Requesting or accepting payment directly from a customer.',
+    'Starting work before Vyntra confirms approval to proceed.',
     'Soliciting clients for private or cash-in-hand work.',
     'Dishonesty, theft or misuse of client property.',
     'Aggressive, threatening or discriminatory conduct.',
@@ -266,7 +268,7 @@ checklist([
     'Working while impaired by alcohol or drugs.',
     'Subcontracting a Vyntra job without our approval.',
     'Unsafe work practices or ignoring site safety.',
-    'Falsifying photos, invoices or job records.',
+    'Falsifying photos, invoices, breaks or job records.',
 ], mark='✖')
 callout('Consequences', 'Serious or repeated breaches of this Code may lead to suspension or immediate termination of your engagement, and where appropriate, referral to the relevant authorities.', fill='FEF3F2')
 page_break()
@@ -292,7 +294,7 @@ kv_table([
 callout('GST & ABN', 'Quote a valid ABN on every invoice. If you are registered for GST, add 10% GST and label it clearly. No ABN may mean we must withhold tax at the top rate.')
 page_break()
 
-kicker('Section 04 · Part 2 of 2'); h1('Payment Policy — Rates, call-outs & approvals')
+kicker('Section 04 · Part 2 of 3'); h1('Payment Policy — Rates, call-outs & approvals')
 h2('Rates & call-outs')
 kv_table([
     ('Minimum call-out', 'A minimum charge applies to every attendance, as agreed for the job'),
@@ -309,8 +311,55 @@ kv_table([
 callout('Client non-payment', 'You are engaged and paid by Vyntra, not the client. Provided you have completed the work to standard and invoiced correctly, you are paid on our standard terms regardless of whether the client has paid us. Never chase payment directly from a client.')
 page_break()
 
+# ============ CUSTOMER PAYMENTS ============
+kicker('Section 04 · Part 3 of 3'); h1('Customer payments & approval to proceed')
+para('Vyntra manages all customer billing. Your job is to deliver great work — never to handle money. Here is exactly how customer payments work.', size=11, color=NAVY)
+kv_table([
+    ('Customers pay before the job', 'Customers must complete payment at least one (1) hour before the scheduled start time, unless otherwise approved by Vyntra.'),
+    ('Vyntra collects all payments', 'Vyntra is responsible for collecting every customer payment.'),
+    ('Never bill the customer', 'You must never request or accept payment directly from a customer.'),
+    ('Approval to proceed', 'Only begin work once Vyntra has confirmed the job is approved to proceed.'),
+    ('If payment isn’t confirmed', 'If payment hasn’t been received and Vyntra hasn’t authorised the job, contact Vyntra before starting any work.'),
+], head=('Rule', 'What it means'))
+callout('Do not start work until Vyntra confirms "approved to proceed"', 'If you arrive and you are unsure whether payment is settled, pause and contact your Vyntra coordinator. Starting an unapproved job can leave you unpaid and the customer unbilled.', fill='FEF3F2')
+callout('This protects you', 'Because Vyntra collects payment up front, you are paid on our terms for approved work — you never have to chase a customer.', fill='ECFDF3')
+page_break()
+
+# ============ BREAK POLICY ============
+kicker('Section 05 · Looking after you'); h1('Break policy')
+para('Rest breaks keep you safe and doing your best work. Here is what you are entitled to and how to record it.', size=11, color=NAVY)
+h2('Your entitlement')
+checklist(['A minimum unpaid 30-minute meal break on longer jobs or shifts.', 'Longer breaks may apply depending on the size, duration and physical demands of the work.', 'Take your break at a sensible point that does not disrupt the customer.'])
+h2('Recording your break')
+checklist(['Record every break through the Vyntra Subcontractor Portal.', 'Clock out when you start your break.', 'Clock back in when you return to work.'])
+callout('Accurate records matter', 'Clocking breaks correctly keeps your timesheet and pay accurate. Breaks that are not recorded properly may create timesheet discrepancies, which will be investigated.')
+page_break()
+
+# ============ SUBCONTRACTOR PORTAL ============
+kicker('Section 06 · Your digital workspace'); h1('The Vyntra Subcontractor Portal')
+para('Once you are approved and your documents are verified, you will receive secure login credentials to your own portal within Vyntra OS — your hub for every job.', size=11, color=NAVY)
+h2('What you can do in the portal')
+checklist([
+    'View upcoming jobs and completed job history.',
+    'View customer and property details for your allocated jobs.',
+    'Review notes and photos from previous visits to returning clients.',
+    'Upload before & after photos.',
+    'Add job notes and completion reports.',
+    'Start and stop work timers.',
+    'Clock in and out for unpaid meal breaks.',
+    'Record your total working time.',
+    'Submit invoices (where applicable).',
+    'View payment history and payment status.',
+    'Update your availability.',
+    'Submit leave requests and unavailability notices.',
+    'Upload renewed insurance certificates and licences.',
+    'Receive company announcements and important updates.',
+])
+callout('Everything is recorded — for your protection too', 'All activity in the portal is timestamped and logged. Clock-ins, clock-outs, break times, photo uploads and job updates are recorded for quality assurance, payroll accuracy and customer service. This gives both you and Vyntra a complete, fair digital record of every job.', fill='0F172A')
+page_break()
+
 # ============ REQUIRED DOCUMENTS ============
-kicker('Section 05 · Before your first job'); h1('Required documents')
+kicker('Section 07 · Before your first job'); h1('Required documents')
 para('Please provide the following so we can verify you and activate your account.', size=11, color=NAVY)
 docs_list = [
     ('ABN — Australian Business Number', 'Mandatory'),
@@ -345,7 +394,7 @@ page_break()
 # ============ AGREEMENT ============
 clauses = [
     ('1', 'Independent contractor relationship', 'You are engaged as an independent contractor, not an employee, partner or agent of Vyntra. You are responsible for your own tax, superannuation, insurances and leave. Nothing in this Agreement creates an employment relationship, and you may work for others provided you meet your obligations to us.'),
-    ('2', 'Scope of work', 'Vyntra will schedule property maintenance and cleaning jobs to you within your nominated availability from time to time. Each job will specify the work, location, timing and rate. You agree to perform allocated work with due care, skill and to the standards set out in this pack and any reasonable directions from Vyntra.'),
+    ('2', 'Scope of work', 'Vyntra will schedule property maintenance and cleaning jobs to you within your nominated availability from time to time. Each job will specify the work, location, timing and rate. You agree to perform allocated work with due care, skill and to the standards set out in this pack and any reasonable directions from Vyntra. Vyntra collects all customer payments; you must not request or accept payment directly from a customer, and must only begin work once Vyntra has confirmed the job is approved to proceed.'),
     ('3', 'Availability & attendance', 'You provide Vyntra with your regular availability, and Vyntra schedules and allocates jobs within those nominated days. Once a job is allocated within your available hours, you are expected to attend and complete it on time and to standard. You remain an independent contractor and control your own availability; however, by nominating your availability you commit to attend jobs scheduled within it. If exceptional circumstances prevent attendance, you must notify Vyntra as soon as possible with a cancellation or unavailability notice and a reasonable explanation. Planned leave or changes to your availability must be notified in advance. Repeated late cancellations, no-shows or inadequate notice may affect future allocations and may lead to suspension or termination.'),
     ('4', 'Your own equipment', 'Unless agreed otherwise, you supply your own tools, equipment, materials and transport, and are responsible for their condition, safety and maintenance.'),
     ('5', 'Insurance requirements', 'You must hold and maintain current Public Liability Insurance of at least $20 million (or another minimum Vyntra notifies you of), plus any insurance required by law for your trade — for example Workers Compensation where applicable. You agree to provide certificates of currency on request and to keep them current at all times.'),
@@ -361,7 +410,7 @@ clauses = [
     ('15', 'Governing law', 'This Agreement is governed by the laws of New South Wales, Australia. The parties submit to the non-exclusive jurisdiction of the courts of New South Wales.'),
     ('16', 'Entire agreement', 'This Agreement, together with the Code of Conduct, Payment Policy and each job’s brief, forms the entire agreement between us. If any part is found to be invalid, the rest continues to apply. Vyntra may update this pack from time to time and will notify you of material changes.'),
 ]
-kicker('Section 06 · Independent Contractor Agreement'); h1('Independent Contractor Agreement')
+kicker('Section 08 · Independent Contractor Agreement'); h1('Independent Contractor Agreement')
 para('This Agreement sets out the terms on which you provide services to Vyntra as an independent contractor. It is written in plain English — please read it before you sign the declaration.', size=11, color=NAVY)
 kv_table([
     ('Principal', 'Vyntra Property Services'),
@@ -378,12 +427,12 @@ for i, (n, t, d) in enumerate(clauses):
     pb.paragraph_format.space_after = Pt(4)
     if i == 7:  # break agreement across two pages
         page_break()
-        kicker('Section 06 · Independent Contractor Agreement (continued)'); h1('Agreement — continued')
+        kicker('Section 08 · Independent Contractor Agreement (continued)'); h1('Agreement — continued')
 callout('Plain-English summary', 'Be safe and insured, do great work, look after our clients and their information, refer client opportunities back to us, and we will keep the jobs and payments flowing. This document is a clear summary of our working arrangement and is not legal advice.', fill='ECFDF3')
 page_break()
 
 # ============ FAQ ============
-kicker('Section 07 · Quick answers'); h1('Frequently asked questions')
+kicker('Section 09 · Quick answers'); h1('Frequently asked questions')
 faqs = [
     ('When do I get paid?', 'Within 14 days of us receiving a correct tax invoice. Payments go out by EFT in our weekly run.'),
     ('How does scheduling work?', 'You give Vyntra your regular availability and we book jobs into those days. Once a job is scheduled within your available hours, you are expected to attend and complete it.'),
@@ -391,6 +440,8 @@ faqs = [
     ('What if the customer wants additional work?', 'Do not start it. Get written approval from Vyntra first so the extra scope and price are agreed and you get paid for it.'),
     ('Who do I contact?', 'Your Vyntra coordinator on 0451 510 026 or info@vyntrapropertyservices.com for anything job-related.'),
     ('What happens if equipment is damaged?', 'Stop, make the area safe, and report it to Vyntra immediately with photos. Do not attempt to hide or quietly fix damage.'),
+    ('Do I collect payment from customers?', 'No — never. Vyntra collects all customer payments. Customers pay us at least an hour before the job, and you only start once we confirm it is approved to proceed.'),
+    ('Where do I log my time and breaks?', 'In the Vyntra Subcontractor Portal. Clock in and out, record your unpaid meal break, upload before & after photos and add job notes — it is all timestamped.'),
 ]
 for q, a in faqs:
     p = doc.add_paragraph(); run(p, 'Q.  ', size=10.5, bold=True, color=GOLD); run(p, q, size=10.5, bold=True, color=NAVY)
@@ -401,7 +452,7 @@ callout('Still have a question?', 'Reach the Vyntra team on 0451 510 026 or emai
 page_break()
 
 # ============ DECLARATION ============
-kicker('Section 08 · Read · agree · sign'); h1('Declaration & agreement')
+kicker('Section 10 · Read · agree · sign'); h1('Declaration & agreement')
 para('By signing below, I confirm that I have read, understood and agree to be bound by the following. This page can be completed and signed electronically, or printed and signed by hand.', size=11, color=NAVY)
 checklist([
     'I agree to the Independent Contractor Agreement',
@@ -439,13 +490,13 @@ pf2 = doc.add_paragraph(); run(pf2, 'Vyntra Property Services · ABN 69 252 402 
 page_break()
 
 # ============ WHAT HAPPENS NEXT ============
-kicker('Section 09 · After you sign'); h1('What happens next?')
+kicker('Section 11 · After you sign'); h1('What happens next?')
 para('Once you have signed your declaration and sent it back with your documents, here is how we will get you ready for your first job.', size=11, color=NAVY)
 next_steps = [
     ('1', 'You submit', 'Return your signed declaration and required documents to Vyntra.'),
     ('2', 'We review & verify', 'We check your documents, insurance and any required clearances — usually within 2–3 business days.'),
     ('3', 'Approval', 'Once everything checks out, we confirm that you are approved to work with Vyntra.'),
-    ('4', 'Account activation', 'We set up your subcontractor profile and add you to our active network.'),
+    ('4', 'Account activation', 'We set up your profile, issue your secure Vyntra Subcontractor Portal login, and add you to our active network.'),
     ('5', 'Your first jobs', 'We start scheduling jobs within your nominated availability that match your trade and service area.'),
 ]
 for n, t, d in next_steps:
