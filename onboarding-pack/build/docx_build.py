@@ -30,7 +30,7 @@ sec.header_distance = Cm(1.1)
 sec.different_first_page_header_footer = True
 try:
     hp = sec.header.paragraphs[0]
-    hp.add_run().add_picture('src/assets/logo-on-navy.png', height=Cm(0.55))
+    hp.add_run().add_picture('src/assets/logo-light.png', height=Cm(0.6))
     tr = hp.add_run('   Subcontractor Onboarding Pack')
     tr.font.size = Pt(8); tr.font.color.rgb = MUTED; tr.font.name = 'Calibri'
 except Exception as e:

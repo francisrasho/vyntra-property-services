@@ -42,10 +42,13 @@ the editable design source. To bring it into a visual editor:
 | Display font | Outfit |
 | Body font | Work Sans |
 
-**Logo** — the official Vyntra "VP" lockup (`src/assets/logo-source.webp`). The navy
-background is keyed out by `build/process-logo.mjs` into three assets: `logo-clear.png`
-(transparent lockup, used on the cover), `logo-on-navy.png` (lockup on brand navy, used
-in the DOCX) and `logo-mark.png` (the gold VP monogram, used in every page header).
+**Logo** — the official Vyntra "VP | VYNTRA PROPERTY SERVICES" lockup
+(`src/assets/logo-source.webp`). `build/process-logo.mjs` keys out the navy
+background, erases the "Professional • Reliable • Results" tagline, and produces
+three assets: `logo-clear.png` (transparent lockup, white wordmark — cover),
+`logo-on-navy.png` (lockup flattened on brand navy — DOCX cover) and
+`logo-light.png` (lockup with the wordmark recoloured navy for light backgrounds —
+used in every page header).
 
 ## Rebuilding from source
 
