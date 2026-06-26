@@ -18,14 +18,14 @@
   --navy:#0F172A; --navy-700:#1E293B; --navy-600:#334155; --navy-500:#475569;
   --gold:#D4AF37; --gold-soft:#E7CB6B; --gold-dark:#B8932B; --gold-tint:#FBF7E8;
   --white:#FFFFFF; --grey:#F8FAFC; --grey-2:#F1F5F9; --line:#E2E8F0;
-  --ink:#0F172A; --body:#334155; --muted:#64748B;
+  --ink:#0F172A; --body:#2B3849; --muted:#475569;
   --red:#B42318; --red-tint:#FEF3F2; --green:#15803D; --green-tint:#ECFDF3;
 }
 *{box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
 html,body{margin:0;padding:0;}
 body{
   font-family:'Work Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  color:var(--body); font-size:10.3pt; line-height:1.55; background:var(--grey-2);
+  color:var(--body); font-size:10.5pt; line-height:1.5; background:var(--grey-2);
   -webkit-font-smoothing:antialiased; font-feature-settings:"ss01";
 }
 h1,h2,h3,h4,.display,.kicker,.logo-word,.num-badge,.step-n{font-family:'Outfit', ui-sans-serif, system-ui, sans-serif;}
@@ -52,7 +52,7 @@ a{color:var(--gold-dark); text-decoration:none;}
   text-transform:uppercase; color:var(--gold-dark); font-weight:700; }
 .masthead .sec .s-name{ font-family:'Outfit'; font-size:10.5pt; color:var(--navy); font-weight:700; }
 .foot{ display:flex; align-items:center; justify-content:space-between;
-  padding:5mm 15mm; border-top:1px solid var(--line); color:var(--muted); font-size:7.6pt; }
+  padding:5mm 15mm; border-top:1px solid var(--line); color:var(--muted); font-size:8.1pt; }
 .foot .dot{ color:var(--gold); margin:0 6px; }
 .foot b{ color:var(--navy-600); font-weight:600; }
 
@@ -76,7 +76,7 @@ h1.title{ font-size:25pt; line-height:1.05; color:var(--navy); font-weight:700; 
 h2{ font-size:13pt; color:var(--navy); font-weight:700; margin:14px 0 8px; letter-spacing:-.01em; }
 h3{ font-size:10.5pt; color:var(--navy); font-weight:700; margin:0 0 4px; }
 .muted{ color:var(--muted); }
-.small{ font-size:8.6pt; }
+.small{ font-size:9.1pt; }
 .rule{ width:46px; height:3px; background:var(--gold); border-radius:2px; margin:2px 0 12px; }
 
 /* ---------- Layout helpers ---------- */
@@ -103,7 +103,7 @@ h3{ font-size:10.5pt; color:var(--navy); font-weight:700; margin:0 0 4px; }
 
 /* ---------- Checklists ---------- */
 ul.check{ list-style:none; margin:0; padding:0; }
-ul.check li{ display:flex; gap:9px; align-items:flex-start; padding:3.5px 0; font-size:9.6pt; line-height:1.4; }
+ul.check li{ display:flex; gap:9px; align-items:flex-start; padding:3.5px 0; font-size:9.9pt; line-height:1.42; }
 ul.check li .tick{ flex:none; width:16px; height:16px; border-radius:5px; background:var(--gold);
   display:grid; place-items:center; margin-top:1px; box-shadow:0 1px 1px rgba(180,140,30,.35); }
 ul.check li .tick svg{ width:10px; height:10px; color:#fff; }
@@ -121,14 +121,14 @@ ul.check li b{ color:var(--ink); }
 .callout.navy .c-ic{ color:var(--gold-soft); }
 .callout.red .c-ic{ color:var(--red); }
 .callout.green .c-ic{ color:var(--green); }
-.callout p{ margin:0; font-size:9.4pt; }
+.callout p{ margin:0; font-size:9.7pt; }
 .callout h3{ margin:0 0 2px; font-size:9.8pt; }
 
 /* ---------- Tables ---------- */
-table.tbl{ width:100%; border-collapse:collapse; font-size:9.2pt; border-radius:10px; overflow:hidden;
+table.tbl{ width:100%; border-collapse:collapse; font-size:9.5pt; border-radius:10px; overflow:hidden;
   box-shadow:0 1px 2px rgba(15,23,42,.05); border:1px solid var(--line); }
 table.tbl thead th{ background:var(--navy); color:#fff; font-family:'Outfit'; font-weight:700;
-  text-align:left; padding:8px 11px; font-size:8.6pt; letter-spacing:.02em; }
+  text-align:left; padding:8px 11px; font-size:9pt; letter-spacing:.02em; }
 table.tbl thead th:first-child{ box-shadow:inset 3px 0 0 var(--gold); }
 table.tbl td{ padding:7.5px 11px; border-top:1px solid var(--line); vertical-align:top; color:var(--body); }
 table.tbl td:first-child{ color:var(--ink); font-weight:600; width:38%; }
@@ -146,7 +146,7 @@ table.tbl td b{ color:var(--navy); }
 .step.acc .step-n{ background:var(--gold); color:var(--navy); }
 .step-b{ flex:1; padding-top:3px; }
 .step-b h3{ margin:0; font-size:10.2pt; }
-.step-b p{ margin:1px 0 0; font-size:8.8pt; color:var(--muted); }
+.step-b p{ margin:1px 0 0; font-size:9.2pt; color:var(--muted); }
 
 /* ---------- Numbered clause ---------- */
 .clause{ display:flex; gap:11px; padding:7px 0; border-top:1px solid var(--line); }
@@ -155,7 +155,7 @@ table.tbl td b{ color:var(--navy); }
   color:var(--gold-dark); display:grid; place-items:center; font-weight:700; font-size:9.5pt; }
 .clause-b{ flex:1; }
 .clause-b h3{ margin:0 0 2px; font-size:10pt; }
-.clause-b p{ margin:0; font-size:9pt; color:var(--body); }
+.clause-b p{ margin:0; font-size:9.4pt; color:var(--body); line-height:1.45; }
 
 /* parties / meta box */
 .meta-box{ display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line);
@@ -173,7 +173,7 @@ table.tbl td b{ color:var(--navy); }
 .faq .q .qm{ flex:none; width:21px; height:21px; border-radius:6px; background:var(--navy); color:var(--gold-soft);
   display:grid; place-items:center; font-family:'Outfit'; font-weight:700; font-size:9pt; }
 .faq .q h3{ margin:0; font-size:9.8pt; }
-.faq .a{ margin:5px 0 0 30px; font-size:9pt; color:var(--body); }
+.faq .a{ margin:5px 0 0 30px; font-size:9.4pt; color:var(--body); }
 
 /* ---------- Contact cards ---------- */
 .contact{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:2px; }
