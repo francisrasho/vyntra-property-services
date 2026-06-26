@@ -209,8 +209,8 @@ para('Every job follows the same simple flow — from the client’s first reque
 steps = [
     ('1', 'Client requests work', 'A property owner or manager books a job through Vyntra.'),
     ('2', 'Vyntra schedules the job', 'We confirm scope, timing and the agreed rate.'),
-    ('3', 'Subcontractor receives job', 'You get the full brief, address and access details.'),
-    ('4', 'Accept or decline', 'Confirm promptly so we can plan with confidence.'),
+    ('3', 'Allocated to your availability', 'We book the job into your nominated working days and send the brief, address and access details.'),
+    ('4', 'Attend the scheduled job', 'Turn up at the booked time, ready to complete the work.'),
     ('5', 'Complete the work', 'Deliver to Vyntra’s quality and safety standards.'),
     ('6', 'Upload before & after photos', 'Required evidence for every job, no exceptions.'),
     ('7', 'Client approval', 'The client signs off that the work meets expectations.'),
@@ -223,7 +223,8 @@ for n, t, d in steps:
     run(p, t + '  —  ', size=10.5, bold=True, color=NAVY)
     run(p, d, size=9.5, color=MUTED)
     p.paragraph_format.space_after = Pt(4)
-callout('Keep it moving', 'Fast acceptance, clean photos and a correct invoice are the three things that get you paid sooner.')
+callout('Keep it moving', 'Reliable attendance, clean photos and a correct invoice are the three things that get you paid sooner.')
+callout('How scheduling works — availability, not accept/decline', 'You remain an independent contractor and set your own availability. You give Vyntra the days you are available to work, and we schedule and allocate jobs within those days. Once a job is booked inside your nominated availability, you are committed to attend and complete it — unless exceptional circumstances arise, in which case you must notify Vyntra in advance. Need leave or a change to your days? Let us know ahead of time so we book around it.', fill='0F172A')
 page_break()
 
 # ============ CODE OF CONDUCT ============
@@ -234,8 +235,8 @@ h2('Customer service')
 checklist(['Introduce yourself as working on behalf of Vyntra Property Services.', 'Greet clients politely and explain what you will be doing.', 'Listen, be patient, and never argue with a client.', 'Leave the client feeling looked after, not just serviced.'])
 h2('Communication')
 checklist(['Respond to Vyntra messages and calls promptly.', 'Flag delays, access issues or extra work straight away.', 'Keep all job communication professional and on record.', 'Never share your personal rates or details with clients.'])
-h2('Punctuality')
-checklist(['Arrive within the agreed appointment window.', 'Call ahead immediately if you are going to be late.', 'Allow enough time to complete the job properly.', 'Respect the client’s time as much as your own.'])
+h2('Availability & attendance')
+checklist(['Keep your nominated availability up to date with Vyntra.', 'Attend every job booked within your available days.', 'Arrive within the agreed window; call ahead if you will be late.', 'Give Vyntra as much notice as possible if you can’t attend.'])
 callout('If something goes wrong, tell us straight away', 'Problems and surprises happen on every job. Contact Vyntra immediately — you will never be in trouble for reporting a genuine issue early. Trying to hide a mistake is the only real mistake.', fill='ECFDF3')
 page_break()
 
@@ -302,7 +303,7 @@ kv_table([
 h2('Approvals & changes')
 kv_table([
     ('Extra work approval', 'Stop and get written approval from Vyntra before any work beyond the original scope. Unapproved extras may not be paid.'),
-    ('Cancellation', 'If a client cancels with less than 24 hours’ notice after you are dispatched, a cancellation fee may apply as agreed.'),
+    ('Cancellation', 'If a client cancels a scheduled job at short notice, a cancellation fee may apply as agreed. If you can’t attend a scheduled job, submit an unavailability notice as early as possible (see Code of Conduct).'),
     ('Variations', 'Any change to price, scope or timing must be confirmed by Vyntra in writing.'),
 ], head=('Situation', 'What to do'))
 callout('Client non-payment', 'You are engaged and paid by Vyntra, not the client. Provided you have completed the work to standard and invoiced correctly, you are paid on our standard terms regardless of whether the client has paid us. Never chase payment directly from a client.')
@@ -313,6 +314,7 @@ kicker('Section 05 · Before your first job'); h1('Required documents')
 para('Please provide the following so we can verify you and activate your account.', size=11, color=NAVY)
 docs_list = [
     ('ABN — Australian Business Number', 'Mandatory'),
+    ('Availability — your regular working days', 'Mandatory'),
     ('Public Liability Insurance — current certificate, minimum $20 million', 'Mandatory'),
     ('Driver Licence — front & back', 'Mandatory'),
     ('White Card — construction induction', 'If applicable'),
@@ -343,8 +345,8 @@ page_break()
 # ============ AGREEMENT ============
 clauses = [
     ('1', 'Independent contractor relationship', 'You are engaged as an independent contractor, not an employee, partner or agent of Vyntra. You are responsible for your own tax, superannuation, insurances and leave. Nothing in this Agreement creates an employment relationship, and you may work for others provided you meet your obligations to us.'),
-    ('2', 'Scope of work', 'Vyntra will offer you property maintenance and cleaning jobs from time to time. Each job will specify the work, location, timing and rate. You agree to perform accepted work with due care, skill and to the standards set out in this pack and any reasonable directions from Vyntra.'),
-    ('3', 'Acceptance of jobs', 'You are free to accept or decline any job offered. Once you accept a job, you commit to completing it on time and to standard, or to giving Vyntra prompt notice if you genuinely cannot, so we can arrange an alternative.'),
+    ('2', 'Scope of work', 'Vyntra will schedule property maintenance and cleaning jobs to you within your nominated availability from time to time. Each job will specify the work, location, timing and rate. You agree to perform allocated work with due care, skill and to the standards set out in this pack and any reasonable directions from Vyntra.'),
+    ('3', 'Availability & attendance', 'You provide Vyntra with your regular availability, and Vyntra schedules and allocates jobs within those nominated days. Once a job is allocated within your available hours, you are expected to attend and complete it on time and to standard. You remain an independent contractor and control your own availability; however, by nominating your availability you commit to attend jobs scheduled within it. If exceptional circumstances prevent attendance, you must notify Vyntra as soon as possible with a cancellation or unavailability notice and a reasonable explanation. Planned leave or changes to your availability must be notified in advance. Repeated late cancellations, no-shows or inadequate notice may affect future allocations and may lead to suspension or termination.'),
     ('4', 'Your own equipment', 'Unless agreed otherwise, you supply your own tools, equipment, materials and transport, and are responsible for their condition, safety and maintenance.'),
     ('5', 'Insurance requirements', 'You must hold and maintain current Public Liability Insurance of at least $20 million (or another minimum Vyntra notifies you of), plus any insurance required by law for your trade — for example Workers Compensation where applicable. You agree to provide certificates of currency on request and to keep them current at all times.'),
     ('6', 'Work standards & safety', 'You agree to perform all work safely, lawfully and to a professional standard, complying with all work health and safety laws and the standards in this pack. You will take reasonable care for your own safety and that of others, and stop work and notify Vyntra if a situation is unsafe.'),
@@ -354,7 +356,7 @@ clauses = [
     ('10', 'Intellectual property', 'Any materials, photos, reports or records you create in performing the work — including before and after photos — are Vyntra’s property and may be used by Vyntra for service delivery, quality and marketing. You grant Vyntra a perpetual licence to use them for these purposes.'),
     ('11', 'Liability & indemnity', 'You are responsible for the work you perform and for any loss, damage or claim arising from your acts, omissions or negligence. To the extent permitted by law, you indemnify Vyntra against such claims. Nothing in this clause limits rights that cannot be excluded under the Australian Consumer Law.'),
     ('12', 'Termination', 'Either party may end this Agreement at any time by giving reasonable notice in writing. Vyntra may suspend or end your engagement immediately for a serious breach — including a breach of the Code of Conduct, safety, confidentiality or non-solicitation terms. Ending the Agreement does not affect rights or payments accrued beforehand.'),
-    ('13', 'Subcontracting & assignment', 'You will not subcontract, assign or transfer a Vyntra job to anyone else without Vyntra’s prior written consent. Accepted jobs are personal to you and the team we have approved.'),
+    ('13', 'Subcontracting & assignment', 'You will not subcontract, assign or transfer a Vyntra job to anyone else without Vyntra’s prior written consent. Allocated jobs are personal to you and the team we have approved.'),
     ('14', 'Dispute resolution', 'If a dispute arises, both parties agree to first raise it in good faith and try to resolve it through discussion. If it cannot be resolved within a reasonable time, the parties may refer the matter to mediation before commencing legal proceedings, except where urgent relief is needed.'),
     ('15', 'Governing law', 'This Agreement is governed by the laws of New South Wales, Australia. The parties submit to the non-exclusive jurisdiction of the courts of New South Wales.'),
     ('16', 'Entire agreement', 'This Agreement, together with the Code of Conduct, Payment Policy and each job’s brief, forms the entire agreement between us. If any part is found to be invalid, the rest continues to apply. Vyntra may update this pack from time to time and will notify you of material changes.'),
@@ -384,8 +386,8 @@ page_break()
 kicker('Section 07 · Quick answers'); h1('Frequently asked questions')
 faqs = [
     ('When do I get paid?', 'Within 14 days of us receiving a correct tax invoice. Payments go out by EFT in our weekly run.'),
-    ('Can I decline jobs?', 'Yes. You choose which jobs to accept. Please respond quickly so we can offer it to someone else if needed.'),
-    ('What if I am running late?', 'Call ahead as soon as you know. Keep the client and Vyntra informed — a quick heads-up prevents most problems.'),
+    ('How does scheduling work?', 'You give Vyntra your regular availability and we book jobs into those days. Once a job is scheduled within your available hours, you are expected to attend and complete it.'),
+    ('What if I can’t make a scheduled job?', 'Tell Vyntra as soon as possible and submit an unavailability notice with the reason. If you are just running late, call ahead. Repeated short-notice cancellations or no-shows may affect future work.'),
     ('What if the customer wants additional work?', 'Do not start it. Get written approval from Vyntra first so the extra scope and price are agreed and you get paid for it.'),
     ('Who do I contact?', 'Your Vyntra coordinator on 0451 510 026 or info@vyntrapropertyservices.com for anything job-related.'),
     ('What happens if equipment is damaged?', 'Stop, make the area safe, and report it to Vyntra immediately with photos. Do not attempt to hide or quietly fix damage.'),
@@ -444,7 +446,7 @@ next_steps = [
     ('2', 'We review & verify', 'We check your documents, insurance and any required clearances — usually within 2–3 business days.'),
     ('3', 'Approval', 'Once everything checks out, we confirm that you are approved to work with Vyntra.'),
     ('4', 'Account activation', 'We set up your subcontractor profile and add you to our active network.'),
-    ('5', 'Your first jobs', 'You start receiving job offers that match your trade, availability and service area.'),
+    ('5', 'Your first jobs', 'We start scheduling jobs within your nominated availability that match your trade and service area.'),
 ]
 for n, t, d in next_steps:
     p = doc.add_paragraph()

@@ -338,8 +338,8 @@ ul.declare li b{ color:var(--ink); }
       <div class="flow" style="flex:1;">
         <div class="step"><div class="step-n">1</div><div class="step-b"><h3>Client requests work</h3><p>A property owner or manager books a job through Vyntra.</p></div></div>
         <div class="step"><div class="step-n">2</div><div class="step-b"><h3>Vyntra schedules the job</h3><p>We confirm scope, timing and the agreed rate.</p></div></div>
-        <div class="step"><div class="step-n">3</div><div class="step-b"><h3>Subcontractor receives job</h3><p>You get the full brief, address and access details.</p></div></div>
-        <div class="step acc"><div class="step-n">4</div><div class="step-b"><h3>Accept or decline</h3><p>Confirm promptly so we can plan with confidence.</p></div></div>
+        <div class="step"><div class="step-n">3</div><div class="step-b"><h3>Allocated to your availability</h3><p>We book the job into your nominated working days and send the brief, address and access details.</p></div></div>
+        <div class="step acc"><div class="step-n">4</div><div class="step-b"><h3>Attend the scheduled job</h3><p>Turn up at the booked time, ready to complete the work.</p></div></div>
         <div class="step"><div class="step-n">5</div><div class="step-b"><h3>Complete the work</h3><p>Deliver to Vyntra's quality and safety standards.</p></div></div>
       </div>
       <div style="flex:1;">
@@ -351,8 +351,15 @@ ul.declare li b{ color:var(--ink); }
         </div>
         <div class="callout" style="margin-top:14px;">
           <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span>
-          <div><h3>Keep it moving</h3><p>Fast acceptance, clean photos and a correct invoice are the three things that get you paid sooner.</p></div>
+          <div><h3>Keep it moving</h3><p>Reliable attendance, clean photos and a correct invoice are the three things that get you paid sooner.</p></div>
         </div>
+      </div>
+    </div>
+
+    <div class="callout navy" style="margin-top:16px;">
+      <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M9 14l2 2 4-4"/></svg></span>
+      <div><h3>How scheduling works — availability, not accept/decline</h3>
+        <p style="margin-top:3px;">You remain an independent contractor and set your own availability. You give Vyntra the days you're available to work, and we schedule and allocate jobs within those days. Once a job is booked inside your nominated availability, you're committed to attend and complete it — unless exceptional circumstances arise, in which case you must notify Vyntra in advance. Need leave or a change to your days? Just let us know ahead of time so we book around it.</p>
       </div>
     </div>
   </div>
@@ -403,12 +410,12 @@ ul.declare li b{ color:var(--ink); }
         </ul>
       </div>
       <div class="card">
-        <div class="card-h"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>Punctuality</h3></div>
+        <div class="card-h"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span><h3>Availability &amp; attendance</h3></div>
         <ul class="check">
-          <li><span class="tick">&#10003;</span><span>Arrive within the agreed appointment window.</span></li>
-          <li><span class="tick">&#10003;</span><span>Call ahead immediately if you're going to be late.</span></li>
-          <li><span class="tick">&#10003;</span><span>Allow enough time to complete the job properly.</span></li>
-          <li><span class="tick">&#10003;</span><span>Respect the client's time as much as your own.</span></li>
+          <li><span class="tick">&#10003;</span><span>Keep your nominated availability up to date with Vyntra.</span></li>
+          <li><span class="tick">&#10003;</span><span>Attend every job booked within your available days.</span></li>
+          <li><span class="tick">&#10003;</span><span>Arrive within the agreed window; call ahead if you'll be late.</span></li>
+          <li><span class="tick">&#10003;</span><span>Give Vyntra as much notice as possible if you can't attend.</span></li>
         </ul>
       </div>
     </div>
@@ -629,7 +636,7 @@ ul.declare li b{ color:var(--ink); }
       <thead><tr><th>Situation</th><th>What to do</th></tr></thead>
       <tbody>
         <tr><td>Extra work approval</td><td>Stop and get <b>written approval</b> from Vyntra before doing any work beyond the original scope. Unapproved extras may not be paid.</td></tr>
-        <tr><td>Cancellation</td><td>If a client cancels with less than 24 hours' notice after you've been dispatched, a cancellation fee may apply as agreed.</td></tr>
+        <tr><td>Cancellation</td><td>If a client cancels a scheduled job at short notice, a cancellation fee may apply as agreed. If you can't attend a scheduled job, submit an unavailability notice as early as possible (see Code of Conduct).</td></tr>
         <tr><td>Variations</td><td>Any change to price, scope or timing must be confirmed by Vyntra in writing.</td></tr>
       </tbody>
     </table>
@@ -666,6 +673,7 @@ ul.declare li b{ color:var(--ink); }
       <thead><tr><th style="width:34px;"></th><th>Document</th><th style="width:30%;">Requirement</th></tr></thead>
       <tbody>
         <tr><td><div class="fbox" data-field="doc_abn" data-ftype="checkbox"></div></td><td><b>ABN</b> — Australian Business Number</td><td>Mandatory</td></tr>
+        <tr><td><div class="fbox" data-field="doc_availability" data-ftype="checkbox"></div></td><td><b>Availability</b> — your regular working days</td><td>Mandatory</td></tr>
         <tr><td><div class="fbox" data-field="doc_pli" data-ftype="checkbox"></div></td><td><b>Public Liability Insurance</b> — current certificate, minimum <b>$20 million</b></td><td>Mandatory</td></tr>
         <tr><td><div class="fbox" data-field="doc_licence" data-ftype="checkbox"></div></td><td><b>Driver Licence</b> — front &amp; back</td><td>Mandatory</td></tr>
         <tr><td><div class="fbox" data-field="doc_whitecard" data-ftype="checkbox"></div></td><td><b>White Card</b> — construction induction</td><td>If applicable</td></tr>
@@ -715,8 +723,8 @@ ul.declare li b{ color:var(--ink); }
     </div>
 
     <div class="clause"><div class="num-badge">1</div><div class="clause-b"><h3>Independent contractor relationship</h3><p>You are engaged as an independent contractor, not an employee, partner or agent of Vyntra. You are responsible for your own tax, superannuation, insurances and leave. Nothing in this Agreement creates an employment relationship, and you may work for others provided you meet your obligations to us.</p></div></div>
-    <div class="clause"><div class="num-badge">2</div><div class="clause-b"><h3>Scope of work</h3><p>Vyntra will offer you property maintenance and cleaning jobs from time to time. Each job will specify the work, location, timing and rate. You agree to perform accepted work with due care, skill and to the standards set out in this pack and any reasonable directions from Vyntra.</p></div></div>
-    <div class="clause"><div class="num-badge">3</div><div class="clause-b"><h3>Acceptance of jobs</h3><p>You are free to accept or decline any job offered. Once you accept a job, you commit to completing it on time and to standard, or to giving Vyntra prompt notice if you genuinely cannot, so we can arrange an alternative.</p></div></div>
+    <div class="clause"><div class="num-badge">2</div><div class="clause-b"><h3>Scope of work</h3><p>Vyntra will schedule property maintenance and cleaning jobs to you within your nominated availability from time to time. Each job will specify the work, location, timing and rate. You agree to perform allocated work with due care, skill and to the standards set out in this pack and any reasonable directions from Vyntra.</p></div></div>
+    <div class="clause"><div class="num-badge">3</div><div class="clause-b"><h3>Availability &amp; attendance</h3><p>You provide Vyntra with your regular availability, and Vyntra schedules and allocates jobs within those nominated days. Once a job is allocated within your available hours, you are expected to attend and complete it on time and to standard. You remain an independent contractor and control your own availability; however, by nominating your availability you commit to attend jobs scheduled within it. If exceptional circumstances prevent attendance, you must notify Vyntra as soon as possible with a cancellation or unavailability notice and a reasonable explanation. Planned leave or changes to your availability must be notified in advance. Repeated late cancellations, no-shows or inadequate notice may affect future allocations and may lead to suspension or termination.</p></div></div>
     <div class="clause"><div class="num-badge">4</div><div class="clause-b"><h3>Your own equipment</h3><p>Unless agreed otherwise, you supply your own tools, equipment, materials and transport, and are responsible for their condition, safety and maintenance.</p></div></div>
   </div>
   <div class="foot"><span><b>Vyntra Property Services</b></span><span>Subcontractor Onboarding Pack <span class="dot">·</span> v1.0</span><span>Page <b>10</b></span></div>
@@ -762,7 +770,7 @@ ul.declare li b{ color:var(--ink); }
     <div class="clause"><div class="num-badge">10</div><div class="clause-b"><h3>Intellectual property</h3><p>Any materials, photos, reports or records you create in performing the work — including before and after photos — are Vyntra's property and may be used by Vyntra for service delivery, quality and marketing. You grant Vyntra a perpetual licence to use them for these purposes.</p></div></div>
     <div class="clause"><div class="num-badge">11</div><div class="clause-b"><h3>Liability &amp; indemnity</h3><p>You are responsible for the work you perform and for any loss, damage or claim arising from your acts, omissions or negligence. To the extent permitted by law, you indemnify Vyntra against such claims. Nothing in this clause limits rights that cannot be excluded under the Australian Consumer Law.</p></div></div>
     <div class="clause"><div class="num-badge">12</div><div class="clause-b"><h3>Termination</h3><p>Either party may end this Agreement at any time by giving reasonable notice in writing. Vyntra may suspend or end your engagement immediately for a serious breach — including a breach of the Code of Conduct, safety, confidentiality or non-solicitation terms. Ending the Agreement does not affect rights or payments accrued beforehand.</p></div></div>
-    <div class="clause"><div class="num-badge">13</div><div class="clause-b"><h3>Subcontracting &amp; assignment</h3><p>You will not subcontract, assign or transfer a Vyntra job to anyone else without Vyntra's prior written consent. Accepted jobs are personal to you and the team we have approved.</p></div></div>
+    <div class="clause"><div class="num-badge">13</div><div class="clause-b"><h3>Subcontracting &amp; assignment</h3><p>You will not subcontract, assign or transfer a Vyntra job to anyone else without Vyntra's prior written consent. Allocated jobs are personal to you and the team we have approved.</p></div></div>
   </div>
   <div class="foot"><span><b>Vyntra Property Services</b></span><span>Subcontractor Onboarding Pack <span class="dot">·</span> v1.0</span><span>Page <b>12</b></span></div>
 </section>
@@ -814,8 +822,8 @@ ul.declare li b{ color:var(--ink); }
 
     <div class="grid g2" style="margin-top:4px;">
       <div class="faq"><div class="q"><span class="qm">?</span><h3>When do I get paid?</h3></div><div class="a">Within 14 days of us receiving a correct tax invoice. Payments go out by EFT in our weekly run.</div></div>
-      <div class="faq"><div class="q"><span class="qm">?</span><h3>Can I decline jobs?</h3></div><div class="a">Yes. You choose which jobs to accept. Please respond quickly so we can offer it to someone else if needed.</div></div>
-      <div class="faq"><div class="q"><span class="qm">?</span><h3>What if I'm running late?</h3></div><div class="a">Call ahead as soon as you know. Keep the client and Vyntra informed — a quick heads-up prevents most problems.</div></div>
+      <div class="faq"><div class="q"><span class="qm">?</span><h3>How does scheduling work?</h3></div><div class="a">You give Vyntra your regular availability and we book jobs into those days. Once a job is scheduled within your available hours, you're expected to attend and complete it.</div></div>
+      <div class="faq"><div class="q"><span class="qm">?</span><h3>What if I can't make a scheduled job?</h3></div><div class="a">Tell Vyntra as soon as possible and submit an unavailability notice with the reason. If you're just running late, call ahead. Repeated short-notice cancellations or no-shows may affect future work.</div></div>
       <div class="faq"><div class="q"><span class="qm">?</span><h3>What if the customer wants extra work?</h3></div><div class="a">Don't start it. Get written approval from Vyntra first so the extra scope and price are agreed and you get paid for it.</div></div>
       <div class="faq"><div class="q"><span class="qm">?</span><h3>Who do I contact?</h3></div><div class="a">Your Vyntra coordinator on <b>0451 510 026</b> or <b>info@vyntrapropertyservices.com</b> for anything job-related.</div></div>
       <div class="faq"><div class="q"><span class="qm">?</span><h3>What if equipment is damaged?</h3></div><div class="a">Stop, make the area safe, and report it to Vyntra immediately with photos. Don't attempt to hide or quietly fix damage.</div></div>
@@ -907,7 +915,7 @@ ul.declare li b{ color:var(--ink); }
       <div class="step"><div class="step-n">2</div><div class="step-b"><h3>We review &amp; verify</h3><p>We check your documents, insurance and any required clearances — usually within 2–3 business days.</p></div></div>
       <div class="step acc"><div class="step-n">3</div><div class="step-b"><h3>Approval</h3><p>Once everything checks out, we confirm that you're approved to work with Vyntra.</p></div></div>
       <div class="step"><div class="step-n">4</div><div class="step-b"><h3>Account activation</h3><p>We set up your subcontractor profile and add you to our active network.</p></div></div>
-      <div class="step acc"><div class="step-n">5</div><div class="step-b"><h3>Your first jobs</h3><p>You start receiving job offers that match your trade, availability and service area.</p></div></div>
+      <div class="step acc"><div class="step-n">5</div><div class="step-b"><h3>Your first jobs</h3><p>We start scheduling jobs within your nominated availability that match your trade and service area.</p></div></div>
     </div>
 
     <div class="callout green" style="margin-top:6px;">
