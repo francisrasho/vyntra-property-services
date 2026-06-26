@@ -1,7 +1,7 @@
 import { createCanvas, loadImage } from '@napi-rs/canvas';
 import fs from 'fs';
 
-const cols = 4, rows = 5, n = 19;
+const cols = 4, rows = 5, n = 20;
 const tw = 360, th = Math.round(360 * 297 / 210); // A4 ratio thumb
 const gap = 22, pad = 30;
 const W = pad * 2 + cols * tw + (cols - 1) * gap;

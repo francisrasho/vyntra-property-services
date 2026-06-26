@@ -1,7 +1,7 @@
 const { PDFDocument } = require('pdf-lib');
 const fs = require('fs');
 (async () => {
-  const pdf = await PDFDocument.load(fs.readFileSync('dist/Vyntra-Subcontractor-Onboarding-Pack.pdf'));
+  const pdf = await PDFDocument.load(fs.readFileSync('dist/Vyntra-Contractor-Declaration-and-Agreement.pdf'));
   const form = pdf.getForm();
   ['doc_abn','doc_pli','doc_licence','doc_bank','doc_emergency',
    'agree_ica','agree_conduct','agree_payment','agree_safety','agree_conf','agree_privacy','agree_nonsolicit','agree_accuracy']

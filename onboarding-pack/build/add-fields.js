@@ -27,9 +27,15 @@ const fs = require('fs');
       tf.setFontSize(f.name === 'signature' ? 14 : 11);
     }
   }
+  // Document metadata
+  pdf.setTitle('Contractor Declaration & Agreement');
+  pdf.setAuthor('Vyntra Property Services');
+  pdf.setSubject('Vyntra Property Services — Contractor Declaration & Agreement');
+  pdf.setKeywords(['Vyntra', 'contractor', 'declaration', 'agreement', 'onboarding']);
+
   // Make fields look clean in viewers
   form.updateFieldAppearances();
   const out = await pdf.save();
-  fs.writeFileSync('dist/Vyntra-Subcontractor-Onboarding-Pack.pdf', out);
+  fs.writeFileSync('dist/Vyntra-Contractor-Declaration-and-Agreement.pdf', out);
   console.log('Wrote fillable PDF. Field names:', form.getFields().map(x=>x.getName()).join(', '));
 })().catch(e=>{console.error(e);process.exit(1);});

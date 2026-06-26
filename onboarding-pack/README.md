@@ -1,6 +1,6 @@
-# Vyntra Property Services — Subcontractor Onboarding Pack
+# Vyntra Property Services — Contractor Declaration & Agreement
 
-A premium, 15-page subcontractor onboarding handbook for Vyntra Property Services.
+A premium, 20-page contractor onboarding handbook for Vyntra Property Services.
 Navy / gold / white corporate design, plain-English copy, icons, checklists, tables,
 a job-lifecycle flow, a plain-English contractor agreement, and a fillable
 declaration page.
@@ -9,8 +9,8 @@ declaration page.
 
 | File | What it is |
 | --- | --- |
-| `Vyntra-Subcontractor-Onboarding-Pack.pdf` | **Interactive PDF** — the version you send to subcontractors. 19 pages, 24 fillable AcroForm fields (9 document-checklist boxes incl. availability, plus 8 declaration checkboxes incl. an accuracy/currency confirmation, 6 detail fields and a signature box). Fill on screen in any PDF reader, or print and sign. Footer page numbers auto-increment (CSS counter). |
-| `Vyntra-Subcontractor-Onboarding-Pack.docx` | **Editable Microsoft Word** version for future updates — branded headings, tables, callouts and checklists. Opens in Word or Google Docs. |
+| `Vyntra-Contractor-Declaration-and-Agreement.pdf` | **Interactive PDF** — the version you send to subcontractors. 19 pages, 24 fillable AcroForm fields (9 document-checklist boxes incl. availability, plus 8 declaration checkboxes incl. an accuracy/currency confirmation, 6 detail fields and a signature box). Fill on screen in any PDF reader, or print and sign. Footer page numbers auto-increment (CSS counter). |
+| `Vyntra-Contractor-Declaration-and-Agreement.docx` | **Editable Microsoft Word** version for future updates — branded headings, tables, callouts and checklists. Opens in Word or Google Docs. |
 
 ## Editable design master (`src/`)
 
@@ -73,11 +73,14 @@ build scripts if your environment differs.
 
 ## Page map
 
-1. Cover · 2. Welcome · 3. How Vyntra Works (flow) · 4–6. Code of Conduct ·
-7–8. Payment Policy (subcontractor) · 9. Customer Payments & Approval to Proceed ·
-10. Break Policy · 11. Vyntra Subcontractor Portal · 12. Required Documents ·
-13–16. Independent Contractor Agreement · 17. FAQ · 18. Declaration & Agreement
-(fillable) · 19. What Happens Next (onboarding process + Contact Vyntra).
+1. Cover · 2. Table of Contents (auto-generated) · 3. Welcome · 4. How Vyntra Works ·
+5–7. Code of Conduct · 8–10. Payment Policy (incl. Customer Payments) · 11. Break Policy ·
+12. Vyntra Subcontractor Portal · 13. Required Documents · 14–17. Independent Contractor
+Agreement · 18. FAQ · 19. Declaration & Agreement (fillable) · 20. What Happens Next.
+
+The Table of Contents page numbers are computed automatically at build time
+(`build/assemble.js`) from section order, so they stay correct when pages change.
+The PDF footer page numbers use a CSS counter; the DOCX uses a live Word TOC field.
 
 ## Editable placeholders to confirm
 

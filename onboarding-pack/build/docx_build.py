@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the editable Word version of the Vyntra Subcontractor Onboarding Pack."""
+"""Build the editable Word version of the Vyntra Contractor Declaration & Agreement."""
 from docx import Document
 from docx.shared import Pt, RGBColor, Cm, Mm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -15,11 +15,43 @@ MUTED = RGBColor(0x47, 0x55, 0x69)
 WHITE = RGBColor(0xFF, 0xFF, 0xFF)
 
 doc = Document()
+# Document metadata
+doc.core_properties.title = 'Contractor Declaration & Agreement'
+doc.core_properties.author = 'Vyntra Property Services'
+doc.core_properties.subject = 'Vyntra Property Services — Contractor Declaration & Agreement'
+# Auto-update fields (e.g. the Table of Contents) when opened in Word
+_settings = doc.settings.element
+_uf = OxmlElement('w:updateFields'); _uf.set(qn('w:val'), 'true'); _settings.append(_uf)
+
 # Base style
 normal = doc.styles['Normal']
 normal.font.name = 'Calibri'
 normal.font.size = Pt(10.5)
 normal.font.color.rgb = BODY
+
+# Major sections included in the Table of Contents (matched by exact h1 text)
+MAJOR_TITLES = {
+    'Welcome to Vyntra', 'How Vyntra works', 'Code of Conduct — Presentation & people',
+    'Payment Policy — Getting paid', 'Break policy', 'The Vyntra Subcontractor Portal',
+    'Required documents', 'Independent Contractor Agreement', 'Frequently asked questions',
+    'Declaration & agreement', 'What happens next?',
+}
+
+
+def add_toc_field(document):
+    """Insert a real, auto-updating Word Table of Contents field (Heading 1 only)."""
+    p = document.add_paragraph()
+    r = p.add_run()
+    begin = OxmlElement('w:fldChar'); begin.set(qn('w:fldCharType'), 'begin')
+    instr = OxmlElement('w:instrText'); instr.set(qn('xml:space'), 'preserve')
+    instr.text = ' TOC \\o "1-1" \\h \\z \\u '
+    sep = OxmlElement('w:fldChar'); sep.set(qn('w:fldCharType'), 'separate')
+    end = OxmlElement('w:fldChar'); end.set(qn('w:fldCharType'), 'end')
+    r._r.append(begin); r._r.append(instr); r._r.append(sep)
+    ph = document.add_paragraph().add_run('Open in Word and choose "Update Field" (or print) to build the table of contents with page numbers.')
+    ph.font.size = Pt(9); ph.font.italic = True; ph.font.color.rgb = MUTED
+    r2 = document.add_paragraph().add_run()
+    r2._r.append(end)
 
 sec = doc.sections[0]
 sec.page_height = Mm(297); sec.page_width = Mm(210)
@@ -31,7 +63,7 @@ sec.different_first_page_header_footer = True
 try:
     hp = sec.header.paragraphs[0]
     hp.add_run().add_picture('src/assets/logo-on-navy.png', height=Cm(0.85))
-    tr = hp.add_run('   Subcontractor Onboarding Pack')
+    tr = hp.add_run('   Contractor Declaration & Agreement')
     tr.font.size = Pt(8); tr.font.color.rgb = MUTED; tr.font.name = 'Calibri'
 except Exception as e:
     print('header image skipped:', e)
@@ -87,6 +119,8 @@ def kicker(text):
 
 def h1(text):
     p = doc.add_paragraph()
+    if text in MAJOR_TITLES:
+        p.style = doc.styles['Heading 1']  # outline level -> picked up by the TOC field
     run(p, text, size=22, bold=True, color=NAVY, font='Calibri Light')
     p.paragraph_format.space_after = Pt(4); p.paragraph_format.space_before = Pt(0)
     # gold rule
@@ -169,9 +203,9 @@ c = band.cell(0, 0); shade(c, '0F172A'); set_cell_margins(c, 500, 500, 360, 360)
 p = c.paragraphs[0]; p.alignment = WD_ALIGN_PARAGRAPH.LEFT
 p.add_run().add_picture('src/assets/logo-on-navy.png', width=Cm(9.0))
 p.paragraph_format.space_after = Pt(14)
-p2 = c.add_paragraph(); run(p2, 'Subcontractor', size=34, bold=True, color=WHITE, font='Calibri Light')
+p2 = c.add_paragraph(); run(p2, 'Contractor Declaration', size=32, bold=True, color=WHITE, font='Calibri Light')
 p2.paragraph_format.space_after = Pt(0)
-p3 = c.add_paragraph(); run(p3, 'Onboarding Pack', size=34, bold=True, color=GOLD_BR, font='Calibri Light')
+p3 = c.add_paragraph(); run(p3, '& Agreement', size=32, bold=True, color=GOLD_BR, font='Calibri Light')
 p3.paragraph_format.space_after = Pt(10)
 p4 = c.add_paragraph()
 run(p4, 'Everything you need to deliver premium property maintenance & cleaning with Vyntra — our standards, your payments, and how we work together.', size=11, color=RGBColor(0x94, 0xA3, 0xB8))
@@ -184,6 +218,12 @@ for i, (l, v) in enumerate(labels):
     pv = cc.add_paragraph(); run(pv, v, size=12, bold=True, color=NAVY)
 doc.add_paragraph()
 pf = doc.add_paragraph(); run(pf, 'Vyntra Property Services   ·   ABN 69 252 402 831   ·   Sydney, New South Wales   ·   CONFIDENTIAL', size=8.5, color=MUTED)
+page_break()
+
+# ============ TABLE OF CONTENTS ============
+_tt = doc.add_paragraph(); run(_tt, 'Table of Contents', size=22, bold=True, color=NAVY, font='Calibri Light')
+_tt.paragraph_format.space_after = Pt(10)
+add_toc_field(doc)
 page_break()
 
 # ============ WELCOME ============
@@ -229,8 +269,13 @@ page_break()
 
 # ============ CODE OF CONDUCT ============
 kicker('Section 03 · Part 1 of 3'); h1('Code of Conduct — Presentation & people')
-h2('Professional appearance')
-checklist(['Wear clean, professional workwear and enclosed safety footwear.', 'Maintain good personal hygiene and a tidy, professional appearance.', 'Keep your tools, equipment and vehicle clean and well presented.', 'No Vyntra uniform is required — your own business branding is welcome.'])
+h2('Uniform & appearance')
+checklist([
+    'No Vyntra uniform is required. You may wear official Vyntra-branded clothing — request free branded shirts any time.',
+    'Otherwise, wear clean, plain, professional work clothing suited to the job.',
+    'Never wear clothing showing another company’s name, logo or branding on a Vyntra job.',
+    'Always wear required PPE and keep a clean, professional appearance.',
+])
 h2('Customer service')
 checklist(['Introduce yourself as working on behalf of Vyntra Property Services.', 'Greet clients politely and explain what you will be doing.', 'Listen, be patient, and never argue with a client.', 'Leave the client feeling looked after, not just serviced.'])
 h2('Communication')
@@ -518,6 +563,6 @@ for i in range(3):
 doc.add_paragraph()
 callout('Welcome to the Vyntra network', 'We are glad to have you on board. Do great work, keep us in the loop, and we will keep the jobs coming.', fill='0F172A')
 
-out = 'dist/Vyntra-Subcontractor-Onboarding-Pack.docx'
+out = 'dist/Vyntra-Contractor-Declaration-and-Agreement.docx'
 doc.save(out)
 print('Saved', out)
