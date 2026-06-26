@@ -42,6 +42,11 @@ the editable design source. To bring it into a visual editor:
 | Display font | Outfit |
 | Body font | Work Sans |
 
+**Logo** — the official Vyntra "VP" lockup (`src/assets/logo-source.webp`). The navy
+background is keyed out by `build/process-logo.mjs` into three assets: `logo-clear.png`
+(transparent lockup, used on the cover), `logo-on-navy.png` (lockup on brand navy, used
+in the DOCX) and `logo-mark.png` (the gold VP monogram, used in every page header).
+
 ## Rebuilding from source
 
 ```sh
@@ -50,7 +55,8 @@ npm install                      # playwright, pdf-lib, pdfjs-dist, @napi-rs/can
 pip3 install python-docx
 
 node build/make-fonts.js          # embed fonts -> build/fonts.css
-node build/assemble.js            # inject fonts -> src/onboarding.html
+node build/process-logo.mjs       # key navy from src/assets/logo-source.webp -> logo assets
+node build/assemble.js            # inject fonts + logos -> src/onboarding.html
 node build/render-and-measure.js  # render base PDF + measure field positions
 node build/add-fields.js          # overlay fillable AcroForm fields -> dist/*.pdf
 python3 build/docx_build.py       # build dist/*.docx

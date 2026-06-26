@@ -25,6 +25,16 @@ sec = doc.sections[0]
 sec.page_height = Mm(297); sec.page_width = Mm(210)
 sec.top_margin = Cm(2.0); sec.bottom_margin = Cm(1.8)
 sec.left_margin = Cm(2.0); sec.right_margin = Cm(2.0)
+sec.header_distance = Cm(1.1)
+# Running header on pages 2+ (cover/first page excluded)
+sec.different_first_page_header_footer = True
+try:
+    hp = sec.header.paragraphs[0]
+    hp.add_run().add_picture('src/assets/logo-on-navy.png', height=Cm(0.55))
+    tr = hp.add_run('   Subcontractor Onboarding Pack')
+    tr.font.size = Pt(8); tr.font.color.rgb = MUTED; tr.font.name = 'Calibri'
+except Exception as e:
+    print('header image skipped:', e)
 
 
 def shade(cell, hex_color):
@@ -156,8 +166,9 @@ for _ in range(2):
 band = doc.add_table(rows=1, cols=1); band.alignment = WD_TABLE_ALIGNMENT.CENTER
 no_borders(band)
 c = band.cell(0, 0); shade(c, '0F172A'); set_cell_margins(c, 500, 500, 360, 360)
-p = c.paragraphs[0]; run(p, 'VYNTRA PROPERTY SERVICES', size=10, bold=True, color=GOLD_BR)
-p.paragraph_format.space_after = Pt(10)
+p = c.paragraphs[0]; p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+p.add_run().add_picture('src/assets/logo-on-navy.png', width=Cm(9.0))
+p.paragraph_format.space_after = Pt(14)
 p2 = c.add_paragraph(); run(p2, 'Subcontractor', size=34, bold=True, color=WHITE, font='Calibri Light')
 p2.paragraph_format.space_after = Pt(0)
 p3 = c.add_paragraph(); run(p3, 'Onboarding Pack', size=34, bold=True, color=GOLD_BR, font='Calibri Light')
