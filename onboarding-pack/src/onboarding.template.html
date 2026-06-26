@@ -114,6 +114,8 @@ ul.check li .tick{ flex:none; width:16px; height:16px; border-radius:5px; backgr
 ul.check li .tick svg{ width:10px; height:10px; color:#fff; }
 ul.check.neg li .tick{ background:var(--red); }
 ul.check li b{ color:var(--ink); }
+.callout.navy ul.check li b{ color:#fff; }
+.callout.navy ul.check li{ color:#CBD5E1; }
 
 /* ---------- Callouts ---------- */
 .callout{ display:flex; gap:11px; padding:11px 13px; border-radius:11px; background:var(--gold-tint);
@@ -598,43 +600,36 @@ ul.declare li b{ color:var(--ink); }
       <div class="sec"><div class="s-kick">Section 04</div><div class="s-name">Payment Policy</div></div>
     </div>
 
-    <span class="kicker">Payment Policy · Part 1 of 2</span>
-    <h1 class="title">Getting paid</h1>
+    <span class="kicker">Payment Policy · Part 1 of 4</span>
+    <h1 class="title">How customers pay Vyntra</h1>
     <div class="rule"></div>
-    <p class="lead">We keep payments simple and predictable. Submit a correct tax invoice and we'll pay it on time, every time.</p>
+    <p class="lead">Vyntra manages all invoicing and collects every customer payment. You focus on the work — you never handle money, quote prices or chase invoices.</p>
 
-    <h2 style="margin-top:8px;">Payment schedule</h2>
-    <table class="tbl">
-      <thead><tr><th>Item</th><th>Standard</th></tr></thead>
-      <tbody>
-        <tr><td>Payment terms</td><td><b>14 days</b> from receipt of a valid tax invoice</td></tr>
-        <tr><td>Payment method</td><td>Electronic funds transfer (EFT) to your nominated account</td></tr>
-        <tr><td>Payment run</td><td>Processed weekly; cleared funds typically within 1–2 business days</td></tr>
-        <tr><td>Remittance</td><td>Emailed to you each time a payment is made</td></tr>
-      </tbody>
-    </table>
-
-    <h2>Invoice requirements</h2>
-    <table class="tbl">
-      <thead><tr><th>Your tax invoice must include</th><th>Detail</th></tr></thead>
-      <tbody>
-        <tr><td>Vyntra job number</td><td>Quoted on every invoice so we can match it quickly</td></tr>
-        <tr><td>Your business name &amp; ABN</td><td>Must match the details we hold on file</td></tr>
-        <tr><td>GST</td><td>If registered, show GST separately and the words "Tax Invoice"</td></tr>
-        <tr><td>Description &amp; date of work</td><td>Clear line items, site address and date completed</td></tr>
-        <tr><td>Bank details</td><td>BSB and account number for EFT payment</td></tr>
-      </tbody>
-    </table>
-
-    <div class="grid g2" style="margin-top:11px;">
-      <div class="callout">
-        <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>
-        <div><h3>GST &amp; ABN</h3><p>Quote a valid ABN on every invoice. If you're registered for GST, add 10% GST and label it clearly. No ABN may mean we must withhold tax at the top rate.</p></div>
+    <div class="grid g2" style="margin-top:4px;">
+      <div class="card">
+        <div class="card-h"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5"/></svg></span><h3>Standard residential jobs</h3></div>
+        <ul class="check">
+          <li><span class="tick">&#10003;</span><span>The customer pays a <b>deposit</b> to secure the booking.</span></li>
+          <li><span class="tick">&#10003;</span><span>The balance is invoiced about <b>one (1) hour before</b> the job is expected to finish.</span></li>
+          <li><span class="tick">&#10003;</span><span>Vyntra issues the invoice <b>directly</b> to the customer.</span></li>
+          <li><span class="tick">&#10003;</span><span>The aim is for the final payment to be received <b>before you leave</b> the property.</span></li>
+        </ul>
       </div>
-      <div class="callout green">
-        <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
-        <div><h3>Get paid faster</h3><p>Right job number, correct ABN, photos uploaded and a clear description — three boxes ticked and your invoice sails straight through.</p></div>
+      <div class="card">
+        <div class="card-h"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>Hourly jobs</h3></div>
+        <ul class="check">
+          <li><span class="tick">&#10003;</span><span>The customer pays the required <b>deposit</b> before the booking.</span></li>
+          <li><span class="tick">&#10003;</span><span>Record <b>all</b> your working time in the Vyntra Subcontractor Portal.</span></li>
+          <li><span class="tick">&#10003;</span><span>When about <b>one hour of work remains</b>, notify Vyntra (or flag it in the portal) so the final invoice can be prepared.</span></li>
+          <li><span class="tick">&#10003;</span><span>Vyntra issues the final invoice <b>before completion</b>, from your recorded hours plus any approved variations.</span></li>
+          <li><span class="tick">&#10003;</span><span>If scope or hours change significantly, Vyntra updates the invoice before requesting payment.</span></li>
+        </ul>
       </div>
+    </div>
+
+    <div class="callout navy" style="margin-top:12px;">
+      <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+      <div><h3>Your role with payments</h3><p style="margin-top:2px;">If a customer asks, you may politely remind them that <strong>Vyntra has sent the final invoice</strong>. You must never collect payment, quote prices or discuss pricing — always refer money questions to Vyntra.</p></div>
     </div>
   </div>
   <div class="foot"><span><b>Vyntra Property Services</b></span><span>Contractor Declaration &amp; Agreement <span class="dot">·</span> v1.0</span><span>Page <b class="pageno"></b></span></div>
@@ -650,9 +645,97 @@ ul.declare li b{ color:var(--ink); }
       <div class="sec"><div class="s-kick">Section 04</div><div class="s-name">Payment Policy</div></div>
     </div>
 
-    <span class="kicker">Payment Policy · Part 2 of 2</span>
+    <span class="kicker">Payment Policy · Part 2 of 4</span>
+    <h1 class="title">Commercial accounts &amp; approval to proceed</h1>
+    <div class="rule"></div>
+    <p class="lead">Not every customer pays on the day. Some clients are set up on approved trading terms — and that's entirely Vyntra's side of the arrangement.</p>
+
+    <div class="callout navy" style="margin-top:4px; display:block;">
+      <div style="display:flex; gap:11px; align-items:center; margin-bottom:8px;">
+        <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-3M9 9h.01M9 13h.01M9 17h.01"/></svg></span>
+        <h3 style="margin:0;">Commercial, strata &amp; ongoing clients</h3>
+      </div>
+      <ul class="check" style="margin:0;">
+        <li><span class="tick">&#10003;</span><span>Some commercial, strata, real estate and ongoing contract clients operate under <b>approved trading terms</b>.</span></li>
+        <li><span class="tick">&#10003;</span><span>They may have agreed payment terms — for example <b>7, 14 or 30-day accounts</b> — rather than paying on the day.</span></li>
+        <li><span class="tick">&#10003;</span><span>These arrangements are <b>approved and managed solely by Vyntra</b>.</span></li>
+        <li><span class="tick">&#10003;</span><span>Keep completing work as instructed and <b>never discuss payment arrangements</b> with these clients.</span></li>
+      </ul>
+    </div>
+
+    <h2 style="margin-top:13px;">Approval to proceed</h2>
+    <table class="tbl">
+      <thead><tr><th>Situation</th><th>What to do</th></tr></thead>
+      <tbody>
+        <tr><td>Start of every job</td><td>Begin work once Vyntra confirms the booking is secured and the job is <b>approved to proceed</b>.</td></tr>
+        <tr><td>If you're unsure on site</td><td>If you're not sure a job is approved to proceed, <b>contact Vyntra before starting</b> any work.</td></tr>
+        <tr><td>Money questions</td><td>Refer any customer questions about deposits, invoices or pricing straight to Vyntra.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout" style="margin-top:12px;">
+      <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span>
+      <div><h3>One simple rule on money</h3><p>If a job changes in any way that affects time or cost, pause and message Vyntra first. A 30-second check keeps invoicing accurate and protects your pay.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Vyntra Property Services</b></span><span>Contractor Declaration &amp; Agreement <span class="dot">·</span> v1.0</span><span>Page <b class="pageno"></b></span></div>
+</section>
+
+<!-- =================================================================== -->
+<!-- CUSTOMER PAYMENTS & APPROVAL TO PROCEED                              -->
+<!-- =================================================================== -->
+<section class="page">
+  <div class="pad">
+    <div class="masthead">
+      <span class="head-plate"><img src="__LOGO_CLEAR__" alt="Vyntra Property Services"></span>
+      <div class="sec"><div class="s-kick">Section 04</div><div class="s-name">Payment Policy</div></div>
+    </div>
+
+    <span class="kicker">Payment Policy · Part 3 of 4</span>
+    <h1 class="title">How you get paid</h1>
+    <div class="rule"></div>
+    <p class="lead">You're paid on a clear, transparent <b>weekly</b> cycle. Here's exactly how and when your money reaches you.</p>
+
+    <table class="tbl" style="margin-top:4px;">
+      <thead><tr><th>Item</th><th>How it works</th></tr></thead>
+      <tbody>
+        <tr><td>Payment frequency</td><td>Subcontractor payments are processed <b>weekly</b>.</td></tr>
+        <tr><td>What's included</td><td>All approved, completed jobs for which Vyntra has <b>received the customer's payment</b> during that payment period.</td></tr>
+        <tr><td>Standard residential</td><td>Paid in the <b>next available weekly run</b> once the customer's final payment has been received.</td></tr>
+        <tr><td>Commercial &amp; account clients</td><td>Your payment may follow the client's <b>agreed trading terms</b> where applicable.</td></tr>
+        <tr><td>If the customer hasn't paid</td><td>Payment for that job may be delayed until Vyntra receives it, unless Vyntra decides otherwise at its sole discretion.</td></tr>
+        <tr><td>Method</td><td>EFT to your nominated account, with a remittance emailed each run.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="grid g2" style="margin-top:12px;">
+      <div class="callout green">
+        <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
+        <div><h3>We keep you informed</h3><p>Vyntra will always communicate with you about any significant payment delays. Never contact customers about outstanding invoices or payment status.</p></div>
+      </div>
+      <div class="callout">
+        <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>
+        <div><h3>Invoicing &amp; GST</h3><p>Where you invoice, submit it through the portal quoting the job number and your ABN. If registered for GST, show it separately.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Vyntra Property Services</b></span><span>Contractor Declaration &amp; Agreement <span class="dot">·</span> v1.0</span><span>Page <b class="pageno"></b></span></div>
+</section>
+
+<!-- =================================================================== -->
+<!-- PAYMENT POLICY (4) — RATES, CALL-OUTS & APPROVALS                    -->
+<!-- =================================================================== -->
+<section class="page">
+  <div class="pad">
+    <div class="masthead">
+      <span class="head-plate"><img src="__LOGO_CLEAR__" alt="Vyntra Property Services"></span>
+      <div class="sec"><div class="s-kick">Section 04</div><div class="s-name">Payment Policy</div></div>
+    </div>
+
+    <span class="kicker">Payment Policy · Part 4 of 4</span>
     <h1 class="title">Rates, call-outs &amp; approvals</h1>
     <div class="rule"></div>
+    <p class="lead">Your rate for each job is agreed up front. These are the standard rules for rates, call-outs and any change to a job once it's underway.</p>
 
     <h2 style="margin-top:6px;">Rates &amp; call-outs</h2>
     <table class="tbl">
@@ -671,63 +754,13 @@ ul.declare li b{ color:var(--ink); }
       <tbody>
         <tr><td>Extra work approval</td><td>Stop and get <b>written approval</b> from Vyntra before doing any work beyond the original scope. Unapproved extras may not be paid.</td></tr>
         <tr><td>Cancellation</td><td>If a client cancels a scheduled job at short notice, a cancellation fee may apply as agreed. If you can't attend a scheduled job, submit an unavailability notice as early as possible (see Code of Conduct).</td></tr>
-        <tr><td>Variations</td><td>Any change to price, scope or timing must be confirmed by Vyntra in writing.</td></tr>
+        <tr><td>Variations</td><td>Any change to price, scope or timing must be confirmed by Vyntra in writing so the customer's invoice can be updated.</td></tr>
       </tbody>
     </table>
 
-    <div class="callout" style="margin-top:12px;">
-      <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span>
-      <div><h3>Client non-payment</h3><p>You are engaged and paid by <strong>Vyntra</strong>, not the client. Provided you've completed the work to standard and invoiced correctly, you are paid on our standard terms regardless of whether the client has paid us. Never chase payment directly from a client.</p></div>
-    </div>
-
-    <div class="callout navy" style="margin-top:11px;">
-      <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span>
-      <div><h3>One simple rule on money</h3><p>If a job changes in any way that affects time or cost, pause and message Vyntra first. A 30-second check saves a payment dispute later.</p></div>
-    </div>
-  </div>
-  <div class="foot"><span><b>Vyntra Property Services</b></span><span>Contractor Declaration &amp; Agreement <span class="dot">·</span> v1.0</span><span>Page <b class="pageno"></b></span></div>
-</section>
-
-<!-- =================================================================== -->
-<!-- CUSTOMER PAYMENTS & APPROVAL TO PROCEED                              -->
-<!-- =================================================================== -->
-<section class="page">
-  <div class="pad">
-    <div class="masthead">
-      <span class="head-plate"><img src="__LOGO_CLEAR__" alt="Vyntra Property Services"></span>
-      <div class="sec"><div class="s-kick">Section 04</div><div class="s-name">Payment Policy</div></div>
-    </div>
-
-    <span class="kicker">Payment Policy · Part 3 of 3</span>
-    <h1 class="title">Customer payments &amp; approval to proceed</h1>
-    <div class="rule"></div>
-    <p class="lead">Vyntra manages all customer billing. Your job is to deliver great work — never to handle money. Here's exactly how customer payments work.</p>
-
-    <table class="tbl" style="margin-top:4px;">
-      <thead><tr><th>Rule</th><th>What it means</th></tr></thead>
-      <tbody>
-        <tr><td>Customers pay before the job</td><td>Customers must complete payment at least <b>one (1) hour before</b> the scheduled start time, unless otherwise approved by Vyntra.</td></tr>
-        <tr><td>Vyntra collects all payments</td><td>Vyntra is responsible for collecting every customer payment.</td></tr>
-        <tr><td>Never bill the customer</td><td>You must <b>never</b> request or accept payment directly from a customer.</td></tr>
-        <tr><td>Approval to proceed</td><td>Only begin work once Vyntra has confirmed the job is approved to proceed.</td></tr>
-        <tr><td>If payment isn't confirmed</td><td>If payment hasn't been received and Vyntra hasn't authorised the job, contact Vyntra <b>before</b> starting any work.</td></tr>
-      </tbody>
-    </table>
-
-    <div class="callout red" style="margin-top:13px;">
-      <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10.3 3.9l-8 13.9A2 2 0 004 21h16a2 2 0 001.7-3.2l-8-13.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span>
-      <div><h3>Do not start work until Vyntra confirms "approved to proceed"</h3><p style="margin-top:3px;">If you arrive and you're unsure whether payment is settled, pause and contact your Vyntra coordinator. Starting an unapproved job can leave you unpaid and the customer unbilled.</p></div>
-    </div>
-
-    <div class="grid g2" style="margin-top:11px;">
-      <div class="callout green">
-        <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
-        <div><h3>This protects you</h3><p>Because Vyntra collects payment up front, you're paid on our terms for approved work — you never have to chase a customer.</p></div>
-      </div>
-      <div class="callout">
-        <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92V21a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012 4.2 2 2 0 014 2h4.1a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L10 10a16 16 0 006 6l1.6-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg></span>
-        <div><h3>Unsure on site?</h3><p>One quick call to Vyntra on <strong>0451 510 026</strong> settles it. When in doubt, check before you start.</p></div>
-      </div>
+    <div class="callout green" style="margin-top:12px;">
+      <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
+      <div><h3>Approved variations are paid</h3><p>When extra work or a variation is approved by Vyntra in writing, it's added to the customer's invoice and flows through to your pay. Unapproved extras may not be.</p></div>
     </div>
   </div>
   <div class="foot"><span><b>Vyntra Property Services</b></span><span>Contractor Declaration &amp; Agreement <span class="dot">·</span> v1.0</span><span>Page <b class="pageno"></b></span></div>
@@ -896,8 +929,8 @@ ul.declare li b{ color:var(--ink); }
     </div>
 
     <div class="clause"><div class="num-badge">1</div><div class="clause-b"><h3>Independent contractor relationship</h3><p>You are engaged as an independent contractor, not an employee, partner or agent of Vyntra. You are responsible for your own tax, superannuation, insurances and leave. Nothing in this Agreement creates an employment relationship, and you may work for others provided you meet your obligations to us.</p></div></div>
-    <div class="clause"><div class="num-badge">2</div><div class="clause-b"><h3>Scope of work</h3><p>Vyntra will schedule property maintenance and cleaning jobs to you within your nominated availability from time to time. Each job will specify the work, location, timing and rate. You agree to perform allocated work with due care, skill and to the standards set out in this pack and any reasonable directions from Vyntra. Vyntra collects all customer payments; you must not request or accept payment directly from a customer, and must only begin work once Vyntra has confirmed the job is approved to proceed.</p></div></div>
-    <div class="clause"><div class="num-badge">3</div><div class="clause-b"><h3>Availability &amp; attendance</h3><p>You provide Vyntra with your regular availability, and Vyntra schedules and allocates jobs within those nominated days. Once a job is allocated within your available hours, you are expected to attend and complete it on time and to standard. You remain an independent contractor and control your own availability; however, by nominating your availability you commit to attend jobs scheduled within it. If exceptional circumstances prevent attendance, you must notify Vyntra as soon as possible with a cancellation or unavailability notice and a reasonable explanation. Planned leave or changes to your availability must be notified in advance. Repeated late cancellations, no-shows or inadequate notice may affect future allocations and may lead to suspension or termination.</p></div></div>
+    <div class="clause"><div class="num-badge">2</div><div class="clause-b"><h3>Scope &amp; payment</h3><p>Vyntra will schedule property maintenance and cleaning jobs to you within your nominated availability. You agree to perform allocated work with due care and skill and to the standards in this pack and any reasonable directions from Vyntra. Vyntra manages all invoicing and collects all customer payments; you must not request, accept or discuss payment or pricing with customers, and must only begin work once Vyntra confirms the job is approved to proceed. Vyntra pays you <strong>weekly</strong> for approved, completed jobs for which it has received the customer's payment; where a customer has not paid, payment for that job may be delayed until received, at Vyntra's sole discretion, with Vyntra keeping you informed of any significant delay.</p></div></div>
+    <div class="clause"><div class="num-badge">3</div><div class="clause-b"><h3>Availability &amp; attendance</h3><p>You provide Vyntra with your regular availability, and Vyntra allocates jobs within those nominated days. Once a job is allocated within your available hours, you are expected to attend and complete it on time and to standard. You remain an independent contractor controlling your own availability, but by nominating it you commit to attend jobs scheduled within it. If exceptional circumstances prevent attendance, notify Vyntra as soon as possible with an unavailability notice and a reasonable explanation; planned leave or availability changes must be notified in advance. Repeated late cancellations, no-shows or inadequate notice may affect future allocations and may lead to suspension or termination.</p></div></div>
     <div class="clause"><div class="num-badge">4</div><div class="clause-b"><h3>Your own equipment</h3><p>Unless agreed otherwise, you supply your own tools, equipment, materials and transport, and are responsible for their condition, safety and maintenance.</p></div></div>
   </div>
   <div class="foot"><span><b>Vyntra Property Services</b></span><span>Contractor Declaration &amp; Agreement <span class="dot">·</span> v1.0</span><span>Page <b class="pageno"></b></span></div>
@@ -994,13 +1027,13 @@ ul.declare li b{ color:var(--ink); }
     <div class="rule"></div>
 
     <div class="grid g2" style="margin-top:4px;">
-      <div class="faq"><div class="q"><span class="qm">?</span><h3>When do I get paid?</h3></div><div class="a">Within 14 days of us receiving a correct tax invoice. Payments go out by EFT in our weekly run.</div></div>
+      <div class="faq"><div class="q"><span class="qm">?</span><h3>When do I get paid?</h3></div><div class="a">Weekly. Each run covers your approved, completed jobs where Vyntra has received the customer's payment. Residential jobs are paid in the next run after the customer's final payment; commercial account clients may follow their agreed terms.</div></div>
       <div class="faq"><div class="q"><span class="qm">?</span><h3>How does scheduling work?</h3></div><div class="a">You give Vyntra your regular availability and we book jobs into those days. Once a job is scheduled within your available hours, you're expected to attend and complete it.</div></div>
       <div class="faq"><div class="q"><span class="qm">?</span><h3>What if I can't make a scheduled job?</h3></div><div class="a">Tell Vyntra as soon as possible and submit an unavailability notice with the reason. If you're just running late, call ahead. Repeated short-notice cancellations or no-shows may affect future work.</div></div>
       <div class="faq"><div class="q"><span class="qm">?</span><h3>What if the customer wants extra work?</h3></div><div class="a">Don't start it. Get written approval from Vyntra first so the extra scope and price are agreed and you get paid for it.</div></div>
       <div class="faq"><div class="q"><span class="qm">?</span><h3>Who do I contact?</h3></div><div class="a">Your Vyntra coordinator on <b>0451 510 026</b> or <b>info@vyntrapropertyservices.com</b> for anything job-related.</div></div>
       <div class="faq"><div class="q"><span class="qm">?</span><h3>What if equipment is damaged?</h3></div><div class="a">Stop, make the area safe, and report it to Vyntra immediately with photos. Don't attempt to hide or quietly fix damage.</div></div>
-      <div class="faq"><div class="q"><span class="qm">?</span><h3>Do I collect payment from customers?</h3></div><div class="a">No — never. Vyntra collects all customer payments. Customers pay us at least an hour before the job, and you only start once we confirm it's approved to proceed.</div></div>
+      <div class="faq"><div class="q"><span class="qm">?</span><h3>Do I collect payment from customers?</h3></div><div class="a">No. Vyntra invoices and collects from every customer. If asked, you may politely remind a customer that Vyntra has sent the final invoice — but never collect payment, quote prices, discuss pricing or chase outstanding invoices.</div></div>
       <div class="faq"><div class="q"><span class="qm">?</span><h3>Where do I log my time and breaks?</h3></div><div class="a">In the Vyntra Subcontractor Portal. Clock in and out, record your unpaid meal break, upload before &amp; after photos and add job notes — it's all timestamped.</div></div>
     </div>
 

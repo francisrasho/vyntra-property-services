@@ -32,7 +32,7 @@ normal.font.color.rgb = BODY
 # Major sections included in the Table of Contents (matched by exact h1 text)
 MAJOR_TITLES = {
     'Welcome to Vyntra', 'How Vyntra works', 'Code of Conduct — Presentation & people',
-    'Payment Policy — Getting paid', 'Break policy', 'The Vyntra Subcontractor Portal',
+    'Payment Policy — How customers pay Vyntra', 'Break policy', 'The Vyntra Subcontractor Portal',
     'Required documents', 'Independent Contractor Agreement', 'Frequently asked questions',
     'Declaration & agreement', 'What happens next?',
 }
@@ -319,27 +319,44 @@ callout('Consequences', 'Serious or repeated breaches of this Code may lead to s
 page_break()
 
 # ============ PAYMENT POLICY ============
-kicker('Section 04 · Part 1 of 2'); h1('Payment Policy — Getting paid')
-para('We keep payments simple and predictable. Submit a correct tax invoice and we will pay it on time, every time.', size=11, color=NAVY)
-h2('Payment schedule')
-kv_table([
-    ('Payment terms', '14 days from receipt of a valid tax invoice'),
-    ('Payment method', 'Electronic funds transfer (EFT) to your nominated account'),
-    ('Payment run', 'Processed weekly; cleared funds typically within 1–2 business days'),
-    ('Remittance', 'Emailed to you each time a payment is made'),
-], head=('Item', 'Standard'))
-h2('Invoice requirements')
-kv_table([
-    ('Vyntra job number', 'Quoted on every invoice so we can match it quickly'),
-    ('Business name & ABN', 'Must match the details we hold on file'),
-    ('GST', 'If registered, show GST separately and the words "Tax Invoice"'),
-    ('Description & date', 'Clear line items, site address and date completed'),
-    ('Bank details', 'BSB and account number for EFT payment'),
-], head=('Your tax invoice must include', 'Detail'))
-callout('GST & ABN', 'Quote a valid ABN on every invoice. If you are registered for GST, add 10% GST and label it clearly. No ABN may mean we must withhold tax at the top rate.')
+kicker('Section 04 · Part 1 of 4'); h1('Payment Policy — How customers pay Vyntra')
+para('Vyntra manages all invoicing and collects every customer payment. You focus on the work — you never handle money, quote prices or chase invoices.', size=11, color=NAVY)
+h2('Standard residential jobs')
+checklist(['The customer pays a deposit to secure the booking.', 'The balance is invoiced about one (1) hour before the job is expected to finish.', 'Vyntra issues the invoice directly to the customer.', 'The aim is for the final payment to be received before you leave the property.'])
+h2('Hourly jobs')
+checklist(['The customer pays the required deposit before the booking.', 'Record all your working time in the Vyntra Subcontractor Portal.', 'When about one hour of work remains, notify Vyntra (or flag it in the portal) so the final invoice can be prepared.', 'Vyntra issues the final invoice before completion, from your recorded hours plus any approved variations.', 'If scope or hours change significantly, Vyntra updates the invoice before requesting payment.'])
+callout('Your role with payments', 'If a customer asks, you may politely remind them that Vyntra has sent the final invoice. You must never collect payment, quote prices or discuss pricing — always refer money questions to Vyntra.', fill='0F172A')
 page_break()
 
-kicker('Section 04 · Part 2 of 3'); h1('Payment Policy — Rates, call-outs & approvals')
+kicker('Section 04 · Part 2 of 4'); h1('Payment Policy — Commercial accounts & approval to proceed')
+para('Not every customer pays on the day. Some clients are set up on approved trading terms — and that is entirely Vyntra’s side of the arrangement.', size=11, color=NAVY)
+h2('Commercial, strata & ongoing clients')
+checklist(['Some commercial, strata, real estate and ongoing contract clients operate under approved trading terms.', 'They may have agreed payment terms — for example 7, 14 or 30-day accounts — rather than paying on the day.', 'These arrangements are approved and managed solely by Vyntra.', 'Keep completing work as instructed and never discuss payment arrangements with these clients.'])
+h2('Approval to proceed')
+kv_table([
+    ('Start of every job', 'Begin work once Vyntra confirms the booking is secured and the job is approved to proceed.'),
+    ('If you’re unsure on site', 'If you’re not sure a job is approved to proceed, contact Vyntra before starting any work.'),
+    ('Money questions', 'Refer any customer questions about deposits, invoices or pricing straight to Vyntra.'),
+], head=('Situation', 'What to do'))
+callout('One simple rule on money', 'If a job changes in any way that affects time or cost, pause and message Vyntra first. A 30-second check keeps invoicing accurate and protects your pay.', fill='0F172A')
+page_break()
+
+kicker('Section 04 · Part 3 of 4'); h1('Payment Policy — How you get paid')
+para('You are paid on a clear, transparent weekly cycle. Here is exactly how and when your money reaches you.', size=11, color=NAVY)
+kv_table([
+    ('Payment frequency', 'Subcontractor payments are processed weekly.'),
+    ('What’s included', 'All approved, completed jobs for which Vyntra has received the customer’s payment during that payment period.'),
+    ('Standard residential', 'Paid in the next available weekly run once the customer’s final payment has been received.'),
+    ('Commercial & account clients', 'Your payment may follow the client’s agreed trading terms where applicable.'),
+    ('If the customer hasn’t paid', 'Payment for that job may be delayed until Vyntra receives it, unless Vyntra decides otherwise at its sole discretion.'),
+    ('Method', 'EFT to your nominated account, with a remittance emailed each run.'),
+], head=('Item', 'How it works'))
+callout('We keep you informed', 'Vyntra will always communicate with you about any significant payment delays. Never contact customers about outstanding invoices or payment status.', fill='ECFDF3')
+callout('Invoicing & GST', 'Where you invoice, submit it through the portal quoting the job number and your ABN. If registered for GST, show it separately.')
+page_break()
+
+kicker('Section 04 · Part 4 of 4'); h1('Payment Policy — Rates, call-outs & approvals')
+para('Your rate for each job is agreed up front. These are the standard rules for rates, call-outs and any change to a job once it is underway.', size=11, color=NAVY)
 h2('Rates & call-outs')
 kv_table([
     ('Minimum call-out', 'A minimum charge applies to every attendance, as agreed for the job'),
@@ -351,23 +368,9 @@ h2('Approvals & changes')
 kv_table([
     ('Extra work approval', 'Stop and get written approval from Vyntra before any work beyond the original scope. Unapproved extras may not be paid.'),
     ('Cancellation', 'If a client cancels a scheduled job at short notice, a cancellation fee may apply as agreed. If you can’t attend a scheduled job, submit an unavailability notice as early as possible (see Code of Conduct).'),
-    ('Variations', 'Any change to price, scope or timing must be confirmed by Vyntra in writing.'),
+    ('Variations', 'Any change to price, scope or timing must be confirmed by Vyntra in writing so the customer’s invoice can be updated.'),
 ], head=('Situation', 'What to do'))
-callout('Client non-payment', 'You are engaged and paid by Vyntra, not the client. Provided you have completed the work to standard and invoiced correctly, you are paid on our standard terms regardless of whether the client has paid us. Never chase payment directly from a client.')
-page_break()
-
-# ============ CUSTOMER PAYMENTS ============
-kicker('Section 04 · Part 3 of 3'); h1('Customer payments & approval to proceed')
-para('Vyntra manages all customer billing. Your job is to deliver great work — never to handle money. Here is exactly how customer payments work.', size=11, color=NAVY)
-kv_table([
-    ('Customers pay before the job', 'Customers must complete payment at least one (1) hour before the scheduled start time, unless otherwise approved by Vyntra.'),
-    ('Vyntra collects all payments', 'Vyntra is responsible for collecting every customer payment.'),
-    ('Never bill the customer', 'You must never request or accept payment directly from a customer.'),
-    ('Approval to proceed', 'Only begin work once Vyntra has confirmed the job is approved to proceed.'),
-    ('If payment isn’t confirmed', 'If payment hasn’t been received and Vyntra hasn’t authorised the job, contact Vyntra before starting any work.'),
-], head=('Rule', 'What it means'))
-callout('Do not start work until Vyntra confirms "approved to proceed"', 'If you arrive and you are unsure whether payment is settled, pause and contact your Vyntra coordinator. Starting an unapproved job can leave you unpaid and the customer unbilled.', fill='FEF3F2')
-callout('This protects you', 'Because Vyntra collects payment up front, you are paid on our terms for approved work — you never have to chase a customer.', fill='ECFDF3')
+callout('Approved variations are paid', 'When extra work or a variation is approved by Vyntra in writing, it is added to the customer’s invoice and flows through to your pay. Unapproved extras may not be.', fill='ECFDF3')
 page_break()
 
 # ============ BREAK POLICY ============
@@ -439,8 +442,8 @@ page_break()
 # ============ AGREEMENT ============
 clauses = [
     ('1', 'Independent contractor relationship', 'You are engaged as an independent contractor, not an employee, partner or agent of Vyntra. You are responsible for your own tax, superannuation, insurances and leave. Nothing in this Agreement creates an employment relationship, and you may work for others provided you meet your obligations to us.'),
-    ('2', 'Scope of work', 'Vyntra will schedule property maintenance and cleaning jobs to you within your nominated availability from time to time. Each job will specify the work, location, timing and rate. You agree to perform allocated work with due care, skill and to the standards set out in this pack and any reasonable directions from Vyntra. Vyntra collects all customer payments; you must not request or accept payment directly from a customer, and must only begin work once Vyntra has confirmed the job is approved to proceed.'),
-    ('3', 'Availability & attendance', 'You provide Vyntra with your regular availability, and Vyntra schedules and allocates jobs within those nominated days. Once a job is allocated within your available hours, you are expected to attend and complete it on time and to standard. You remain an independent contractor and control your own availability; however, by nominating your availability you commit to attend jobs scheduled within it. If exceptional circumstances prevent attendance, you must notify Vyntra as soon as possible with a cancellation or unavailability notice and a reasonable explanation. Planned leave or changes to your availability must be notified in advance. Repeated late cancellations, no-shows or inadequate notice may affect future allocations and may lead to suspension or termination.'),
+    ('2', 'Scope & payment', 'Vyntra will schedule property maintenance and cleaning jobs to you within your nominated availability. You agree to perform allocated work with due care and skill and to the standards in this pack and any reasonable directions from Vyntra. Vyntra manages all invoicing and collects all customer payments; you must not request, accept or discuss payment or pricing with customers, and must only begin work once Vyntra confirms the job is approved to proceed. Vyntra pays you weekly for approved, completed jobs for which it has received the customer’s payment; where a customer has not paid, payment for that job may be delayed until received, at Vyntra’s sole discretion, with Vyntra keeping you informed of any significant delay.'),
+    ('3', 'Availability & attendance', 'You provide Vyntra with your regular availability, and Vyntra allocates jobs within those nominated days. Once a job is allocated within your available hours, you are expected to attend and complete it on time and to standard. You remain an independent contractor controlling your own availability, but by nominating it you commit to attend jobs scheduled within it. If exceptional circumstances prevent attendance, notify Vyntra as soon as possible with an unavailability notice and a reasonable explanation; planned leave or availability changes must be notified in advance. Repeated late cancellations, no-shows or inadequate notice may affect future allocations and may lead to suspension or termination.'),
     ('4', 'Your own equipment', 'Unless agreed otherwise, you supply your own tools, equipment, materials and transport, and are responsible for their condition, safety and maintenance.'),
     ('5', 'Insurance requirements', 'You must hold and maintain current Public Liability Insurance of at least $20 million (or another minimum Vyntra notifies you of), plus any insurance required by law for your trade — for example Workers Compensation where applicable. You agree to provide certificates of currency on request and to keep them current at all times.'),
     ('6', 'Work standards & safety', 'You agree to perform all work safely, lawfully and to a professional standard, complying with all work health and safety laws and the standards in this pack. You will take reasonable care for your own safety and that of others, and stop work and notify Vyntra if a situation is unsafe.'),
@@ -479,13 +482,13 @@ page_break()
 # ============ FAQ ============
 kicker('Section 09 · Quick answers'); h1('Frequently asked questions')
 faqs = [
-    ('When do I get paid?', 'Within 14 days of us receiving a correct tax invoice. Payments go out by EFT in our weekly run.'),
+    ('When do I get paid?', 'Weekly. Each run covers your approved, completed jobs where Vyntra has received the customer’s payment. Residential jobs are paid in the next run after the customer’s final payment; commercial account clients may follow their agreed terms.'),
     ('How does scheduling work?', 'You give Vyntra your regular availability and we book jobs into those days. Once a job is scheduled within your available hours, you are expected to attend and complete it.'),
     ('What if I can’t make a scheduled job?', 'Tell Vyntra as soon as possible and submit an unavailability notice with the reason. If you are just running late, call ahead. Repeated short-notice cancellations or no-shows may affect future work.'),
     ('What if the customer wants additional work?', 'Do not start it. Get written approval from Vyntra first so the extra scope and price are agreed and you get paid for it.'),
     ('Who do I contact?', 'Your Vyntra coordinator on 0451 510 026 or info@vyntrapropertyservices.com for anything job-related.'),
     ('What happens if equipment is damaged?', 'Stop, make the area safe, and report it to Vyntra immediately with photos. Do not attempt to hide or quietly fix damage.'),
-    ('Do I collect payment from customers?', 'No — never. Vyntra collects all customer payments. Customers pay us at least an hour before the job, and you only start once we confirm it is approved to proceed.'),
+    ('Do I collect payment from customers?', 'No. Vyntra invoices and collects from every customer. If asked, you may politely remind a customer that Vyntra has sent the final invoice — but never collect payment, quote prices, discuss pricing or chase outstanding invoices.'),
     ('Where do I log my time and breaks?', 'In the Vyntra Subcontractor Portal. Clock in and out, record your unpaid meal break, upload before & after photos and add job notes — it is all timestamped.'),
 ]
 for q, a in faqs:
