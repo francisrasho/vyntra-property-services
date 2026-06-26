@@ -9,7 +9,7 @@ declaration page.
 
 | File | What it is |
 | --- | --- |
-| `Vyntra-Subcontractor-Onboarding-Pack.pdf` | **Interactive PDF** — the version you send to subcontractors. 15 pages, 22 fillable AcroForm fields (8 document-checklist boxes on p.9, plus 7 agreement checkboxes, 6 detail fields and a signature box on p.15). Fill on screen in any PDF reader, or print and sign. |
+| `Vyntra-Subcontractor-Onboarding-Pack.pdf` | **Interactive PDF** — the version you send to subcontractors. 16 pages, 23 fillable AcroForm fields (8 document-checklist boxes on p.9, plus 8 declaration checkboxes incl. an accuracy/currency confirmation, 6 detail fields and a signature box on p.15). Fill on screen in any PDF reader, or print and sign. |
 | `Vyntra-Subcontractor-Onboarding-Pack.docx` | **Editable Microsoft Word** version for future updates — branded headings, tables, callouts and checklists. Opens in Word or Google Docs. |
 
 ## Editable design master (`src/`)
@@ -66,7 +66,16 @@ build scripts if your environment differs.
 
 1. Cover · 2. Welcome · 3. How Vyntra Works (flow) · 4–6. Code of Conduct ·
 7–8. Payment Policy · 9. Required Documents · 10–13. Independent Contractor
-Agreement · 14. FAQ · 15. Declaration & Agreement (fillable).
+Agreement · 14. FAQ · 15. Declaration & Agreement (fillable) · 16. What Happens Next
+(onboarding process + Contact Vyntra).
+
+## Editable placeholders to confirm
+
+- **Legal entity** — set to the sole-trader trading name "Vyntra Property Services".
+  To switch to a company, see the BRAND/LEGAL note at the top of
+  `src/onboarding.template.html` (3 places to change).
+- **Public Liability minimum** — set to **$20 million** on p.9 and in Agreement
+  clause 5. Adjust both if a different minimum is required.
 
 ---
-Version 1.0 · Effective 26 June 2026 · Vyntra Property Services Pty Ltd · ABN 69 252 402 831
+Version 1.0 (final) · Effective 26 June 2026 · Vyntra Property Services · ABN 69 252 402 831

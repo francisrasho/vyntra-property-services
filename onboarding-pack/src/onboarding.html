@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<!--
+  BRAND / LEGAL ENTITY NOTE
+  Trading as "Vyntra Property Services" (sole trader) · ABN 69 252 402 831.
+  If the business later incorporates, change "Vyntra Property Services" to
+  "Vyntra Property Services Pty Ltd" in three places: the cover footer, the
+  Agreement "Principal" box, and the Declaration footer.
+  Minimum Public Liability cover is set to $20 million — adjust if required.
+-->
 <html lang="en-AU">
 <head>
 <meta charset="utf-8">
@@ -169,6 +177,13 @@ table.tbl td b{ color:var(--navy); }
 .faq .q h3{ margin:0; font-size:9.8pt; }
 .faq .a{ margin:5px 0 0 30px; font-size:9pt; color:var(--body); }
 
+/* ---------- Contact cards ---------- */
+.contact{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:2px; }
+.cbox{ background:var(--navy); border-radius:12px; padding:13px 14px; box-shadow:0 1px 2px rgba(15,23,42,.08); }
+.cbox .chip{ margin-bottom:9px; background:rgba(212,175,55,.16); color:var(--gold-soft); }
+.cbox .cl{ font-size:7.4pt; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft); font-weight:700; }
+.cbox .cv{ font-size:11.5pt; color:#fff; font-weight:600; font-family:'Outfit'; margin-top:3px; }
+
 /* ---------- Fillable fields ---------- */
 .fld{ position:relative; border:1px solid #CBD5E1; background:var(--grey); border-radius:8px;
   height:30px; }
@@ -252,7 +267,7 @@ ul.declare li b{ color:var(--ink); }
       </div>
 
       <div class="cov-bottom">
-        <span>Vyntra Property Services Pty Ltd&nbsp;&nbsp;·&nbsp;&nbsp;ABN 69 252 402 831</span>
+        <span>Vyntra Property Services&nbsp;&nbsp;·&nbsp;&nbsp;ABN 69 252 402 831</span>
         <span>Sydney, New South Wales</span>
       </div>
     </div>
@@ -302,7 +317,7 @@ ul.declare li b{ color:var(--ink); }
       <div><h3>Our commitment to you</h3><p>In return, we commit to clear job briefs, responsive support, fair rates and reliable payment — so you can focus on doing great work.</p></div>
     </div>
 
-    <p class="small muted mt-a" style="padding-top:10px;">Please read this pack carefully. It explains how we work, what's expected of you, and how you'll be paid. The final page is a declaration for you to sign and return.</p>
+    <p class="small muted mt-a" style="padding-top:10px;">Please read this pack carefully. It explains how we work, what's expected of you, and how you'll be paid. Near the end you'll find a declaration to sign and return.</p>
   </div>
   <div class="foot"><span><b>Vyntra Property Services</b></span><span>Subcontractor Onboarding Pack <span class="dot">·</span> v1.0</span><span>Page <b>2</b></span></div>
 </section>
@@ -364,18 +379,18 @@ ul.declare li b{ color:var(--ink); }
       <div class="card">
         <div class="card-h"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 7a4 4 0 10-8 0M4 21a8 8 0 0116 0M9 7h6"/></svg></span><h3>Professional appearance</h3></div>
         <ul class="check">
-          <li><span class="tick">&#10003;</span><span>Wear clean, tidy workwear and enclosed safety footwear.</span></li>
-          <li><span class="tick">&#10003;</span><span>Display Vyntra ID or branding where provided.</span></li>
-          <li><span class="tick">&#10003;</span><span>Maintain good personal hygiene and presentation.</span></li>
-          <li><span class="tick">&#10003;</span><span>Keep tools and equipment clean and in safe working order.</span></li>
+          <li><span class="tick">&#10003;</span><span>Wear clean, professional workwear and enclosed safety footwear.</span></li>
+          <li><span class="tick">&#10003;</span><span>Maintain good personal hygiene and a tidy, professional appearance.</span></li>
+          <li><span class="tick">&#10003;</span><span>Keep your tools, equipment and vehicle clean and well presented.</span></li>
+          <li><span class="tick">&#10003;</span><span>No Vyntra uniform is required — your own business branding is welcome.</span></li>
         </ul>
       </div>
       <div class="card">
         <div class="card-h"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span><h3>Customer service</h3></div>
         <ul class="check">
-          <li><span class="tick">&#10003;</span><span>Greet clients politely and introduce yourself as Vyntra.</span></li>
+          <li><span class="tick">&#10003;</span><span>Introduce yourself as working on behalf of Vyntra Property Services.</span></li>
+          <li><span class="tick">&#10003;</span><span>Greet clients politely and explain what you'll be doing.</span></li>
           <li><span class="tick">&#10003;</span><span>Listen, be patient, and never argue with a client.</span></li>
-          <li><span class="tick">&#10003;</span><span>Explain what you'll do and answer questions calmly.</span></li>
           <li><span class="tick">&#10003;</span><span>Leave the client feeling looked after, not just serviced.</span></li>
         </ul>
       </div>
@@ -399,7 +414,11 @@ ul.declare li b{ color:var(--ink); }
       </div>
     </div>
 
-    <div class="callout" style="margin-top:11px;">
+    <div class="callout green" style="margin-top:11px;">
+      <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v5M12 16h.01"/><path d="M10.3 3.9l-8 13.9A2 2 0 004 21h16a2 2 0 001.7-3.2l-8-13.9a2 2 0 00-3.4 0z"/></svg></span>
+      <div><h3>If something goes wrong, tell us straight away</h3><p>Problems and surprises happen on every job. Contact Vyntra immediately — you will never be in trouble for reporting a genuine issue early. Trying to hide a mistake is the only real mistake.</p></div>
+    </div>
+    <div class="callout" style="margin-top:9px;">
       <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.6 5.7 21l2.3-7.2-6-4.4h7.6z"/></svg></span>
       <div><p><strong>The golden rule:</strong> if you'd be happy for it to happen in your own home, you're on the right track.</p></div>
     </div>
@@ -648,7 +667,7 @@ ul.declare li b{ color:var(--ink); }
       <thead><tr><th style="width:34px;"></th><th>Document</th><th style="width:30%;">Requirement</th></tr></thead>
       <tbody>
         <tr><td><div class="fbox" data-field="doc_abn" data-ftype="checkbox"></div></td><td><b>ABN</b> — Australian Business Number</td><td>Mandatory</td></tr>
-        <tr><td><div class="fbox" data-field="doc_pli" data-ftype="checkbox"></div></td><td><b>Public Liability Insurance</b> — current certificate</td><td>Mandatory</td></tr>
+        <tr><td><div class="fbox" data-field="doc_pli" data-ftype="checkbox"></div></td><td><b>Public Liability Insurance</b> — current certificate, minimum <b>$20 million</b></td><td>Mandatory</td></tr>
         <tr><td><div class="fbox" data-field="doc_licence" data-ftype="checkbox"></div></td><td><b>Driver Licence</b> — front &amp; back</td><td>Mandatory</td></tr>
         <tr><td><div class="fbox" data-field="doc_whitecard" data-ftype="checkbox"></div></td><td><b>White Card</b> — construction induction</td><td>If applicable</td></tr>
         <tr><td><div class="fbox" data-field="doc_police" data-ftype="checkbox"></div></td><td><b>Police Check</b> — national criminal history</td><td>If required</td></tr>
@@ -690,7 +709,7 @@ ul.declare li b{ color:var(--ink); }
     <p class="lead">This Agreement sets out the terms on which you provide services to Vyntra as an independent contractor. It's written in plain English — please read it before you sign the declaration.</p>
 
     <div class="meta-box" style="margin:6px 0 12px;">
-      <div class="mb"><div class="l">Principal</div><div class="v">Vyntra Property Services Pty Ltd</div></div>
+      <div class="mb"><div class="l">Principal</div><div class="v">Vyntra Property Services</div></div>
       <div class="mb"><div class="l">ABN</div><div class="v">69 252 402 831</div></div>
       <div class="mb"><div class="l">Contractor</div><div class="v">As named on the signed declaration</div></div>
       <div class="mb"><div class="l">Governing law</div><div class="v">New South Wales, Australia</div></div>
@@ -718,7 +737,7 @@ ul.declare li b{ color:var(--ink); }
     <h1 class="title">Standards, insurance &amp; information</h1>
     <div class="rule"></div>
 
-    <div class="clause"><div class="num-badge">5</div><div class="clause-b"><h3>Insurance requirements</h3><p>You must hold and maintain current Public Liability Insurance to a level acceptable to Vyntra, plus any insurance required by law for your trade (for example Workers Compensation where applicable). You agree to provide certificates of currency on request and to keep them up to date.</p></div></div>
+    <div class="clause"><div class="num-badge">5</div><div class="clause-b"><h3>Insurance requirements</h3><p>You must hold and maintain current Public Liability Insurance of at least <strong>$20 million</strong> (or another minimum Vyntra notifies you of), plus any insurance required by law for your trade — for example Workers Compensation where applicable. You agree to provide certificates of currency on request and to keep them current at all times.</p></div></div>
     <div class="clause"><div class="num-badge">6</div><div class="clause-b"><h3>Work standards &amp; safety</h3><p>You agree to perform all work safely, lawfully and to a professional standard, complying with all work health and safety laws and the standards in this pack. You will take reasonable care for your own safety and that of others, and stop work and notify Vyntra if a situation is unsafe.</p></div></div>
     <div class="clause"><div class="num-badge">7</div><div class="clause-b"><h3>Confidentiality</h3><p>You will keep confidential all non-public information you learn through your engagement — including Vyntra's clients, pricing, methods and systems — and use it only to perform the work. This obligation continues after your engagement ends.</p></div></div>
     <div class="clause"><div class="num-badge">8</div><div class="clause-b"><h3>Privacy</h3><p>You will handle any personal information of clients and occupants in line with the Privacy Act 1988 (Cth) and Vyntra's directions — collecting only what is needed, keeping it secure, and never disclosing or using it for any purpose other than the job.</p></div></div>
@@ -769,7 +788,7 @@ ul.declare li b{ color:var(--ink); }
 
     <div class="callout green" style="margin-top:14px;">
       <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
-      <div><h3>Plain-English summary</h3><p>Be safe and insured, do great work, look after our clients and their information, refer client opportunities back to us, and we'll keep the jobs and payments flowing. Sign the declaration on the final page to confirm you accept these terms.</p></div>
+      <div><h3>Plain-English summary</h3><p>Be safe and insured, do great work, look after our clients and their information, refer client opportunities back to us, and we'll keep the jobs and payments flowing. Sign the declaration to confirm you accept these terms.</p></div>
     </div>
 
     <div class="callout navy" style="margin-top:11px;">
@@ -836,6 +855,10 @@ ul.declare li b{ color:var(--ink); }
         <li><div class="fbox" data-field="agree_privacy" data-ftype="checkbox"></div><span>I agree to protect <b>Client Privacy</b></span></li>
         <li><div class="fbox" data-field="agree_nonsolicit" data-ftype="checkbox"></div><span>I agree to the <b>Non-Solicitation Policy</b></span></li>
       </ul>
+      <div style="display:flex; gap:10px; align-items:flex-start; padding:9px 0 1px; margin-top:6px; border-top:1px solid var(--line);">
+        <div class="fbox" data-field="agree_accuracy" data-ftype="checkbox" style="margin-top:1px;"></div>
+        <span style="font-size:9.4pt;">I confirm that all information and documents I have provided are <b>accurate and current</b>, and I understand that providing false or expired documents may result in suspension or removal from the Vyntra network.</span>
+      </div>
     </div>
 
     <h2 style="margin-top:13px;">Your details</h2>
@@ -859,10 +882,62 @@ ul.declare li b{ color:var(--ink); }
     </div>
 
     <p class="small muted mt-a" style="padding-top:12px; border-top:1px solid var(--line); margin-top:14px;">
-      Vyntra Property Services Pty Ltd&nbsp;·&nbsp;ABN 69 252 402 831&nbsp;·&nbsp;Level 12, 1 Sydney Avenue, Sydney NSW&nbsp;·&nbsp;This declaration forms part of your engagement with Vyntra.
+      Vyntra Property Services&nbsp;·&nbsp;ABN 69 252 402 831&nbsp;·&nbsp;Level 12, 1 Sydney Avenue, Sydney NSW&nbsp;·&nbsp;This declaration forms part of your engagement with Vyntra.
     </p>
   </div>
   <div class="foot"><span><b>Vyntra Property Services</b></span><span>Subcontractor Onboarding Pack <span class="dot">·</span> v1.0</span><span>Page <b>15</b></span></div>
+</section>
+
+<!-- =================================================================== -->
+<!-- PAGE 16 — WHAT HAPPENS NEXT                                          -->
+<!-- =================================================================== -->
+<section class="page">
+  <div class="pad">
+    <div class="masthead">
+      <div class="logo"><span class="logo-badge"><svg viewBox="0 0 810 554"><use href="#vpmark"/></svg></span><span class="logo-word">VYNTRA<i>.</i></span></div>
+      <div class="sec"><div class="s-kick">Section 09</div><div class="s-name">What Happens Next</div></div>
+    </div>
+
+    <span class="kicker">After you sign</span>
+    <h1 class="title">What happens next?</h1>
+    <div class="rule"></div>
+    <p class="lead">Once you've signed your declaration and sent it back with your documents, here's how we'll get you ready for your first job.</p>
+
+    <div class="flow" style="margin-top:8px;">
+      <div class="step"><div class="step-n">1</div><div class="step-b"><h3>You submit</h3><p>Return your signed declaration and required documents to Vyntra.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-b"><h3>We review &amp; verify</h3><p>We check your documents, insurance and any required clearances — usually within 2–3 business days.</p></div></div>
+      <div class="step acc"><div class="step-n">3</div><div class="step-b"><h3>Approval</h3><p>Once everything checks out, we confirm that you're approved to work with Vyntra.</p></div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-b"><h3>Account activation</h3><p>We set up your subcontractor profile and add you to our active network.</p></div></div>
+      <div class="step acc"><div class="step-n">5</div><div class="step-b"><h3>Your first jobs</h3><p>You start receiving job offers that match your trade, availability and service area.</p></div></div>
+    </div>
+
+    <div class="callout green" style="margin-top:6px;">
+      <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
+      <div><p>If anything is missing or needs updating, we'll let you know exactly what's required — so nothing holds up your start.</p></div>
+    </div>
+
+    <h2 style="margin-top:14px;">Contact Vyntra</h2>
+    <div class="contact">
+      <div class="cbox">
+        <span class="chip navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92V21a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012 4.2 2 2 0 014 2h4.1a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L10 10a16 16 0 006 6l1.6-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg></span>
+        <div class="cl">Phone</div><div class="cv">0451 510 026</div>
+      </div>
+      <div class="cbox">
+        <span class="chip navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+        <div class="cl">Email</div><div class="cv" style="font-size:9.5pt;">info@vyntrapropertyservices.com</div>
+      </div>
+      <div class="cbox">
+        <span class="chip navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M12 9v4M12 16h.01"/></svg></span>
+        <div class="cl">After-hours &amp; emergencies</div><div class="cv">0451 510 026</div>
+      </div>
+    </div>
+
+    <div class="callout navy" style="margin-top:auto;">
+      <span class="c-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.6 5.7 21l2.3-7.2-6-4.4h7.6z"/></svg></span>
+      <div><h3>Welcome to the Vyntra network</h3><p>We're glad to have you on board. Do great work, keep us in the loop, and we'll keep the jobs coming.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Vyntra Property Services</b></span><span>Subcontractor Onboarding Pack <span class="dot">·</span> v1.0</span><span>Page <b>16</b></span></div>
 </section>
 
 </body>

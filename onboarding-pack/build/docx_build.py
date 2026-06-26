@@ -108,16 +108,20 @@ def checklist(items, mark='✔'):
 
 
 def callout(title, text, fill='FBF7E8'):
+    dark = fill.upper() in ('0F172A', '1E293B')
+    border = '334155' if dark else ('FECDCA' if fill.upper() == 'FEF3F2' else ('ABEFC6' if fill.upper() == 'ECFDF3' else 'EAD9A6'))
+    title_color = GOLD_BR if dark else NAVY
+    text_color = RGBColor(0xCB, 0xD5, 0xE1) if dark else BODY
     t = doc.add_table(rows=1, cols=1); t.alignment = WD_TABLE_ALIGNMENT.CENTER
-    line_borders(t, 'EAD9A6')
+    line_borders(t, border)
     c = t.cell(0, 0); shade(c, fill); set_cell_margins(c, 120, 120, 160, 160)
     c.paragraphs[0].text = ''
     if title:
-        p = c.paragraphs[0]; run(p, title, size=10.5, bold=True, color=NAVY)
+        p = c.paragraphs[0]; run(p, title, size=10.5, bold=True, color=title_color)
         p.paragraph_format.space_after = Pt(2)
-        p2 = c.add_paragraph(); run(p2, text, size=9.5)
+        p2 = c.add_paragraph(); run(p2, text, size=9.5, color=text_color)
     else:
-        p = c.paragraphs[0]; run(p, text, size=9.5)
+        p = c.paragraphs[0]; run(p, text, size=9.5, color=text_color)
     doc.add_paragraph().paragraph_format.space_after = Pt(2)
 
 
@@ -168,7 +172,7 @@ for i, (l, v) in enumerate(labels):
     pp = cc.paragraphs[0]; run(pp, l, size=8, bold=True, color=MUTED); pp.paragraph_format.space_after = Pt(2)
     pv = cc.add_paragraph(); run(pv, v, size=12, bold=True, color=NAVY)
 doc.add_paragraph()
-pf = doc.add_paragraph(); run(pf, 'Vyntra Property Services Pty Ltd   ·   ABN 69 252 402 831   ·   Sydney, New South Wales   ·   CONFIDENTIAL', size=8.5, color=MUTED)
+pf = doc.add_paragraph(); run(pf, 'Vyntra Property Services   ·   ABN 69 252 402 831   ·   Sydney, New South Wales   ·   CONFIDENTIAL', size=8.5, color=MUTED)
 page_break()
 
 # ============ WELCOME ============
@@ -214,13 +218,14 @@ page_break()
 # ============ CODE OF CONDUCT ============
 kicker('Section 03 · Part 1 of 3'); h1('Code of Conduct — Presentation & people')
 h2('Professional appearance')
-checklist(['Wear clean, tidy workwear and enclosed safety footwear.', 'Display Vyntra ID or branding where provided.', 'Maintain good personal hygiene and presentation.', 'Keep tools and equipment clean and in safe working order.'])
+checklist(['Wear clean, professional workwear and enclosed safety footwear.', 'Maintain good personal hygiene and a tidy, professional appearance.', 'Keep your tools, equipment and vehicle clean and well presented.', 'No Vyntra uniform is required — your own business branding is welcome.'])
 h2('Customer service')
-checklist(['Greet clients politely and introduce yourself as Vyntra.', 'Listen, be patient, and never argue with a client.', 'Explain what you will do and answer questions calmly.', 'Leave the client feeling looked after, not just serviced.'])
+checklist(['Introduce yourself as working on behalf of Vyntra Property Services.', 'Greet clients politely and explain what you will be doing.', 'Listen, be patient, and never argue with a client.', 'Leave the client feeling looked after, not just serviced.'])
 h2('Communication')
 checklist(['Respond to Vyntra messages and calls promptly.', 'Flag delays, access issues or extra work straight away.', 'Keep all job communication professional and on record.', 'Never share your personal rates or details with clients.'])
 h2('Punctuality')
 checklist(['Arrive within the agreed appointment window.', 'Call ahead immediately if you are going to be late.', 'Allow enough time to complete the job properly.', 'Respect the client’s time as much as your own.'])
+callout('If something goes wrong, tell us straight away', 'Problems and surprises happen on every job. Contact Vyntra immediately — you will never be in trouble for reporting a genuine issue early. Trying to hide a mistake is the only real mistake.', fill='ECFDF3')
 page_break()
 
 kicker('Section 03 · Part 2 of 3'); h1('Code of Conduct — On-site standards')
@@ -297,7 +302,7 @@ kicker('Section 05 · Before your first job'); h1('Required documents')
 para('Please provide the following so we can verify you and activate your account.', size=11, color=NAVY)
 docs_list = [
     ('ABN — Australian Business Number', 'Mandatory'),
-    ('Public Liability Insurance — current certificate', 'Mandatory'),
+    ('Public Liability Insurance — current certificate, minimum $20 million', 'Mandatory'),
     ('Driver Licence — front & back', 'Mandatory'),
     ('White Card — construction induction', 'If applicable'),
     ('Police Check — national criminal history', 'If required'),
@@ -330,7 +335,7 @@ clauses = [
     ('2', 'Scope of work', 'Vyntra will offer you property maintenance and cleaning jobs from time to time. Each job will specify the work, location, timing and rate. You agree to perform accepted work with due care, skill and to the standards set out in this pack and any reasonable directions from Vyntra.'),
     ('3', 'Acceptance of jobs', 'You are free to accept or decline any job offered. Once you accept a job, you commit to completing it on time and to standard, or to giving Vyntra prompt notice if you genuinely cannot, so we can arrange an alternative.'),
     ('4', 'Your own equipment', 'Unless agreed otherwise, you supply your own tools, equipment, materials and transport, and are responsible for their condition, safety and maintenance.'),
-    ('5', 'Insurance requirements', 'You must hold and maintain current Public Liability Insurance to a level acceptable to Vyntra, plus any insurance required by law for your trade (for example Workers Compensation where applicable). You agree to provide certificates of currency on request and to keep them up to date.'),
+    ('5', 'Insurance requirements', 'You must hold and maintain current Public Liability Insurance of at least $20 million (or another minimum Vyntra notifies you of), plus any insurance required by law for your trade — for example Workers Compensation where applicable. You agree to provide certificates of currency on request and to keep them current at all times.'),
     ('6', 'Work standards & safety', 'You agree to perform all work safely, lawfully and to a professional standard, complying with all work health and safety laws and the standards in this pack. You will take reasonable care for your own safety and that of others, and stop work and notify Vyntra if a situation is unsafe.'),
     ('7', 'Confidentiality', 'You will keep confidential all non-public information you learn through your engagement — including Vyntra’s clients, pricing, methods and systems — and use it only to perform the work. This obligation continues after your engagement ends.'),
     ('8', 'Privacy', 'You will handle any personal information of clients and occupants in line with the Privacy Act 1988 (Cth) and Vyntra’s directions — collecting only what is needed, keeping it secure, and never disclosing or using it for any purpose other than the job.'),
@@ -346,7 +351,7 @@ clauses = [
 kicker('Section 06 · Independent Contractor Agreement'); h1('Independent Contractor Agreement')
 para('This Agreement sets out the terms on which you provide services to Vyntra as an independent contractor. It is written in plain English — please read it before you sign the declaration.', size=11, color=NAVY)
 kv_table([
-    ('Principal', 'Vyntra Property Services Pty Ltd'),
+    ('Principal', 'Vyntra Property Services'),
     ('ABN', '69 252 402 831'),
     ('Contractor', 'As named on the signed declaration'),
     ('Governing law', 'New South Wales, Australia'),
@@ -394,6 +399,10 @@ checklist([
     'I agree to protect Client Privacy',
     'I agree to the Non-Solicitation Policy',
 ], mark='☐')
+p_acc = doc.add_paragraph()
+run(p_acc, '☐  ', size=13, color=NAVY)
+run(p_acc, 'I confirm that all information and documents I have provided are accurate and current, and I understand that providing false or expired documents may result in suspension or removal from the Vyntra network.', size=9.5)
+p_acc.paragraph_format.left_indent = Cm(0.4); p_acc.paragraph_format.space_before = Pt(4); p_acc.paragraph_format.space_after = Pt(4)
 h2('Your details')
 fields = [('Full Name', ''), ('ABN', ''), ('Company Name', ''), ('Mobile Number', ''), ('Email', ''), ('Date', '')]
 ft = doc.add_table(rows=3, cols=2); ft.alignment = WD_TABLE_ALIGNMENT.CENTER; line_borders(ft)
@@ -413,7 +422,37 @@ sc = st.cell(0, 0); shade(sc, 'F8FAFC'); set_cell_margins(sc, 200, 700, 160, 160
 run(sc.paragraphs[0], 'SIGNATURE', size=8, bold=True, color=MUTED)
 doc.add_paragraph()
 callout('Return this page', 'Send the completed declaration to info@vyntrapropertyservices.com with your documents to activate your account.', fill='ECFDF3')
-pf2 = doc.add_paragraph(); run(pf2, 'Vyntra Property Services Pty Ltd · ABN 69 252 402 831 · Level 12, 1 Sydney Avenue, Sydney NSW · This declaration forms part of your engagement with Vyntra.', size=8, color=MUTED)
+pf2 = doc.add_paragraph(); run(pf2, 'Vyntra Property Services · ABN 69 252 402 831 · Level 12, 1 Sydney Avenue, Sydney NSW · This declaration forms part of your engagement with Vyntra.', size=8, color=MUTED)
+page_break()
+
+# ============ WHAT HAPPENS NEXT ============
+kicker('Section 09 · After you sign'); h1('What happens next?')
+para('Once you have signed your declaration and sent it back with your documents, here is how we will get you ready for your first job.', size=11, color=NAVY)
+next_steps = [
+    ('1', 'You submit', 'Return your signed declaration and required documents to Vyntra.'),
+    ('2', 'We review & verify', 'We check your documents, insurance and any required clearances — usually within 2–3 business days.'),
+    ('3', 'Approval', 'Once everything checks out, we confirm that you are approved to work with Vyntra.'),
+    ('4', 'Account activation', 'We set up your subcontractor profile and add you to our active network.'),
+    ('5', 'Your first jobs', 'You start receiving job offers that match your trade, availability and service area.'),
+]
+for n, t, d in next_steps:
+    p = doc.add_paragraph()
+    run(p, n + '  ', size=12, bold=True, color=GOLD)
+    run(p, t + '  —  ', size=10.5, bold=True, color=NAVY)
+    run(p, d, size=9.5, color=MUTED)
+    p.paragraph_format.space_after = Pt(4)
+callout('If anything is missing', 'If anything needs updating, we will let you know exactly what is required — so nothing holds up your start.', fill='ECFDF3')
+h2('Contact Vyntra')
+ct = doc.add_table(rows=1, cols=3); ct.alignment = WD_TABLE_ALIGNMENT.CENTER; no_borders(ct)
+contacts = [('PHONE', '0451 510 026'), ('EMAIL', 'info@vyntrapropertyservices.com'), ('AFTER-HOURS & EMERGENCIES', '0451 510 026')]
+for i, (l, v) in enumerate(contacts):
+    cc = ct.cell(0, i); shade(cc, '0F172A'); set_cell_margins(cc, 160, 160, 180, 180)
+    run(cc.paragraphs[0], l, size=8, bold=True, color=GOLD_BR); cc.paragraphs[0].paragraph_format.space_after = Pt(2)
+    pv = cc.add_paragraph(); run(pv, v, size=11, bold=True, color=WHITE)
+for i in range(3):
+    ct.cell(0, i).width = Cm(5.67)
+doc.add_paragraph()
+callout('Welcome to the Vyntra network', 'We are glad to have you on board. Do great work, keep us in the loop, and we will keep the jobs coming.', fill='0F172A')
 
 out = 'dist/Vyntra-Subcontractor-Onboarding-Pack.docx'
 doc.save(out)
