@@ -1,0 +1,72 @@
+# Vyntra Property Services — Subcontractor Onboarding Pack
+
+A premium, 15-page subcontractor onboarding handbook for Vyntra Property Services.
+Navy / gold / white corporate design, plain-English copy, icons, checklists, tables,
+a job-lifecycle flow, a plain-English contractor agreement, and a fillable
+declaration page.
+
+## Deliverables (`dist/`)
+
+| File | What it is |
+| --- | --- |
+| `Vyntra-Subcontractor-Onboarding-Pack.pdf` | **Interactive PDF** — the version you send to subcontractors. 15 pages, 22 fillable AcroForm fields (8 document-checklist boxes on p.9, plus 7 agreement checkboxes, 6 detail fields and a signature box on p.15). Fill on screen in any PDF reader, or print and sign. |
+| `Vyntra-Subcontractor-Onboarding-Pack.docx` | **Editable Microsoft Word** version for future updates — branded headings, tables, callouts and checklists. Opens in Word or Google Docs. |
+
+## Editable design master (`src/`)
+
+| File | What it is |
+| --- | --- |
+| `onboarding.html` | **Self-contained design master** — the full layout with fonts embedded as base64. This is the editable design file: open in any browser, edit the markup/CSS, and re-export. |
+| `onboarding.template.html` | Same document with fonts kept external (a `/*__FONTS__*/` marker) — easier to edit copy without the large embedded font blocks. |
+
+### Using it in Figma or Canva
+
+There is no native binary design step in this pipeline — `onboarding.html` **is**
+the editable design source. To bring it into a visual editor:
+
+- **Figma** — install the free *html.to.design* plugin, paste the URL or import
+  `onboarding.html`; it rebuilds the pages as editable Figma frames (fonts: Outfit
+  for display, Work Sans for body — both free on Google Fonts).
+- **Canva** — create A4 pages, drop in the page previews from `previews/` as a
+  visual reference, and rebuild with Canva text/shape elements using the brand
+  palette below. (Canva has no direct HTML import.)
+
+## Brand
+
+| Token | Value |
+| --- | --- |
+| Navy (ink) | `#0F172A` |
+| Gold | `#D4AF37` |
+| White | `#FFFFFF` |
+| Light grey | `#F8FAFC` |
+| Display font | Outfit |
+| Body font | Work Sans |
+
+## Rebuilding from source
+
+```sh
+cd onboarding-pack
+npm install                      # playwright, pdf-lib, pdfjs-dist, @napi-rs/canvas
+pip3 install python-docx
+
+node build/make-fonts.js          # embed fonts -> build/fonts.css
+node build/assemble.js            # inject fonts -> src/onboarding.html
+node build/render-and-measure.js  # render base PDF + measure field positions
+node build/add-fields.js          # overlay fillable AcroForm fields -> dist/*.pdf
+python3 build/docx_build.py       # build dist/*.docx
+node build/previews.js            # render previews/page-XX.png
+node build/contact-sheet.mjs      # previews/_contact-sheet.png
+```
+
+Chromium is driven via Playwright using the system browser
+(`/opt/pw-browsers/chromium-1194/chrome-linux/chrome`); adjust the path in the
+build scripts if your environment differs.
+
+## Page map
+
+1. Cover · 2. Welcome · 3. How Vyntra Works (flow) · 4–6. Code of Conduct ·
+7–8. Payment Policy · 9. Required Documents · 10–13. Independent Contractor
+Agreement · 14. FAQ · 15. Declaration & Agreement (fillable).
+
+---
+Version 1.0 · Effective 26 June 2026 · Vyntra Property Services Pty Ltd · ABN 69 252 402 831

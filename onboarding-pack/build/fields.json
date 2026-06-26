@@ -1,0 +1,203 @@
+{
+  "fields": [
+    {
+      "name": "doc_abn",
+      "type": "checkbox",
+      "page": 8,
+      "x": 68.6875,
+      "y": 334.03125,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "doc_pli",
+      "type": "checkbox",
+      "page": 8,
+      "x": 68.6875,
+      "y": 388.03125,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "doc_licence",
+      "type": "checkbox",
+      "page": 8,
+      "x": 68.6875,
+      "y": 442.03125,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "doc_whitecard",
+      "type": "checkbox",
+      "page": 8,
+      "x": 68.6875,
+      "y": 477.03125,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "doc_police",
+      "type": "checkbox",
+      "page": 8,
+      "x": 68.6875,
+      "y": 531.03125,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "doc_wwcc",
+      "type": "checkbox",
+      "page": 8,
+      "x": 68.6875,
+      "y": 585.03125,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "doc_bank",
+      "type": "checkbox",
+      "page": 8,
+      "x": 68.6875,
+      "y": 620.03125,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "doc_emergency",
+      "type": "checkbox",
+      "page": 8,
+      "x": 68.6875,
+      "y": 674.03125,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "agree_ica",
+      "type": "checkbox",
+      "page": 14,
+      "x": 71.6875,
+      "y": 329.90625,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "agree_conduct",
+      "type": "checkbox",
+      "page": 14,
+      "x": 71.6875,
+      "y": 359.734375,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "agree_payment",
+      "type": "checkbox",
+      "page": 14,
+      "x": 71.6875,
+      "y": 389.5625,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "agree_safety",
+      "type": "checkbox",
+      "page": 14,
+      "x": 71.6875,
+      "y": 419.390625,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "agree_conf",
+      "type": "checkbox",
+      "page": 14,
+      "x": 71.6875,
+      "y": 449.21875,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "agree_privacy",
+      "type": "checkbox",
+      "page": 14,
+      "x": 71.6875,
+      "y": 479.046875,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "agree_nonsolicit",
+      "type": "checkbox",
+      "page": 14,
+      "x": 71.6875,
+      "y": 508.875,
+      "w": 17,
+      "h": 17
+    },
+    {
+      "name": "full_name",
+      "type": "text",
+      "page": 14,
+      "x": 56.6875,
+      "y": 594.140625,
+      "w": 332.15625,
+      "h": 30
+    },
+    {
+      "name": "abn",
+      "type": "text",
+      "page": 14,
+      "x": 404.84375,
+      "y": 594.140625,
+      "w": 332.15625,
+      "h": 30
+    },
+    {
+      "name": "company_name",
+      "type": "text",
+      "page": 14,
+      "x": 56.6875,
+      "y": 638.140625,
+      "w": 332.15625,
+      "h": 30
+    },
+    {
+      "name": "mobile",
+      "type": "text",
+      "page": 14,
+      "x": 404.84375,
+      "y": 638.140625,
+      "w": 332.15625,
+      "h": 30
+    },
+    {
+      "name": "email",
+      "type": "text",
+      "page": 14,
+      "x": 56.6875,
+      "y": 682.140625,
+      "w": 332.15625,
+      "h": 30
+    },
+    {
+      "name": "sign_date",
+      "type": "text",
+      "page": 14,
+      "x": 404.84375,
+      "y": 682.140625,
+      "w": 332.15625,
+      "h": 30
+    },
+    {
+      "name": "signature",
+      "type": "text",
+      "page": 14,
+      "x": 56.6875,
+      "y": 728.140625,
+      "w": 332.15625,
+      "h": 62
+    }
+  ],
+  "pageCount": 15
+}
