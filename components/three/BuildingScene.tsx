@@ -6,6 +6,7 @@ import { Canvas } from "@react-three/fiber";
 import { motion, useTransform, useMotionValue } from "framer-motion";
 import { Building3D } from "./Building3D";
 import { StaticHero } from "./StaticHero";
+import { MobileHero } from "./MobileHero";
 import { Hero3DTitle } from "./Hero3DTitle";
 import { HeroQuoteButton } from "./HeroQuoteButton";
 import { Container } from "@/components/ui/Container";
@@ -95,8 +96,9 @@ const SERVICE_DETAILS = [
 
 export function BuildingScene() {
   const mode = useDisplayMode();
-  const is3D = mode === "mobile" || mode === "desktop";
-  const isMobile = mode === "mobile";
+  // Only desktop runs WebGL; mobile gets the lightweight CSS-3D hero.
+  const is3D = mode === "desktop";
+  const isMobile = false;
   const lenis = useLenis();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -166,9 +168,13 @@ export function BuildingScene() {
   if (mode === "pending") {
     return <div className="h-screen w-full bg-ink" />;
   }
-  // Reduced-motion users skip WebGL entirely.
+  // Reduced-motion users skip animation entirely.
   if (mode === "static") {
     return <StaticHero />;
+  }
+  // Phones get the lightweight CSS-3D tower (no WebGL).
+  if (mode === "mobile") {
+    return <MobileHero />;
   }
 
   return (

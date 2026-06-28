@@ -117,3 +117,40 @@ html.lenis body {
     0 2px 0 #836811,
     0 4px 10px rgba(0, 0, 0, 0.5);
 }
+
+/* --- Lightweight CSS-3D tower used on mobile (no WebGL) --- */
+@keyframes tower-sway {
+  0%,
+  100% {
+    transform: rotateX(10deg) rotateY(-20deg);
+  }
+  50% {
+    transform: rotateX(10deg) rotateY(-8deg);
+  }
+}
+.tower-sway {
+  animation: tower-sway 10s ease-in-out infinite;
+}
+
+@keyframes floor-scan {
+  0%,
+  18%,
+  100% {
+    opacity: 0.35;
+    box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.6);
+  }
+  6% {
+    opacity: 1;
+    box-shadow: 0 0 22px rgba(212, 175, 55, 0.55), 0 6px 18px -8px rgba(0, 0, 0, 0.6);
+  }
+}
+.floor-scan {
+  animation: floor-scan 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tower-sway,
+  .floor-scan {
+    animation: none;
+  }
+}
