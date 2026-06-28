@@ -12,20 +12,28 @@ import { Container } from "@/components/ui/Container";
 import { useLenis } from "@/components/providers/SmoothScroll";
 import { cn } from "@/lib/cn";
 
-/** True when the device is small or the user prefers reduced motion. */
-function useLiteMode() {
-  const [lite, setLite] = useState<boolean | null>(null);
+type DisplayMode = "pending" | "static" | "mobile" | "desktop";
+
+/**
+ * Decides how to render the hero:
+ * - "static": reduced-motion users get the no-WebGL fallback.
+ * - "mobile": small screens get the 3D building, tuned lighter for touch.
+ * - "desktop": full 3D experience.
+ */
+function useDisplayMode(): DisplayMode {
+  const [mode, setMode] = useState<DisplayMode>("pending");
   useEffect(() => {
-    const check = () =>
-      window.matchMedia("(max-width: 767px)").matches ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setLite(check());
+    const compute = (): DisplayMode => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return "static";
+      return window.matchMedia("(max-width: 767px)").matches ? "mobile" : "desktop";
+    };
+    setMode(compute());
     const mq = window.matchMedia("(max-width: 767px)");
-    const handler = () => setLite(check());
+    const handler = () => setMode(compute());
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
-  return lite;
+  return mode;
 }
 
 const SERVICE_DETAILS = [
@@ -86,7 +94,9 @@ const SERVICE_DETAILS = [
 ];
 
 export function BuildingScene() {
-  const lite = useLiteMode();
+  const mode = useDisplayMode();
+  const is3D = mode === "mobile" || mode === "desktop";
+  const isMobile = mode === "mobile";
   const lenis = useLenis();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -114,7 +124,7 @@ export function BuildingScene() {
   const progress = useMotionValue(0);
 
   useEffect(() => {
-    if (lite !== false) return;
+    if (!is3D) return;
     const el = containerRef.current;
     if (!el) return;
     const update = () => {
@@ -138,7 +148,7 @@ export function BuildingScene() {
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, [lite, progress]);
+  }, [is3D, progress]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -152,12 +162,12 @@ export function BuildingScene() {
   const heroY = useTransform(progress, [0, 0.05], [0, -60]);
   const serviceInfoOpacity = useTransform(progress, [0.05, 0.12], [0, 1]);
 
-  // Lite mode (mobile / reduced-motion): skip WebGL entirely.
-  if (lite === null) {
-    // First client tick — render the ink background to avoid a flash before detection.
+  // First client tick — render the ink background to avoid a flash before detection.
+  if (mode === "pending") {
     return <div className="h-screen w-full bg-ink" />;
   }
-  if (lite) {
+  // Reduced-motion users skip WebGL entirely.
+  if (mode === "static") {
     return <StaticHero />;
   }
 
@@ -165,20 +175,21 @@ export function BuildingScene() {
     <div
       ref={containerRef}
       className="relative w-full bg-ink"
-      style={{ height: "360vh" }}
+      style={{ height: isMobile ? "320vh" : "360vh" }}
       onMouseMove={handleMouseMove}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* 3D Canvas — fills sticky viewport */}
         <div className="absolute inset-0">
           <Canvas
-            camera={{ position: [0, 1, 6], fov: 45 }}
-            dpr={[1, 1.5]}
+            camera={{ position: [0, 1, isMobile ? 8 : 6], fov: isMobile ? 55 : 45 }}
+            dpr={isMobile ? [1, 1.25] : [1, 1.5]}
             gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
             style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
           >
             <Suspense fallback={null}>
               <Building3D
+                isMobile={isMobile}
                 scrollRef={scrollRef}
                 activeFloor={activeFloor}
                 mouseRef={mouseRef}
@@ -226,14 +237,14 @@ export function BuildingScene() {
           </Container>
         </motion.div>
 
-        {/* Active service info panel */}
+        {/* Active service info panel — bottom on mobile, centre-left on desktop */}
         <motion.div
-          className="pointer-events-none absolute inset-0 z-10 flex items-center"
+          className="pointer-events-none absolute inset-0 z-10 flex items-end pb-24 sm:items-center sm:pb-0"
           style={{ opacity: serviceInfoOpacity }}
         >
           <Container>
             <div className="flex items-center justify-between">
-              <div className="max-w-md">
+              <div className="w-full sm:max-w-md">
                 {activeFloor >= 0 && activeFloor < SERVICE_DETAILS.length && (
                   <ServiceInfo
                     key={activeFloor}
@@ -308,7 +319,7 @@ function ServiceInfo({
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 24 }}
       transition={{ duration: 0.4 }}
-      className="pointer-events-auto max-w-md rounded-2xl border border-white/10 bg-ink/50 p-7 backdrop-blur-md"
+      className="pointer-events-auto w-full max-w-md rounded-2xl border border-white/10 bg-ink/50 p-5 backdrop-blur-md sm:p-7"
     >
       <div className="flex items-center gap-3">
         <span className="text-sm font-bold text-gold">
@@ -320,11 +331,11 @@ function ServiceInfo({
         </span>
       </div>
 
-      <h2 className="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl">
+      <h2 className="mt-3 text-2xl font-bold leading-tight text-white sm:mt-4 sm:text-4xl">
         {service.name}
       </h2>
-      <p className="mt-2 text-base font-medium text-gold">{service.tagline}</p>
-      <p className="mt-3 text-sm leading-relaxed text-white/65">
+      <p className="mt-2 text-sm font-medium text-gold sm:text-base">{service.tagline}</p>
+      <p className="mt-2 text-sm leading-relaxed text-white/65 sm:mt-3">
         {service.description}
       </p>
 

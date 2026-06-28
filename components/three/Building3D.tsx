@@ -23,9 +23,10 @@ interface Building3DProps {
   activeFloor: number;
   mouseRef: RefObject<{ x: number; y: number }>;
   onSelect: (index: number) => void;
+  isMobile?: boolean;
 }
 
-export function Building3D({ scrollRef, activeFloor, mouseRef, onSelect }: Building3DProps) {
+export function Building3D({ scrollRef, activeFloor, mouseRef, onSelect, isMobile = false }: Building3DProps) {
   const groupRef = useRef<THREE.Group>(null);
   const roofRef = useRef<THREE.Group>(null);
   const { camera } = useThree();
@@ -79,8 +80,10 @@ export function Building3D({ scrollRef, activeFloor, mouseRef, onSelect }: Build
     const blend = THREE.MathUtils.smoothstep(s, 0.04, 0.18);
     const focusY = THREE.MathUtils.lerp(centerY, floorY, blend);
 
+    const baseZ = isMobile ? 8.2 : 6;
+    const zSpread = isMobile ? 2.2 : 1.5;
     camera.position.y = THREE.MathUtils.lerp(camera.position.y, focusY + 0.5, camK);
-    camera.position.z = THREE.MathUtils.lerp(camera.position.z, 6 + ascend * 1.5, camK);
+    camera.position.z = THREE.MathUtils.lerp(camera.position.z, baseZ + ascend * zSpread, camK);
     lookY.current = THREE.MathUtils.lerp(lookY.current, focusY, camK);
     camera.lookAt(0, lookY.current, 0);
   });
@@ -153,10 +156,11 @@ export function Building3D({ scrollRef, activeFloor, mouseRef, onSelect }: Build
         </group>
 
         {/* Floating particles around building */}
-        {Array.from({ length: 16 }).map((_, i) => {
-          const angle = (i / 16) * Math.PI * 2;
+        {Array.from({ length: isMobile ? 7 : 16 }).map((_, i) => {
+          const count = isMobile ? 7 : 16;
+          const angle = (i / count) * Math.PI * 2;
           const radius = 2.2 + Math.sin(i * 1.7) * 0.7;
-          const height = -1.8 + (i / 16) * 4.5;
+          const height = -1.8 + (i / count) * 4.5;
           return (
             <FloatingParticle
               key={i}
