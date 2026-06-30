@@ -118,39 +118,73 @@ html.lenis body {
     0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* --- Lightweight CSS-3D tower used on mobile (no WebGL) --- */
-@keyframes tower-sway {
+/* --- 360° hero hotspot markers (Photo Sphere Viewer) --- */
+.vy-hotspot {
+  --vy-accent: #d4af37;
+  position: relative;
+  display: block;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+.vy-hotspot__dot {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 13px;
+  height: 13px;
+  border-radius: 9999px;
+  background: var(--vy-accent);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--vy-accent) 28%, transparent),
+    0 2px 10px rgba(0, 0, 0, 0.55);
+  transition: transform 0.25s ease;
+}
+.vy-hotspot__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1.5px solid var(--vy-accent);
+  opacity: 0.6;
+  animation: vy-ping 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.vy-hotspot:hover .vy-hotspot__dot {
+  transform: scale(1.18);
+}
+.vy-hotspot--alert .vy-hotspot__ring {
+  animation-duration: 1.5s;
+}
+.vy-hotspot--alert .vy-hotspot__dot {
+  animation: vy-alert 1.5s ease-in-out infinite;
+}
+@keyframes vy-ping {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.7;
+  }
+  80%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+@keyframes vy-alert {
   0%,
   100% {
-    transform: rotateX(10deg) rotateY(-20deg);
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--vy-accent) 30%, transparent),
+      0 0 12px 2px var(--vy-accent);
   }
   50% {
-    transform: rotateX(10deg) rotateY(-8deg);
+    box-shadow:
+      0 0 0 7px color-mix(in srgb, var(--vy-accent) 18%, transparent),
+      0 0 20px 5px var(--vy-accent);
   }
-}
-.tower-sway {
-  animation: tower-sway 10s ease-in-out infinite;
-}
-
-@keyframes floor-scan {
-  0%,
-  18%,
-  100% {
-    opacity: 0.35;
-    box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.6);
-  }
-  6% {
-    opacity: 1;
-    box-shadow: 0 0 22px rgba(212, 175, 55, 0.55), 0 6px 18px -8px rgba(0, 0, 0, 0.6);
-  }
-}
-.floor-scan {
-  animation: floor-scan 6s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tower-sway,
-  .floor-scan {
+  .vy-hotspot__ring,
+  .vy-hotspot--alert .vy-hotspot__dot {
     animation: none;
   }
 }

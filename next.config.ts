@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  transpilePackages: [
+    "@photo-sphere-viewer/core",
+    "@photo-sphere-viewer/markers-plugin",
+    "@photo-sphere-viewer/autorotate-plugin",
+  ],
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
