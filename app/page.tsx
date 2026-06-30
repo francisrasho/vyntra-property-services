@@ -1,22 +1,27 @@
-import { CinematicHero } from "@/components/sections/CinematicHero";
-import { ServicePanels } from "@/components/sections/ServicePanels";
-import { CleaningShowcase } from "@/components/sections/CleaningShowcase";
-import { Stats } from "@/components/sections/Stats";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { CTASection } from "@/components/sections/CTASection";
 import { ScrollTriggerBridge } from "@/components/providers/ScrollTriggerBridge";
+import { CinematicLoader } from "@/components/experience/CinematicLoader";
+import { HeroHouse } from "@/components/experience/HeroHouse";
+import { ServiceScene } from "@/components/experience/ServiceScene";
+import { CleaningShowcase } from "@/components/sections/CleaningShowcase";
+import { CTASection } from "@/components/sections/CTASection";
+import { scenes } from "@/data/experience";
 
 export default function Home() {
   return (
     <>
-      {/* Syncs GSAP ScrollTrigger with Lenis for the cinematic sections below. */}
+      {/* A guided exploration of a property: a cinematic intro, the house with
+          interactive hotspots, and a flythrough of full-screen service scenes. */}
+      <CinematicLoader />
       <ScrollTriggerBridge />
-      <CinematicHero />
-      <ServicePanels />
+      <HeroHouse />
+      {scenes.map((scene, i) => (
+        <ServiceScene key={scene.id} scene={scene} priority={i === 0} />
+      ))}
       <CleaningShowcase />
-      <Stats />
-      <Testimonials limit={3} showVideoPlaceholder={false} />
-      <CTASection />
+      <CTASection
+        title="Ready to experience the Vyntra difference?"
+        subtitle="From a single repair to your entire portfolio — explore what one trusted, accountable property partner can do for you."
+      />
     </>
   );
 }

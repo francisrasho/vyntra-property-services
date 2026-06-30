@@ -61,11 +61,12 @@ export function CleaningShowcase() {
       ref={root}
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink py-40 text-white"
     >
-      <div className="clean-img absolute -inset-[8%]">
+      <div className="clean-img absolute -inset-[6%]">
         <Image
           src="/cleaning.webp"
           alt="Vyntra premium cleaning detail"
           fill
+          quality={90}
           sizes="100vw"
           className="object-cover"
         />
