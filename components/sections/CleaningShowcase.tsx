@@ -59,7 +59,7 @@ export function CleaningShowcase() {
   return (
     <section
       ref={root}
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink py-32 text-white"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink py-40 text-white"
     >
       <div className="clean-img absolute -inset-[8%]">
         <Image

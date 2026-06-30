@@ -114,6 +114,12 @@ export function ServicePanels() {
 
   return (
     <section id="services" ref={root} className="relative bg-ink">
+      {/* Bridge: melts the hero's ink base into the first panel for a seamless
+          hand-off between sections. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 z-20 h-44 bg-gradient-to-b from-ink via-ink/70 to-transparent"
+      />
       {PANELS.map((p, i) => {
         const right = i % 2 === 1;
         return (
@@ -141,18 +147,18 @@ export function ServicePanels() {
               )}
             />
 
-            <Container className="relative z-10 pb-20 pt-32">
+            <Container className="relative z-10 pb-24 pt-36">
               <div className={cn("max-w-xl", right && "ml-auto text-right")}>
                 <p className="svc-reveal text-sm font-semibold uppercase tracking-[0.3em] text-gold-soft">
                   {String(i + 1).padStart(2, "0")} — {p.service}
                 </p>
-                <h2 className="svc-reveal mt-4 text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+                <h2 className="svc-reveal mt-5 text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
                   {p.space}
                 </h2>
-                <p className="svc-reveal mt-5 text-lg leading-relaxed text-white/75">
+                <p className="svc-reveal mt-6 text-lg leading-relaxed text-white/75">
                   {p.copy}
                 </p>
-                <div className={cn("svc-reveal mt-8 flex", right && "justify-end")}>
+                <div className={cn("svc-reveal mt-9 flex", right && "justify-end")}>
                   <Link
                     href={p.href}
                     className="group inline-flex h-14 items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-white/10 hover:text-gold hover:shadow-[0_0_44px_rgba(212,175,55,0.28)]"

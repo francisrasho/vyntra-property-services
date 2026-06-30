@@ -8,12 +8,13 @@ type Variant = "primary" | "secondary" | "ghost" | "outline";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:pointer-events-none disabled:opacity-60";
+  "relative isolate overflow-hidden inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:pointer-events-none disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-gold text-ink shadow-[var(--shadow-glow)] hover:bg-gold-soft hover:-translate-y-0.5",
-  secondary: "bg-ink text-white hover:bg-ink-700 hover:-translate-y-0.5",
+    "btn-shimmer bg-gold text-ink shadow-[var(--shadow-glow)] hover:bg-gold-soft hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-6px_rgba(212,175,55,0.5)]",
+  secondary:
+    "btn-shimmer bg-ink text-white hover:bg-ink-700 hover:-translate-y-0.5",
   ghost: "text-ink hover:bg-ink/5",
   outline:
     "border border-ink/15 bg-white/40 text-ink hover:border-gold hover:text-gold-dark",

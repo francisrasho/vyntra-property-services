@@ -79,7 +79,8 @@ export function CinematicHero() {
       ref={root}
       className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-ink text-white"
     >
-      {/* Backdrop: oversized wrapper (parallax headroom) + inner Ken Burns zoom. */}
+      {/* Backdrop: oversized wrapper (parallax headroom) + inner Ken Burns zoom
+          and slight horizontal drift, with a warm cinematic colour grade. */}
       <div ref={imageWrap} className="absolute -inset-[10%] -z-10">
         <div className="absolute inset-0 animate-kenburns">
           <Image
@@ -88,23 +89,37 @@ export function CinematicHero() {
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-cover [filter:saturate(1.06)_contrast(1.04)_brightness(0.96)]"
           />
         </div>
       </div>
 
-      {/* Dark gradient overlays for legibility + blend into the next section. */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-ink/45 to-ink" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/75 via-transparent to-transparent" />
-      <Particles className="-z-10 opacity-70" />
+      {/* Warm cinematic wash — restrained amber tint over the image. */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-amber-500/10 via-transparent to-orange-900/15 mix-blend-soft-light" />
+      {/* Soft vignette — darkens the edges, keeps the centre clear. */}
+      <div className="absolute inset-0 -z-10 [background:radial-gradient(120%_110%_at_50%_42%,transparent_46%,rgba(8,11,20,0.55)_100%)]" />
 
-      <Container className="relative z-10 pb-32 pt-28">
+      {/* Dark gradient overlays for legibility + blend into the next section. */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-ink/40 to-ink" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/75 via-transparent to-transparent" />
+
+      {/* Subtle floating particles — two slow-drifting layers for depth. */}
+      <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="animate-float-y absolute inset-0">
+          <Particles className="opacity-70" />
+        </div>
+        <div className="animate-float-y-rev absolute inset-0 scale-110 opacity-40">
+          <Particles />
+        </div>
+      </div>
+
+      <Container className="relative z-10 pb-36 pt-32">
         <div className="max-w-3xl">
           <p className="hero-eyebrow inline-flex items-center gap-2 rounded-full border border-gold/30 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-soft backdrop-blur-sm">
             Sydney-wide property services
           </p>
 
-          <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.75rem]">
+          <h1 className="mt-8 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.5rem]">
             {HEADLINE.map((w, i) => (
               <span
                 key={i}
@@ -115,12 +130,12 @@ export function CinematicHero() {
             ))}
           </h1>
 
-          <p className="hero-sub mt-6 max-w-xl text-lg leading-relaxed text-white/75">
+          <p className="hero-sub mt-7 max-w-xl text-lg leading-relaxed text-white/75">
             Professional cleaning, maintenance and property solutions trusted by
             property managers, strata managers and businesses across Sydney.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <div className="mt-11 flex flex-wrap items-center gap-4">
             <span className="hero-cta">
               <Magnetic>
                 <QuoteButton size="lg">

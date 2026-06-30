@@ -50,19 +50,72 @@ body {
     box-shadow: 0 0 32px 7px rgba(212, 175, 55, 0.65);
   }
 }
-/* Slow Ken Burns zoom for the cinematic homepage hero backdrop. */
+/* Slow Ken Burns zoom + slight horizontal drift for the hero backdrop. */
 @keyframes kenburns {
   from {
-    transform: scale(1.04);
+    transform: scale(1.05) translateX(-1.4%);
   }
   to {
-    transform: scale(1.16);
+    transform: scale(1.16) translateX(1.4%);
   }
 }
 .animate-kenburns {
-  animation: kenburns 24s ease-in-out infinite alternate;
+  animation: kenburns 28s ease-in-out infinite alternate;
   transform-origin: center;
   will-change: transform;
+}
+
+/* Subtle, slow drift for the hero particle layers (gentle floating depth). */
+@keyframes floatY {
+  from {
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    transform: translate3d(-6px, -10px, 0);
+  }
+}
+@keyframes floatYReverse {
+  from {
+    transform: translate3d(0, -8px, 0);
+  }
+  to {
+    transform: translate3d(6px, 8px, 0);
+  }
+}
+.animate-float-y {
+  animation: floatY 16s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.animate-float-y-rev {
+  animation: floatYReverse 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Restrained shimmer sweep for primary CTAs — a single soft light pass on
+   hover/focus. Pairs with the button's existing lift. */
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 32%,
+    rgba(255, 255, 255, 0.32) 50%,
+    transparent 68%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.btn-shimmer:hover::after,
+.btn-shimmer:focus-visible::after {
+  transform: translateX(130%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-shimmer::after {
+    transition: none;
+    opacity: 0;
+  }
 }
 
 /* Quiet downward scroll cue (no bounce) used by the hero indicator. */
