@@ -1,10 +1,29 @@
 "use client";
 
-import { useRef, type RefObject } from "react";
+import { useMemo, useRef, type RefObject } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
+import { Environment, Lightformer, SoftShadows } from "@react-three/drei";
 import * as THREE from "three";
 import { BuildingFloor } from "./BuildingFloor";
+
+/** Baked soft contact shadow — a radial gradient on a plane. Renders identically
+ *  on every GPU (no per-frame shadow buffer), grounding the tower in space. */
+function makeShadowTexture() {
+  const s = 256;
+  const c = document.createElement("canvas");
+  c.width = c.height = s;
+  const ctx = c.getContext("2d")!;
+  const g = ctx.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
+  g.addColorStop(0, "rgba(0,0,0,0.7)");
+  g.addColorStop(0.45, "rgba(0,0,0,0.42)");
+  g.addColorStop(0.78, "rgba(0,0,0,0.12)");
+  g.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, s, s);
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
 
 const FLOORS = [
   { label: "Commercial Cleaning", slug: "commercial-cleaning", height: 0.5 },
@@ -31,6 +50,9 @@ export function Building3D({ scrollRef, activeFloor, mouseRef, onSelect, isMobil
   const roofRef = useRef<THREE.Group>(null);
   const { camera } = useThree();
   const lookY = useRef(0);
+  // Smoothed pointer so parallax feels weighted, never twitchy.
+  const smoothMouse = useRef({ x: 0, y: 0 });
+  const shadowTex = useMemo(() => makeShadowTexture(), []);
 
   // Stack floors from the bottom up, recording each floor's centre Y. Stable.
   let yCursor = -2;
@@ -47,14 +69,20 @@ export function Building3D({ scrollRef, activeFloor, mouseRef, onSelect, isMobil
     (floorPositions[i].y - centerY) * THREE.MathUtils.clamp(scrollRef.current ?? 0, 0, 1) * 0.6;
 
   useFrame((_, delta) => {
-    const k = 1 - Math.pow(0.001, delta);
-    const camK = 1 - Math.pow(0.0002, delta);
+    // Heavier, more "expensive" easing — the model settles slowly into place.
+    const k = 1 - Math.pow(0.05, delta);
+    const camK = 1 - Math.pow(0.0006, delta);
     const s = scrollRef.current ?? 0;
     const m = mouseRef.current ?? { x: 0, y: 0 };
 
+    // Ease the raw pointer first so the rotation has real inertia.
+    smoothMouse.current.x = THREE.MathUtils.lerp(smoothMouse.current.x, m.x, k);
+    smoothMouse.current.y = THREE.MathUtils.lerp(smoothMouse.current.y, m.y, k);
+    const sm = smoothMouse.current;
+
     if (groupRef.current) {
-      const targetRotationY = -0.5 + m.x * 0.55 + s * 0.35;
-      const targetRotationX = 0.06 + m.y * 0.16;
+      const targetRotationY = -0.5 + sm.x * 0.34 + s * 0.35;
+      const targetRotationX = 0.05 + sm.y * 0.1;
       groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRotationY, k);
       groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetRotationX, k);
     }
@@ -90,116 +118,96 @@ export function Building3D({ scrollRef, activeFloor, mouseRef, onSelect, isMobil
 
   return (
     <>
-      <ambientLight intensity={0.35} />
-      <directionalLight position={[5, 8, 5]} intensity={1.1} color="#fff6e0" />
-      <pointLight position={[-4, 1, 4]} intensity={0.8} color="#d4af37" />
-      <pointLight position={[4, -1, 3]} intensity={0.4} color="#7aa2ff" />
-      <spotLight position={[0, 10, 2]} angle={0.5} penumbra={0.9} intensity={0.7} color="#d4af37" />
+      {/* Atmospheric haze so the tower sits in real space and the floor recedes. */}
+      <fog attach="fog" args={["#0a1120", 13, 34]} />
 
-      {/* Glossy ground — reflects environment lighting cheaply (no per-frame re-render) */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.32, 0]}>
-        <circleGeometry args={[14, 64]} />
-        <meshStandardMaterial color="#0a1220" metalness={0.92} roughness={0.32} envMapIntensity={1.1} />
+      {/* Architectural lighting: soft warm key + cool rim + gentle sky fill. */}
+      <SoftShadows size={26} samples={12} focus={0.85} />
+      <hemisphereLight intensity={0.34} color="#cdd9f5" groundColor="#0a0f1c" />
+      <ambientLight intensity={0.1} />
+      <directionalLight
+        castShadow
+        position={[6.5, 11, 6]}
+        intensity={1.8}
+        color="#fff1d4"
+        shadow-mapSize={[1024, 1024]}
+        shadow-bias={-0.0004}
+        shadow-normalBias={0.02}
+        shadow-camera-near={1}
+        shadow-camera-far={42}
+        shadow-camera-left={-7}
+        shadow-camera-right={7}
+        shadow-camera-top={9}
+        shadow-camera-bottom={-9}
+      />
+      {/* Cool rim from behind defines the steel edges. */}
+      <directionalLight position={[-7, 5, -6]} intensity={0.6} color="#9db4ff" />
+      {/* Soft warm wash low and to the side, like a developer-suite uplight. */}
+      <spotLight position={[-3, 2, 5]} angle={0.7} penumbra={1} intensity={0.5} color="#ffd9a0" />
+
+      {/* Calm stage floor — an unlit plane tuned to the background so it dissolves
+          into dark space rather than forming a lit turntable pedestal. The property
+          is the subject; grounding comes from the soft baked shadow below. */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.36, 0]}>
+        <circleGeometry args={[44, 96]} />
+        <meshBasicMaterial color="#080d18" />
       </mesh>
-      {/* Soft gold pool of light under the tower */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.31, 0]}>
-        <circleGeometry args={[3.2, 48]} />
-        <meshBasicMaterial color="#d4af37" transparent opacity={0.06} />
+      {/* Baked soft shadow pool grounds the tower without a bright reflective disc. */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.16, 0]}>
+        <planeGeometry args={[6, 4.4]} />
+        <meshBasicMaterial map={shadowTex} transparent depthWrite={false} opacity={0.8} />
       </mesh>
 
       <group ref={groupRef} position={[0, 0, 0]}>
-        {/* Base platform */}
-        <mesh position={[0, -2.25, 0]}>
-          <cylinderGeometry args={[2.4, 2.7, 0.18, 48]} />
-          <meshStandardMaterial color="#0b1424" metalness={0.7} roughness={0.25} />
+        {/* Slim matte base the footprint of the tower — a foot, not a pedestal.
+            envMapIntensity 0 so it never reflects into a bright disc. */}
+        <mesh position={[0, -2.08, 0]} castShadow receiveShadow>
+          <boxGeometry args={[1.9, 0.16, 1.5]} />
+          <meshStandardMaterial color="#10161f" metalness={0.1} roughness={0.85} envMapIntensity={0} />
         </mesh>
 
-        {/* Glowing gold ring around base */}
-        <mesh position={[0, -2.14, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[2.55, 0.025, 12, 80]} />
-          <meshStandardMaterial
-            color="#d4af37"
-            emissive="#d4af37"
-            emissiveIntensity={1.4}
-            metalness={0.9}
-            roughness={0.2}
-          />
-        </mesh>
-
-        {/* Building floors */}
+        {/* Building floors — the active service lights up while the rest of the
+            property quiets, so attention follows what Vyntra is doing, not the form. */}
         {FLOORS.map((floor, i) => (
           <BuildingFloor
             key={floor.label}
             position={[0, floorPositions[i].y, 0]}
             size={[1.7, floorPositions[i].height, 1.3]}
             active={activeFloor === i}
+            dimmed={activeFloor >= 0 && activeFloor !== i}
             index={i}
             getOffset={() => offsetFor(i)}
             onSelect={() => onSelect(i)}
           />
         ))}
 
-        {/* Spire / antenna on top */}
+        {/* Minimal rooftop plant — a slim, restrained cap. No spire, no beacon orb. */}
         <group ref={roofRef} position={[0, topY + 0.35, 0]}>
-          <mesh>
-            <coneGeometry args={[1.1, 0.5, 4]} />
-            <meshStandardMaterial color="#0b1424" metalness={0.8} roughness={0.3} />
+          <mesh castShadow receiveShadow>
+            <boxGeometry args={[0.78, 0.18, 0.6]} />
+            <meshStandardMaterial color="#2a3242" metalness={0.4} roughness={0.6} envMapIntensity={0.7} />
           </mesh>
-          <mesh position={[0, 0.55, 0]}>
-            <cylinderGeometry args={[0.015, 0.015, 0.6, 8]} />
-            <meshStandardMaterial color="#d4af37" emissive="#d4af37" emissiveIntensity={2} />
-          </mesh>
-          <mesh position={[0, 0.88, 0]}>
-            <sphereGeometry args={[0.05, 16, 16]} />
-            <meshStandardMaterial color="#ffe9a8" emissive="#d4af37" emissiveIntensity={3} />
+          <mesh position={[0, 0.16, 0]} castShadow>
+            <boxGeometry args={[0.34, 0.16, 0.28]} />
+            <meshStandardMaterial color="#3a4456" metalness={0.5} roughness={0.55} envMapIntensity={0.7} />
           </mesh>
         </group>
-
-        {/* Floating particles around building */}
-        {Array.from({ length: isMobile ? 7 : 16 }).map((_, i) => {
-          const count = isMobile ? 7 : 16;
-          const angle = (i / count) * Math.PI * 2;
-          const radius = 2.2 + Math.sin(i * 1.7) * 0.7;
-          const height = -1.8 + (i / count) * 4.5;
-          return (
-            <FloatingParticle
-              key={i}
-              initialPosition={[Math.cos(angle) * radius, height, Math.sin(angle) * radius]}
-              speed={0.3 + (i % 5) * 0.08}
-              index={i}
-            />
-          );
-        })}
       </group>
 
-      <Environment preset="city" />
+      {/* In-memory studio environment — true reflections in the glass, no network fetch. */}
+      <Environment resolution={256} frames={1}>
+        <color attach="background" args={["#0a1120"]} />
+        {/* Warm key panel behind the tower. */}
+        <Lightformer form="rect" intensity={2.2} position={[0, 5, -9]} scale={[14, 7, 1]} color="#fff0d2" />
+        {/* Cool fill on the left. */}
+        <Lightformer form="rect" intensity={1.1} position={[-9, 2, 3]} scale={[6, 11, 1]} color="#aec6ff" />
+        {/* Bright crisp strip on the right — the highlight that streaks down the glass. */}
+        <Lightformer form="rect" intensity={1.6} position={[9, 3, 1]} scale={[5, 12, 1]} color="#ffffff" />
+        {/* Soft low bounce. */}
+        <Lightformer form="rect" intensity={0.6} position={[0, -5, 6]} scale={[12, 6, 1]} color="#7e93c4" />
+        {/* Overhead-front panel — the soft reflection the camera-facing glass catches. */}
+        <Lightformer form="rect" intensity={1.3} position={[1, 9, 7]} scale={[10, 4, 1]} color="#eaf0ff" />
+      </Environment>
     </>
-  );
-}
-
-function FloatingParticle({
-  initialPosition,
-  speed,
-  index,
-}: {
-  initialPosition: [number, number, number];
-  speed: number;
-  index: number;
-}) {
-  const ref = useRef<THREE.Mesh>(null);
-
-  useFrame(({ clock }) => {
-    if (!ref.current) return;
-    const t = clock.getElapsedTime() * speed;
-    ref.current.position.x = initialPosition[0] + Math.sin(t + index) * 0.3;
-    ref.current.position.y = initialPosition[1] + Math.sin(t * 0.7 + index * 2) * 0.4;
-    ref.current.position.z = initialPosition[2] + Math.cos(t + index) * 0.3;
-  });
-
-  return (
-    <mesh ref={ref} position={initialPosition}>
-      <sphereGeometry args={[0.025, 8, 8]} />
-      <meshBasicMaterial color={index % 3 === 0 ? "#d4af37" : "#ffffff"} transparent opacity={0.5} />
-    </mesh>
   );
 }
