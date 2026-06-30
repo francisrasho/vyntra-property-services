@@ -1,0 +1,571 @@
+#!/usr/bin/env python3
+"""Build the editable Word version of the Vyntra Contractor Declaration & Agreement."""
+from docx import Document
+from docx.shared import Pt, RGBColor, Cm, Mm
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.oxml.ns import qn
+from docx.oxml import OxmlElement
+
+NAVY = RGBColor(0x0F, 0x17, 0x2A)
+GOLD = RGBColor(0xB8, 0x93, 0x2B)
+GOLD_BR = RGBColor(0xD4, 0xAF, 0x37)
+BODY = RGBColor(0x2B, 0x38, 0x49)
+MUTED = RGBColor(0x47, 0x55, 0x69)
+WHITE = RGBColor(0xFF, 0xFF, 0xFF)
+
+doc = Document()
+# Document metadata
+doc.core_properties.title = 'Contractor Declaration & Agreement'
+doc.core_properties.author = 'Vyntra Property Services'
+doc.core_properties.subject = 'Vyntra Property Services — Contractor Declaration & Agreement'
+# Auto-update fields (e.g. the Table of Contents) when opened in Word
+_settings = doc.settings.element
+_uf = OxmlElement('w:updateFields'); _uf.set(qn('w:val'), 'true'); _settings.append(_uf)
+
+# Base style
+normal = doc.styles['Normal']
+normal.font.name = 'Calibri'
+normal.font.size = Pt(10.5)
+normal.font.color.rgb = BODY
+
+# Major sections included in the Table of Contents (matched by exact h1 text)
+MAJOR_TITLES = {
+    'Welcome to Vyntra', 'How Vyntra works', 'Code of Conduct — Presentation & people',
+    'Payment Policy — How customers pay Vyntra', 'Break policy', 'The Vyntra Subcontractor Portal',
+    'Required documents', 'Independent Contractor Agreement', 'Frequently asked questions',
+    'Declaration & agreement', 'What happens next?',
+}
+
+
+def add_toc_field(document):
+    """Insert a real, auto-updating Word Table of Contents field (Heading 1 only)."""
+    p = document.add_paragraph()
+    r = p.add_run()
+    begin = OxmlElement('w:fldChar'); begin.set(qn('w:fldCharType'), 'begin')
+    instr = OxmlElement('w:instrText'); instr.set(qn('xml:space'), 'preserve')
+    instr.text = ' TOC \\o "1-1" \\h \\z \\u '
+    sep = OxmlElement('w:fldChar'); sep.set(qn('w:fldCharType'), 'separate')
+    end = OxmlElement('w:fldChar'); end.set(qn('w:fldCharType'), 'end')
+    r._r.append(begin); r._r.append(instr); r._r.append(sep)
+    ph = document.add_paragraph().add_run('Open in Word and choose "Update Field" (or print) to build the table of contents with page numbers.')
+    ph.font.size = Pt(9); ph.font.italic = True; ph.font.color.rgb = MUTED
+    r2 = document.add_paragraph().add_run()
+    r2._r.append(end)
+
+sec = doc.sections[0]
+sec.page_height = Mm(297); sec.page_width = Mm(210)
+sec.top_margin = Cm(2.0); sec.bottom_margin = Cm(1.8)
+sec.left_margin = Cm(2.0); sec.right_margin = Cm(2.0)
+sec.header_distance = Cm(1.1)
+# Running header on pages 2+ (cover/first page excluded)
+sec.different_first_page_header_footer = True
+try:
+    hp = sec.header.paragraphs[0]
+    hp.add_run().add_picture('src/assets/logo-on-navy.png', height=Cm(0.85))
+    tr = hp.add_run('   Contractor Declaration & Agreement')
+    tr.font.size = Pt(8); tr.font.color.rgb = MUTED; tr.font.name = 'Calibri'
+except Exception as e:
+    print('header image skipped:', e)
+
+
+def shade(cell, hex_color):
+    tcPr = cell._tc.get_or_add_tcPr()
+    shd = OxmlElement('w:shd')
+    shd.set(qn('w:val'), 'clear'); shd.set(qn('w:fill'), hex_color)
+    tcPr.append(shd)
+
+
+def set_cell_margins(cell, top=80, bottom=80, left=120, right=120):
+    tcPr = cell._tc.get_or_add_tcPr()
+    m = OxmlElement('w:tcMar')
+    for tag, val in (('top', top), ('bottom', bottom), ('start', left), ('end', right)):
+        e = OxmlElement(f'w:{tag}'); e.set(qn('w:w'), str(val)); e.set(qn('w:type'), 'dxa'); m.append(e)
+    tcPr.append(m)
+
+
+def no_borders(table):
+    tbl = table._tbl
+    tblPr = tbl.tblPr
+    borders = OxmlElement('w:tblBorders')
+    for edge in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV'):
+        e = OxmlElement(f'w:{edge}'); e.set(qn('w:val'), 'none'); borders.append(e)
+    tblPr.append(borders)
+
+
+def line_borders(table, color='E2E8F0'):
+    tbl = table._tbl
+    borders = OxmlElement('w:tblBorders')
+    for edge in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV'):
+        e = OxmlElement(f'w:{edge}')
+        e.set(qn('w:val'), 'single'); e.set(qn('w:sz'), '4'); e.set(qn('w:color'), color)
+        borders.append(e)
+    tbl.tblPr.append(borders)
+
+
+def run(p, text, size=10.5, bold=False, color=BODY, italic=False, font='Calibri'):
+    r = p.add_run(text); r.font.size = Pt(size); r.bold = bold; r.italic = italic
+    r.font.color.rgb = color; r.font.name = font
+    return r
+
+
+def kicker(text):
+    p = doc.add_paragraph(); p.space_after = Pt(2)
+    p.paragraph_format.space_after = Pt(2)
+    run(p, text.upper(), size=8.5, bold=True, color=GOLD)
+    pf = p.paragraph_format; pf.space_before = Pt(4); pf.space_after = Pt(1)
+    return p
+
+
+def h1(text):
+    p = doc.add_paragraph()
+    if text in MAJOR_TITLES:
+        p.style = doc.styles['Heading 1']  # outline level -> picked up by the TOC field
+    run(p, text, size=22, bold=True, color=NAVY, font='Calibri Light')
+    p.paragraph_format.space_after = Pt(4); p.paragraph_format.space_before = Pt(0)
+    # gold rule
+    rp = doc.add_paragraph(); rr = run(rp, '_____', size=10, bold=True, color=GOLD_BR)
+    rp.paragraph_format.space_after = Pt(8); rp.paragraph_format.space_before = Pt(0)
+    return p
+
+
+def h2(text):
+    p = doc.add_paragraph()
+    run(p, text, size=13, bold=True, color=NAVY)
+    p.paragraph_format.space_before = Pt(10); p.paragraph_format.space_after = Pt(4)
+    return p
+
+
+def para(text, size=10.5, color=BODY):
+    p = doc.add_paragraph(); run(p, text, size=size, color=color)
+    p.paragraph_format.space_after = Pt(6)
+    return p
+
+
+def checklist(items, mark='✔'):
+    for it in items:
+        p = doc.add_paragraph()
+        run(p, mark + '  ', size=10.5, bold=True, color=GOLD)
+        run(p, it, size=10)
+        p.paragraph_format.space_after = Pt(3)
+        p.paragraph_format.left_indent = Cm(0.4)
+
+
+def callout(title, text, fill='FBF7E8'):
+    dark = fill.upper() in ('0F172A', '1E293B')
+    border = '334155' if dark else ('FECDCA' if fill.upper() == 'FEF3F2' else ('ABEFC6' if fill.upper() == 'ECFDF3' else 'EAD9A6'))
+    title_color = GOLD_BR if dark else NAVY
+    text_color = RGBColor(0xCB, 0xD5, 0xE1) if dark else BODY
+    t = doc.add_table(rows=1, cols=1); t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    line_borders(t, border)
+    c = t.cell(0, 0); shade(c, fill); set_cell_margins(c, 120, 120, 160, 160)
+    c.paragraphs[0].text = ''
+    if title:
+        p = c.paragraphs[0]; run(p, title, size=10.5, bold=True, color=title_color)
+        p.paragraph_format.space_after = Pt(2)
+        p2 = c.add_paragraph(); run(p2, text, size=9.5, color=text_color)
+    else:
+        p = c.paragraphs[0]; run(p, text, size=9.5, color=text_color)
+    doc.add_paragraph().paragraph_format.space_after = Pt(2)
+
+
+def kv_table(rows, head=('Item', 'Detail'), widths=(0.38, 0.62)):
+    t = doc.add_table(rows=1, cols=2); t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    line_borders(t)
+    hdr = t.rows[0].cells
+    for i, htxt in enumerate(head):
+        shade(hdr[i], '0F172A'); set_cell_margins(hdr[i])
+        p = hdr[i].paragraphs[0]; run(p, htxt, size=9, bold=True, color=WHITE)
+    for ri, (a, b) in enumerate(rows):
+        cells = t.add_row().cells
+        if ri % 2 == 1:
+            shade(cells[0], 'F8FAFC'); shade(cells[1], 'F8FAFC')
+        for ci, txt in enumerate((a, b)):
+            set_cell_margins(cells[ci])
+            p = cells[ci].paragraphs[0]
+            run(p, txt, size=9.5, bold=(ci == 0), color=(NAVY if ci == 0 else BODY))
+    # column widths
+    for row in t.rows:
+        row.cells[0].width = Cm(6.4); row.cells[1].width = Cm(10.6)
+    doc.add_paragraph().paragraph_format.space_after = Pt(2)
+
+
+def page_break():
+    doc.add_page_break()
+
+
+# ============ COVER ============
+for _ in range(2):
+    doc.add_paragraph()
+band = doc.add_table(rows=1, cols=1); band.alignment = WD_TABLE_ALIGNMENT.CENTER
+no_borders(band)
+c = band.cell(0, 0); shade(c, '0F172A'); set_cell_margins(c, 500, 500, 360, 360)
+p = c.paragraphs[0]; p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+p.add_run().add_picture('src/assets/logo-on-navy.png', width=Cm(9.0))
+p.paragraph_format.space_after = Pt(14)
+p2 = c.add_paragraph(); run(p2, 'Contractor Declaration', size=32, bold=True, color=WHITE, font='Calibri Light')
+p2.paragraph_format.space_after = Pt(0)
+p3 = c.add_paragraph(); run(p3, '& Agreement', size=32, bold=True, color=GOLD_BR, font='Calibri Light')
+p3.paragraph_format.space_after = Pt(10)
+p4 = c.add_paragraph()
+run(p4, 'Everything you need to deliver premium property maintenance & cleaning with Vyntra — our standards, your payments, and how we work together.', size=11, color=RGBColor(0x94, 0xA3, 0xB8))
+doc.add_paragraph()
+meta = doc.add_table(rows=1, cols=3); meta.alignment = WD_TABLE_ALIGNMENT.CENTER; line_borders(meta)
+labels = [('VERSION', '1.0'), ('EFFECTIVE DATE', '26 June 2026'), ('REVIEW CYCLE', 'Annual')]
+for i, (l, v) in enumerate(labels):
+    cc = meta.cell(0, i); shade(cc, 'F8FAFC'); set_cell_margins(cc, 140, 140, 160, 160)
+    pp = cc.paragraphs[0]; run(pp, l, size=8, bold=True, color=MUTED); pp.paragraph_format.space_after = Pt(2)
+    pv = cc.add_paragraph(); run(pv, v, size=12, bold=True, color=NAVY)
+doc.add_paragraph()
+pf = doc.add_paragraph(); run(pf, 'Vyntra Property Services   ·   ABN 69 252 402 831   ·   Sydney, New South Wales   ·   CONFIDENTIAL', size=8.5, color=MUTED)
+page_break()
+
+# ============ TABLE OF CONTENTS ============
+_tt = doc.add_paragraph(); run(_tt, 'Table of Contents', size=22, bold=True, color=NAVY, font='Calibri Light')
+_tt.paragraph_format.space_after = Pt(10)
+add_toc_field(doc)
+page_break()
+
+# ============ WELCOME ============
+kicker('Section 01 · Welcome aboard'); h1('Welcome to Vyntra')
+para('Thank you for choosing to work with us. You are joining a network of trusted trade and cleaning professionals who help us deliver a premium, reliable service to property owners and managers across Sydney.', size=11, color=NAVY)
+h2('Who we are')
+para('Vyntra Property Services is a Sydney-based provider of premium property maintenance and cleaning. We connect property owners and managers with skilled subcontractors who get the job done properly, the first time.')
+callout('Our mission', 'To make property care effortless for our clients by pairing them with dependable professionals and backing every job with clear standards, fast communication and fair, on-time payment.', fill='0F172A')
+h2('What we expect')
+checklist([
+    'Quality — workmanship you would be proud to put your own name to.',
+    'Reliability — turn up on time, communicate, and finish what you start.',
+    'Respect — treat every client, property and colleague with courtesy.',
+])
+h2('Where you fit in')
+para('As an independent subcontractor, you are the face of Vyntra on every job. The quality of your work and the way you treat our clients directly shapes our reputation — and your future opportunities with us.')
+callout('Our commitment to you', 'In return, we commit to clear job briefs, responsive support, fair rates and reliable payment — so you can focus on doing great work.', fill='ECFDF3')
+page_break()
+
+# ============ HOW VYNTRA WORKS ============
+kicker('Section 02 · The job lifecycle'); h1('How Vyntra works')
+para('Every job follows the same simple flow — from the client’s first request through to your payment.', size=11, color=NAVY)
+steps = [
+    ('1', 'Client requests work', 'A property owner or manager books a job through Vyntra.'),
+    ('2', 'Vyntra schedules the job', 'We confirm scope, timing and the agreed rate.'),
+    ('3', 'Allocated to your availability', 'We book the job into your nominated working days and send the brief, address and access details.'),
+    ('4', 'Attend the scheduled job', 'Once Vyntra confirms the job is approved to proceed, turn up at the booked time ready to work.'),
+    ('5', 'Complete the work', 'Deliver to Vyntra’s quality and safety standards.'),
+    ('6', 'Upload before & after photos', 'Required evidence for every job, no exceptions.'),
+    ('7', 'Client approval', 'The client signs off that the work meets expectations.'),
+    ('8', 'Invoice submitted', 'Send your tax invoice quoting the Vyntra job number.'),
+    ('9', 'Payment processed', 'Paid to your nominated account on our payment terms.'),
+]
+for n, t, d in steps:
+    p = doc.add_paragraph()
+    run(p, n + '  ', size=12, bold=True, color=GOLD)
+    run(p, t + '  —  ', size=10.5, bold=True, color=NAVY)
+    run(p, d, size=9.5, color=MUTED)
+    p.paragraph_format.space_after = Pt(4)
+callout('Keep it moving', 'Reliable attendance, clean photos and a correct invoice are the three things that get you paid sooner.')
+callout('How scheduling works — availability, not accept/decline', 'You remain an independent contractor and set your own availability. You give Vyntra the days you are available to work, and we schedule and allocate jobs within those days. Once a job is booked inside your nominated availability, you are committed to attend and complete it — unless exceptional circumstances arise, in which case you must notify Vyntra in advance. Need leave or a change to your days? Let us know ahead of time so we book around it.', fill='0F172A')
+page_break()
+
+# ============ CODE OF CONDUCT ============
+kicker('Section 03 · Part 1 of 3'); h1('Code of Conduct — Presentation & people')
+h2('Uniform & appearance')
+checklist([
+    'No Vyntra uniform is required. You may wear official Vyntra-branded clothing — request free branded shirts any time.',
+    'Otherwise, wear clean, plain, professional work clothing suited to the job.',
+    'Never wear clothing showing another company’s name, logo or branding on a Vyntra job.',
+    'Always wear required PPE and keep a clean, professional appearance.',
+])
+h2('Customer service')
+checklist(['Introduce yourself as working on behalf of Vyntra Property Services.', 'Greet clients politely and explain what you will be doing.', 'Listen, be patient, and never argue with a client.', 'Leave the client feeling looked after, not just serviced.'])
+h2('Communication')
+checklist(['Respond to Vyntra messages and calls promptly.', 'Flag delays, access issues or extra work straight away.', 'Keep all job communication professional and on record.', 'Never share your personal rates or details with clients.'])
+h2('Availability & attendance')
+checklist(['Keep your nominated availability up to date with Vyntra.', 'Attend every job booked within your available days.', 'Arrive within the agreed window; call ahead if you will be late.', 'Give Vyntra as much notice as possible if you can’t attend.'])
+callout('If something goes wrong, tell us straight away', 'Problems and surprises happen on every job. Contact Vyntra immediately — you will never be in trouble for reporting a genuine issue early. Trying to hide a mistake is the only real mistake.', fill='ECFDF3')
+page_break()
+
+kicker('Section 03 · Part 2 of 3'); h1('Code of Conduct — On-site standards')
+h2('Cleanliness')
+checklist(['Use drop sheets and protect surfaces and floors.', 'Clean as you go and remove all rubbish and offcuts.', 'Leave the area cleaner than you found it.'])
+h2('Before & after photos')
+checklist(['Take clear before photos prior to starting.', 'Take matching after photos from the same angles.', 'Upload to the job before you leave site — every time.'])
+h2('Property respect')
+checklist(['Only access the areas required for the job.', 'Handle the client’s belongings with care.', 'Secure doors, windows and gates when you leave.', 'Report any pre-existing damage before you start.'])
+h2('Privacy & confidentiality')
+checklist(['Keep client details and access codes confidential.', 'Do not photograph clients or belongings beyond the work.', 'Never discuss one client’s job with another.'])
+callout('Zero tolerance — smoking, alcohol & drugs', 'No smoking or vaping on or around any client property. Never attend a job under the influence of alcohol or drugs, and never consume them on site. Breaches result in immediate removal from the job and may end your engagement.', fill='FEF3F2')
+page_break()
+
+kicker('Section 03 · Part 3 of 3'); h1('Code of Conduct — Reputation & prohibited behaviour')
+h2('Social media')
+checklist(['Do not post client properties, addresses or people.', 'Get written approval before using Vyntra’s name or logo.', 'Never post anything that could embarrass a client or Vyntra.'])
+h2('Representing Vyntra')
+checklist(['Act honestly and ethically at all times.', 'Refer all quotes and bookings back to Vyntra.', 'Raise any client concern with Vyntra immediately.'])
+h2('Prohibited behaviour — strictly not permitted')
+checklist([
+    'Requesting or accepting payment directly from a customer.',
+    'Starting work before Vyntra confirms approval to proceed.',
+    'Soliciting clients for private or cash-in-hand work.',
+    'Dishonesty, theft or misuse of client property.',
+    'Aggressive, threatening or discriminatory conduct.',
+    'Sharing client data or images without consent.',
+    'Working while impaired by alcohol or drugs.',
+    'Subcontracting a Vyntra job without our approval.',
+    'Unsafe work practices or ignoring site safety.',
+    'Falsifying photos, invoices, breaks or job records.',
+], mark='✖')
+callout('Consequences', 'Serious or repeated breaches of this Code may lead to suspension or immediate termination of your engagement, and where appropriate, referral to the relevant authorities.', fill='FEF3F2')
+page_break()
+
+# ============ PAYMENT POLICY ============
+kicker('Section 04 · Part 1 of 4'); h1('Payment Policy — How customers pay Vyntra')
+para('Vyntra manages all invoicing and collects every customer payment. You focus on the work — you never handle money, quote prices or chase invoices.', size=11, color=NAVY)
+h2('Standard residential jobs')
+checklist(['The customer pays a deposit to secure the booking.', 'The balance is invoiced about one (1) hour before the job is expected to finish.', 'Vyntra issues the invoice directly to the customer.', 'The aim is for the final payment to be received before you leave the property.'])
+h2('Hourly jobs')
+checklist(['The customer pays the required deposit before the booking.', 'Record all your working time in the Vyntra Subcontractor Portal.', 'When about one hour of work remains, notify Vyntra (or flag it in the portal) so the final invoice can be prepared.', 'Vyntra issues the final invoice before completion, from your recorded hours plus any approved variations.', 'If scope or hours change significantly, Vyntra updates the invoice before requesting payment.'])
+callout('Your role with payments', 'If a customer asks, you may politely remind them that Vyntra has sent the final invoice. You must never collect payment, quote prices or discuss pricing — always refer money questions to Vyntra.', fill='0F172A')
+page_break()
+
+kicker('Section 04 · Part 2 of 4'); h1('Payment Policy — Commercial accounts & approval to proceed')
+para('Not every customer pays on the day. Some clients are set up on approved trading terms — and that is entirely Vyntra’s side of the arrangement.', size=11, color=NAVY)
+h2('Commercial, strata & ongoing clients')
+checklist(['Some commercial, strata, real estate and ongoing contract clients operate under approved trading terms.', 'They may have agreed payment terms — for example 7, 14 or 30-day accounts — rather than paying on the day.', 'These arrangements are approved and managed solely by Vyntra.', 'Keep completing work as instructed and never discuss payment arrangements with these clients.'])
+h2('Approval to proceed')
+kv_table([
+    ('Start of every job', 'Begin work once Vyntra confirms the booking is secured and the job is approved to proceed.'),
+    ('If you’re unsure on site', 'If you’re not sure a job is approved to proceed, contact Vyntra before starting any work.'),
+    ('Money questions', 'Refer any customer questions about deposits, invoices or pricing straight to Vyntra.'),
+], head=('Situation', 'What to do'))
+callout('One simple rule on money', 'If a job changes in any way that affects time or cost, pause and message Vyntra first. A 30-second check keeps invoicing accurate and protects your pay.', fill='0F172A')
+page_break()
+
+kicker('Section 04 · Part 3 of 4'); h1('Payment Policy — How you get paid')
+para('You are paid on a clear, transparent weekly cycle. Here is exactly how and when your money reaches you.', size=11, color=NAVY)
+kv_table([
+    ('Payment frequency', 'Subcontractor payments are processed weekly.'),
+    ('What’s included', 'All approved, completed jobs for which Vyntra has received the customer’s payment during that payment period.'),
+    ('Standard residential', 'Paid in the next available weekly run once the customer’s final payment has been received.'),
+    ('Commercial & account clients', 'Your payment may follow the client’s agreed trading terms where applicable.'),
+    ('If the customer hasn’t paid', 'Payment for that job may be delayed until Vyntra receives it, unless Vyntra decides otherwise at its sole discretion.'),
+    ('Method', 'EFT to your nominated account, with a remittance emailed each run.'),
+], head=('Item', 'How it works'))
+callout('We keep you informed', 'Vyntra will always communicate with you about any significant payment delays. Never contact customers about outstanding invoices or payment status.', fill='ECFDF3')
+callout('Invoicing & GST', 'Where you invoice, submit it through the portal quoting the job number and your ABN. If registered for GST, show it separately.')
+page_break()
+
+kicker('Section 04 · Part 4 of 4'); h1('Payment Policy — Rates, call-outs & approvals')
+para('Your rate for each job is agreed up front. These are the standard rules for rates, call-outs and any change to a job once it is underway.', size=11, color=NAVY)
+h2('Rates & call-outs')
+kv_table([
+    ('Minimum call-out', 'A minimum charge applies to every attendance, as agreed for the job'),
+    ('Standard hours', 'Mon–Fri, 7:00am–5:00pm at the agreed standard rate'),
+    ('After-hours work', 'Evenings & weekends attract a higher agreed rate — confirm before attending'),
+    ('Emergency work', 'Urgent call-outs are paid at the agreed emergency rate and prioritised'),
+], head=('Type', 'How it works'))
+h2('Approvals & changes')
+kv_table([
+    ('Extra work approval', 'Stop and get written approval from Vyntra before any work beyond the original scope. Unapproved extras may not be paid.'),
+    ('Cancellation', 'If a client cancels a scheduled job at short notice, a cancellation fee may apply as agreed. If you can’t attend a scheduled job, submit an unavailability notice as early as possible (see Code of Conduct).'),
+    ('Variations', 'Any change to price, scope or timing must be confirmed by Vyntra in writing so the customer’s invoice can be updated.'),
+], head=('Situation', 'What to do'))
+callout('Approved variations are paid', 'When extra work or a variation is approved by Vyntra in writing, it is added to the customer’s invoice and flows through to your pay. Unapproved extras may not be.', fill='ECFDF3')
+page_break()
+
+# ============ BREAK POLICY ============
+kicker('Section 05 · Looking after you'); h1('Break policy')
+para('Rest breaks keep you safe and doing your best work. Here is what you are entitled to and how to record it.', size=11, color=NAVY)
+h2('Your entitlement')
+checklist(['A minimum unpaid 30-minute meal break on longer jobs or shifts.', 'Longer breaks may apply depending on the size, duration and physical demands of the work.', 'Take your break at a sensible point that does not disrupt the customer.'])
+h2('Recording your break')
+checklist(['Record every break through the Vyntra Subcontractor Portal.', 'Clock out when you start your break.', 'Clock back in when you return to work.'])
+callout('Accurate records matter', 'Clocking breaks correctly keeps your timesheet and pay accurate. Breaks that are not recorded properly may create timesheet discrepancies, which will be investigated.')
+page_break()
+
+# ============ SUBCONTRACTOR PORTAL ============
+kicker('Section 06 · Your digital workspace'); h1('The Vyntra Subcontractor Portal')
+para('Once you are approved and your documents are verified, you will receive secure login credentials to your own portal within Vyntra OS — your hub for every job.', size=11, color=NAVY)
+h2('What you can do in the portal')
+checklist([
+    'View upcoming jobs and completed job history.',
+    'View customer and property details for your allocated jobs.',
+    'Review notes and photos from previous visits to returning clients.',
+    'Upload before & after photos.',
+    'Add job notes and completion reports.',
+    'Start and stop work timers.',
+    'Clock in and out for unpaid meal breaks.',
+    'Record your total working time.',
+    'Submit invoices (where applicable).',
+    'View payment history and payment status.',
+    'Update your availability.',
+    'Submit leave requests and unavailability notices.',
+    'Upload renewed insurance certificates and licences.',
+    'Receive company announcements and important updates.',
+])
+callout('Everything is recorded — for your protection too', 'All activity in the portal is timestamped and logged. Clock-ins, clock-outs, break times, photo uploads and job updates are recorded for quality assurance, payroll accuracy and customer service. This gives both you and Vyntra a complete, fair digital record of every job.', fill='0F172A')
+page_break()
+
+# ============ REQUIRED DOCUMENTS ============
+kicker('Section 07 · Before your first job'); h1('Required documents')
+para('Please provide the following so we can verify you and activate your account.', size=11, color=NAVY)
+docs_list = [
+    ('ABN — Australian Business Number', 'Mandatory'),
+    ('Availability — your regular working days', 'Mandatory'),
+    ('Public Liability Insurance — current certificate, minimum $20 million', 'Mandatory'),
+    ('Driver Licence — front & back', 'Mandatory'),
+    ('White Card — construction induction', 'If applicable'),
+    ('Police Check — national criminal history', 'If required'),
+    ('Working With Children Check', 'If required'),
+    ('Bank Details — BSB & account number', 'Mandatory'),
+    ('Emergency Contact — name & phone', 'Mandatory'),
+]
+t = doc.add_table(rows=1, cols=3); t.alignment = WD_TABLE_ALIGNMENT.CENTER; line_borders(t)
+hd = t.rows[0].cells
+for i, htxt in enumerate(('☐', 'Document', 'Requirement')):
+    shade(hd[i], '0F172A'); set_cell_margins(hd[i])
+    run(hd[i].paragraphs[0], htxt, size=9, bold=True, color=WHITE)
+for ri, (d, r) in enumerate(docs_list):
+    cells = t.add_row().cells
+    if ri % 2 == 1:
+        for cc in cells: shade(cc, 'F8FAFC')
+    for cc in cells: set_cell_margins(cc)
+    run(cells[0].paragraphs[0], '☐', size=13, color=NAVY)
+    run(cells[1].paragraphs[0], d, size=9.5, color=NAVY, bold=True)
+    run(cells[2].paragraphs[0], r, size=9.5, color=BODY)
+for row in t.rows:
+    row.cells[0].width = Cm(1.2); row.cells[1].width = Cm(10.6); row.cells[2].width = Cm(5.2)
+doc.add_paragraph()
+callout('How to submit', 'Attach clear PDF or photo copies to info@vyntrapropertyservices.com or upload them through your subcontractor portal. Keep insurance and checks current — expired documents will pause your jobs until renewed.')
+page_break()
+
+# ============ AGREEMENT ============
+clauses = [
+    ('1', 'Independent contractor relationship', 'You are engaged as an independent contractor, not an employee, partner or agent of Vyntra. You are responsible for your own tax, superannuation, insurances and leave. Nothing in this Agreement creates an employment relationship, and you may work for others provided you meet your obligations to us.'),
+    ('2', 'Scope & payment', 'Vyntra will schedule property maintenance and cleaning jobs to you within your nominated availability. You agree to perform allocated work with due care and skill and to the standards in this pack and any reasonable directions from Vyntra. Vyntra manages all invoicing and collects all customer payments; you must not request, accept or discuss payment or pricing with customers, and must only begin work once Vyntra confirms the job is approved to proceed. Vyntra pays you weekly for approved, completed jobs for which it has received the customer’s payment; where a customer has not paid, payment for that job may be delayed until received, at Vyntra’s sole discretion, with Vyntra keeping you informed of any significant delay.'),
+    ('3', 'Availability & attendance', 'You provide Vyntra with your regular availability, and Vyntra allocates jobs within those nominated days. Once a job is allocated within your available hours, you are expected to attend and complete it on time and to standard. You remain an independent contractor controlling your own availability, but by nominating it you commit to attend jobs scheduled within it. If exceptional circumstances prevent attendance, notify Vyntra as soon as possible with an unavailability notice and a reasonable explanation; planned leave or availability changes must be notified in advance. Repeated late cancellations, no-shows or inadequate notice may affect future allocations and may lead to suspension or termination.'),
+    ('4', 'Your own equipment', 'Unless agreed otherwise, you supply your own tools, equipment, materials and transport, and are responsible for their condition, safety and maintenance.'),
+    ('5', 'Insurance requirements', 'You must hold and maintain current Public Liability Insurance of at least $20 million (or another minimum Vyntra notifies you of), plus any insurance required by law for your trade — for example Workers Compensation where applicable. You agree to provide certificates of currency on request and to keep them current at all times.'),
+    ('6', 'Work standards & safety', 'You agree to perform all work safely, lawfully and to a professional standard, complying with all work health and safety laws and the standards in this pack. You will take reasonable care for your own safety and that of others, and stop work and notify Vyntra if a situation is unsafe.'),
+    ('7', 'Confidentiality', 'You will keep confidential all non-public information you learn through your engagement — including Vyntra’s clients, pricing, methods and systems — and use it only to perform the work. This obligation continues after your engagement ends.'),
+    ('8', 'Privacy', 'You will handle any personal information of clients and occupants in line with the Privacy Act 1988 (Cth) and Vyntra’s directions — collecting only what is needed, keeping it secure, and never disclosing or using it for any purpose other than the job.'),
+    ('9', 'Non-solicitation of Vyntra clients', 'During your engagement and for 12 months after it ends, you will not directly or indirectly solicit, accept or perform private work for any Vyntra client you were introduced to or serviced through Vyntra, without Vyntra’s written consent. All client opportunities must be referred back to Vyntra.'),
+    ('10', 'Intellectual property', 'Any materials, photos, reports or records you create in performing the work — including before and after photos — are Vyntra’s property and may be used by Vyntra for service delivery, quality and marketing. You grant Vyntra a perpetual licence to use them for these purposes.'),
+    ('11', 'Liability & indemnity', 'You are responsible for the work you perform and for any loss, damage or claim arising from your acts, omissions or negligence. To the extent permitted by law, you indemnify Vyntra against such claims. Nothing in this clause limits rights that cannot be excluded under the Australian Consumer Law.'),
+    ('12', 'Termination', 'Either party may end this Agreement at any time by giving reasonable notice in writing. Vyntra may suspend or end your engagement immediately for a serious breach — including a breach of the Code of Conduct, safety, confidentiality or non-solicitation terms. Ending the Agreement does not affect rights or payments accrued beforehand.'),
+    ('13', 'Subcontracting & assignment', 'You will not subcontract, assign or transfer a Vyntra job to anyone else without Vyntra’s prior written consent. Allocated jobs are personal to you and the team we have approved.'),
+    ('14', 'Dispute resolution', 'If a dispute arises, both parties agree to first raise it in good faith and try to resolve it through discussion. If it cannot be resolved within a reasonable time, the parties may refer the matter to mediation before commencing legal proceedings, except where urgent relief is needed.'),
+    ('15', 'Governing law', 'This Agreement is governed by the laws of New South Wales, Australia. The parties submit to the non-exclusive jurisdiction of the courts of New South Wales.'),
+    ('16', 'Entire agreement', 'This Agreement, together with the Code of Conduct, Payment Policy and each job’s brief, forms the entire agreement between us. If any part is found to be invalid, the rest continues to apply. Vyntra may update this pack from time to time and will notify you of material changes.'),
+]
+kicker('Section 08 · Independent Contractor Agreement'); h1('Independent Contractor Agreement')
+para('This Agreement sets out the terms on which you provide services to Vyntra as an independent contractor. It is written in plain English — please read it before you sign the declaration.', size=11, color=NAVY)
+kv_table([
+    ('Principal', 'Vyntra Property Services'),
+    ('ABN', '69 252 402 831'),
+    ('Contractor', 'As named on the signed declaration'),
+    ('Governing law', 'New South Wales, Australia'),
+], head=('Party', 'Detail'))
+for i, (n, t, d) in enumerate(clauses):
+    p = doc.add_paragraph()
+    run(p, n + '.  ', size=10.5, bold=True, color=GOLD)
+    run(p, t, size=10.5, bold=True, color=NAVY)
+    p.paragraph_format.space_after = Pt(1); p.paragraph_format.space_before = Pt(6)
+    pb = doc.add_paragraph(); run(pb, d, size=9.5)
+    pb.paragraph_format.space_after = Pt(4)
+    if i == 7:  # break agreement across two pages
+        page_break()
+        kicker('Section 08 · Independent Contractor Agreement (continued)'); h1('Agreement — continued')
+callout('Plain-English summary', 'Be safe and insured, do great work, look after our clients and their information, refer client opportunities back to us, and we will keep the jobs and payments flowing. This document is a clear summary of our working arrangement and is not legal advice.', fill='ECFDF3')
+page_break()
+
+# ============ FAQ ============
+kicker('Section 09 · Quick answers'); h1('Frequently asked questions')
+faqs = [
+    ('When do I get paid?', 'Weekly. Each run covers your approved, completed jobs where Vyntra has received the customer’s payment. Residential jobs are paid in the next run after the customer’s final payment; commercial account clients may follow their agreed terms.'),
+    ('How does scheduling work?', 'You give Vyntra your regular availability and we book jobs into those days. Once a job is scheduled within your available hours, you are expected to attend and complete it.'),
+    ('What if I can’t make a scheduled job?', 'Tell Vyntra as soon as possible and submit an unavailability notice with the reason. If you are just running late, call ahead. Repeated short-notice cancellations or no-shows may affect future work.'),
+    ('What if the customer wants additional work?', 'Do not start it. Get written approval from Vyntra first so the extra scope and price are agreed and you get paid for it.'),
+    ('Who do I contact?', 'Your Vyntra coordinator on 0451 510 026 or info@vyntrapropertyservices.com for anything job-related.'),
+    ('What happens if equipment is damaged?', 'Stop, make the area safe, and report it to Vyntra immediately with photos. Do not attempt to hide or quietly fix damage.'),
+    ('Do I collect payment from customers?', 'No. Vyntra invoices and collects from every customer. If asked, you may politely remind a customer that Vyntra has sent the final invoice — but never collect payment, quote prices, discuss pricing or chase outstanding invoices.'),
+    ('Where do I log my time and breaks?', 'In the Vyntra Subcontractor Portal. Clock in and out, record your unpaid meal break, upload before & after photos and add job notes — it is all timestamped.'),
+]
+for q, a in faqs:
+    p = doc.add_paragraph(); run(p, 'Q.  ', size=10.5, bold=True, color=GOLD); run(p, q, size=10.5, bold=True, color=NAVY)
+    p.paragraph_format.space_before = Pt(7); p.paragraph_format.space_after = Pt(1)
+    pa = doc.add_paragraph(); run(pa, a, size=9.5)
+    pa.paragraph_format.left_indent = Cm(0.55); pa.paragraph_format.space_after = Pt(3)
+callout('Still have a question?', 'Reach the Vyntra team on 0451 510 026 or email info@vyntrapropertyservices.com. We are here to help you do your best work.')
+page_break()
+
+# ============ DECLARATION ============
+kicker('Section 10 · Read · agree · sign'); h1('Declaration & agreement')
+para('By signing below, I confirm that I have read, understood and agree to be bound by the following. This page can be completed and signed electronically, or printed and signed by hand.', size=11, color=NAVY)
+checklist([
+    'I agree to the Independent Contractor Agreement',
+    'I agree to the Code of Conduct',
+    'I agree to the Payment Policy',
+    'I agree to the Safety Requirements',
+    'I agree to maintain Confidentiality',
+    'I agree to protect Client Privacy',
+    'I agree to the Non-Solicitation Policy',
+], mark='☐')
+p_acc = doc.add_paragraph()
+run(p_acc, '☐  ', size=13, color=NAVY)
+run(p_acc, 'I confirm that all information and documents I have provided are accurate and current, and I understand that providing false or expired documents may result in suspension or removal from the Vyntra network.', size=9.5)
+p_acc.paragraph_format.left_indent = Cm(0.4); p_acc.paragraph_format.space_before = Pt(4); p_acc.paragraph_format.space_after = Pt(4)
+h2('Your details')
+fields = [('Full Name', ''), ('ABN', ''), ('Company Name', ''), ('Mobile Number', ''), ('Email', ''), ('Date', '')]
+ft = doc.add_table(rows=3, cols=2); ft.alignment = WD_TABLE_ALIGNMENT.CENTER; line_borders(ft)
+flat = [fields[0], fields[1], fields[2], fields[3], fields[4], fields[5]]
+idx = 0
+for r in range(3):
+    for c in range(2):
+        cell = ft.cell(r, c); set_cell_margins(cell, 120, 200, 160, 160)
+        lbl, _ = flat[idx]; idx += 1
+        run(cell.paragraphs[0], lbl.upper(), size=8, bold=True, color=MUTED)
+        cell.add_paragraph().add_run(' ')
+for row in ft.rows:
+    row.cells[0].width = Cm(8.5); row.cells[1].width = Cm(8.5)
+doc.add_paragraph()
+st = doc.add_table(rows=1, cols=1); st.alignment = WD_TABLE_ALIGNMENT.CENTER; line_borders(st, '94A3B8')
+sc = st.cell(0, 0); shade(sc, 'F8FAFC'); set_cell_margins(sc, 200, 700, 160, 160)
+run(sc.paragraphs[0], 'SIGNATURE', size=8, bold=True, color=MUTED)
+doc.add_paragraph()
+callout('Return this page', 'Send the completed declaration to info@vyntrapropertyservices.com with your documents to activate your account.', fill='ECFDF3')
+pf2 = doc.add_paragraph(); run(pf2, 'Vyntra Property Services · ABN 69 252 402 831 · Level 12, 1 Sydney Avenue, Sydney NSW · This declaration forms part of your engagement with Vyntra.', size=8, color=MUTED)
+page_break()
+
+# ============ WHAT HAPPENS NEXT ============
+kicker('Section 11 · After you sign'); h1('What happens next?')
+para('Once you have signed your declaration and sent it back with your documents, here is how we will get you ready for your first job.', size=11, color=NAVY)
+next_steps = [
+    ('1', 'You submit', 'Return your signed declaration and required documents to Vyntra.'),
+    ('2', 'We review & verify', 'We check your documents, insurance and any required clearances — usually within 2–3 business days.'),
+    ('3', 'Approval', 'Once everything checks out, we confirm that you are approved to work with Vyntra.'),
+    ('4', 'Account activation', 'We set up your profile, issue your secure Vyntra Subcontractor Portal login, and add you to our active network.'),
+    ('5', 'Your first jobs', 'We start scheduling jobs within your nominated availability that match your trade and service area.'),
+]
+for n, t, d in next_steps:
+    p = doc.add_paragraph()
+    run(p, n + '  ', size=12, bold=True, color=GOLD)
+    run(p, t + '  —  ', size=10.5, bold=True, color=NAVY)
+    run(p, d, size=9.5, color=MUTED)
+    p.paragraph_format.space_after = Pt(4)
+callout('If anything is missing', 'If anything needs updating, we will let you know exactly what is required — so nothing holds up your start.', fill='ECFDF3')
+h2('Contact Vyntra')
+ct = doc.add_table(rows=1, cols=3); ct.alignment = WD_TABLE_ALIGNMENT.CENTER; no_borders(ct)
+contacts = [('PHONE', '0451 510 026'), ('EMAIL', 'info@vyntrapropertyservices.com'), ('AFTER-HOURS & EMERGENCIES', '0451 510 026')]
+for i, (l, v) in enumerate(contacts):
+    cc = ct.cell(0, i); shade(cc, '0F172A'); set_cell_margins(cc, 160, 160, 180, 180)
+    run(cc.paragraphs[0], l, size=8, bold=True, color=GOLD_BR); cc.paragraphs[0].paragraph_format.space_after = Pt(2)
+    pv = cc.add_paragraph(); run(pv, v, size=11, bold=True, color=WHITE)
+for i in range(3):
+    ct.cell(0, i).width = Cm(5.67)
+doc.add_paragraph()
+callout('Welcome to the Vyntra network', 'We are glad to have you on board. Do great work, keep us in the loop, and we will keep the jobs coming.', fill='0F172A')
+
+out = 'dist/Vyntra-Contractor-Declaration-and-Agreement.docx'
+doc.save(out)
+print('Saved', out)
