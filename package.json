@@ -14,8 +14,9 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.105.0",
     "@hookform/resolvers": "^3.10.0",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.1",
+    "@photo-sphere-viewer/autorotate-plugin": "^5.14.3",
+    "@photo-sphere-viewer/core": "^5.14.3",
+    "@photo-sphere-viewer/markers-plugin": "^5.14.3",
     "@supabase/supabase-js": "^2.48.1",
     "clsx": "^2.1.1",
     "framer-motion": "^11.18.2",
