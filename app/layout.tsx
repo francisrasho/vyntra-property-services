@@ -1,31 +1,44 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Fraunces, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import { GlassNav } from "@/components/layout/GlassNav";
+import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
-import { FloatingQuoteButton } from "@/components/layout/FloatingQuoteButton";
-import { MobileCallBar } from "@/components/layout/MobileCallBar";
 import { QuoteModalProvider } from "@/components/forms/QuoteModalProvider";
-import { ExitIntentPopup } from "@/components/forms/ExitIntentPopup";
 import { JsonLd, localBusinessSchema } from "@/lib/seo";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import { ChatWidget } from "@/components/chat/ChatWidget";
 
-const inter = Inter({
+/* The Property voice — architectural serif (production stand-in for Signifier). */
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["opsz"],
+});
+
+/* The Working voice — neutral grotesque (deliberately NOT Inter/Geist). */
+const hanken = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-hanken",
+  display: "swap",
+});
+
+/* The System voice — monospace, reserved for Vyntra OS elements only. */
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  ),
   title: {
-    default: "Vyntra Property Services",
+    default: "Vyntra Property Services — Your property, on the record",
     template: "%s · Vyntra Property Services",
   },
   description:
-    "Sydney's premium property maintenance and cleaning partner. Trusted by property managers, strata managers and businesses for reliable, fully insured, technology-driven service.",
+    "Technology-enabled property maintenance and cleaning across Sydney. Every job scoped, checklisted and photo-verified — documented, accountable, on the record. Powered by Vyntra OS.",
   keywords: [
     "property maintenance sydney",
     "commercial cleaning sydney",
@@ -39,16 +52,15 @@ export const metadata: Metadata = {
     locale: "en_AU",
     url: "/",
     siteName: "Vyntra Property Services",
-    title:
-      "Vyntra Property Services | Premium Property Maintenance & Cleaning, Sydney",
+    title: "Vyntra Property Services — Your property, on the record",
     description:
-      "Sydney's premium property maintenance and cleaning partner — trusted by property managers, strata managers and businesses.",
+      "Technology-enabled property maintenance and cleaning across Sydney. Every job documented, verified and accountable. Powered by Vyntra OS.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vyntra Property Services | Premium Property Services, Sydney",
+    title: "Vyntra Property Services — Your property, on the record",
     description:
-      "Professional cleaning, maintenance and property solutions trusted across Sydney.",
+      "Technology-enabled property care across Sydney. Documented, verified, accountable.",
   },
 };
 
@@ -56,21 +68,23 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased">
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${hanken.variable} ${plexMono.variable}`}
+    >
+      <body className="bg-travertine font-sans text-ink antialiased">
         <JsonLd data={localBusinessSchema()} />
-        <SmoothScroll>
-          <ScrollProgress />
-          <QuoteModalProvider>
-            <GlassNav />
-            <main>{children}</main>
-            <Footer />
-            <FloatingQuoteButton />
-            <MobileCallBar />
-            <ExitIntentPopup />
-            <ChatWidget />
-          </QuoteModalProvider>
-        </SmoothScroll>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-graphite focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-ondark"
+        >
+          Skip to content
+        </a>
+        <QuoteModalProvider>
+          <Nav />
+          <main id="main">{children}</main>
+          <Footer />
+        </QuoteModalProvider>
       </body>
     </html>
   );

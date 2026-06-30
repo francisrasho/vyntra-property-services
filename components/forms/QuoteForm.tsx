@@ -121,16 +121,18 @@ export function QuoteForm({ onSuccess }: { onSuccess?: () => void }) {
   if (status === "success") {
     return (
       <div className="py-6 text-center">
-        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-gold/15 text-gold-dark">
+        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-graphite text-brass">
           <CheckCircle2 className="h-7 w-7" />
         </div>
-        <h3 className="mt-4 text-2xl font-bold text-ink">Request received</h3>
+        <h3 className="mt-4 font-serif text-2xl font-medium text-ink">
+          Request received
+        </h3>
         <p className="mx-auto mt-2 max-w-sm text-sm text-ink-600">
           Thank you — a member of the Vyntra team will be in touch shortly with
           your tailored quote. Need us sooner?
         </p>
         <div className="mt-5 flex justify-center">
-          <Button href={`tel:${company.phone}`} external variant="secondary" size="sm">
+          <Button href={`tel:${company.phone}`} external variant="primary" size="sm">
             <PhoneCall className="h-4 w-4" /> Call {company.phoneDisplay}
           </Button>
         </div>
@@ -141,9 +143,11 @@ export function QuoteForm({ onSuccess }: { onSuccess?: () => void }) {
   return (
     <FormProvider {...methods}>
       <form onSubmit={onSubmit} noValidate>
-        <h3 className="text-xl font-bold text-ink">Request a free quote</h3>
+        <h3 className="font-serif text-xl font-medium text-ink">
+          Open a property
+        </h3>
         <p className="mt-1 text-sm text-ink-600">
-          Takes under a minute. No obligation.
+          A free scope. Takes under a minute, no obligation.
         </p>
 
         {/* Progress */}
@@ -153,13 +157,13 @@ export function QuoteForm({ onSuccess }: { onSuccess?: () => void }) {
               <div
                 className={
                   "h-1.5 rounded-full transition-colors " +
-                  (i <= step ? "bg-gold" : "bg-ink/10")
+                  (i <= step ? "bg-graphite" : "bg-line")
                 }
               />
               <span
                 className={
                   "mt-1.5 block text-[11px] font-medium " +
-                  (i <= step ? "text-ink" : "text-ink-600/60")
+                  (i <= step ? "text-ink" : "text-ink-400")
                 }
               >
                 {label}

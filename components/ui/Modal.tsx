@@ -52,7 +52,7 @@ export function Modal({
           exit={{ opacity: 0 }}
         >
           <div
-            className="absolute inset-0 bg-ink/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-graphite/60 backdrop-blur-sm"
             aria-hidden
             onClick={onClose}
           />
@@ -67,7 +67,7 @@ export function Modal({
             exit={{ y: 24, opacity: 0 }}
             transition={{ type: "spring", damping: 28, stiffness: 280 }}
             className={cn(
-              "glass relative z-10 max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl p-6 shadow-[var(--shadow-glass)] outline-none sm:rounded-3xl sm:p-8",
+              "relative z-10 max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl border border-line bg-paper p-6 shadow-[var(--shadow-lift)] outline-none sm:rounded-3xl sm:p-8",
               className,
             )}
           >
@@ -75,7 +75,7 @@ export function Modal({
               type="button"
               onClick={onClose}
               aria-label="Close dialog"
-              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full text-ink-600 transition-colors hover:bg-ink/5 hover:text-ink"
+              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full text-ink-600 transition-colors hover:bg-graphite/5 hover:text-ink"
             >
               <X className="h-5 w-5" />
             </button>

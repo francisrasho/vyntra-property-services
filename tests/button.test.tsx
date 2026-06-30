@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/Button";
 
 describe("Button", () => {
   it("renders a <button> with primary styles by default", () => {
-    render(<Button>Get Quote</Button>);
-    const btn = screen.getByRole("button", { name: "Get Quote" });
+    render(<Button>Open a property</Button>);
+    const btn = screen.getByRole("button", { name: "Open a property" });
     expect(btn).toBeInTheDocument();
-    expect(btn.className).toContain("bg-gold");
+    expect(btn.className).toContain("bg-graphite");
     expect(btn).toHaveAttribute("type", "button");
   });
 
@@ -17,10 +17,10 @@ describe("Button", () => {
     expect(link).toHaveAttribute("href", "/contact");
   });
 
-  it("applies the secondary variant styles", () => {
-    render(<Button variant="secondary">Book</Button>);
+  it("applies the on-dark variant styles", () => {
+    render(<Button variant="ondark">Book</Button>);
     expect(screen.getByRole("button", { name: "Book" }).className).toContain(
-      "bg-ink",
+      "bg-ondark",
     );
   });
 

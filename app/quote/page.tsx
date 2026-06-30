@@ -42,17 +42,17 @@ export default function QuotePage() {
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
             <div>
-              <h2 className="text-2xl font-bold tracking-tight text-ink">
-                Why request a quote with Vyntra?
+              <h2 className="font-serif text-2xl font-medium tracking-tight text-ink">
+                Why open a property with Vyntra?
               </h2>
               <ul className="mt-8 space-y-6">
                 {reasons.map((r) => (
                   <li key={r.title} className="flex gap-4">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-ink text-gold">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-graphite text-brass">
                       <r.icon className="h-5 w-5" />
                     </span>
                     <div>
-                      <h3 className="font-bold text-ink">{r.title}</h3>
+                      <h3 className="font-medium text-ink">{r.title}</h3>
                       <p className="mt-1 text-sm leading-relaxed text-ink-600">
                         {r.text}
                       </p>
@@ -62,7 +62,7 @@ export default function QuotePage() {
               </ul>
             </div>
 
-            <div className="rounded-3xl border border-ink/[0.08] bg-surface p-6 shadow-[var(--shadow-glass)] sm:p-8">
+            <div className="rounded-3xl border border-line bg-paper p-6 shadow-[var(--shadow-panel)] sm:p-8">
               <QuoteForm />
             </div>
           </div>

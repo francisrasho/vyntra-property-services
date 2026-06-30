@@ -71,17 +71,19 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-gold/30 bg-gold/5 p-8 text-center">
-        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-gold/15 text-gold-dark">
+      <div className="rounded-2xl border border-line bg-paper p-8 text-center">
+        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-graphite text-brass">
           <CheckCircle2 className="h-7 w-7" />
         </div>
-        <h3 className="mt-4 text-2xl font-bold text-ink">Message sent</h3>
+        <h3 className="mt-4 font-serif text-2xl font-medium text-ink">
+          Message sent
+        </h3>
         <p className="mx-auto mt-2 max-w-md text-sm text-ink-600">
           Thanks for reaching out. A member of the Vyntra team will respond
           shortly. For urgent matters, call us any time.
         </p>
         <div className="mt-5 flex justify-center">
-          <Button href={`tel:${company.phone}`} external variant="secondary" size="sm">
+          <Button href={`tel:${company.phone}`} external variant="primary" size="sm">
             <PhoneCall className="h-4 w-4" /> {company.phoneDisplay}
           </Button>
         </div>
@@ -140,10 +142,10 @@ export function ContactForm() {
         <div>
           <span className="mb-1.5 block text-sm font-medium text-ink">
             Attach a file{" "}
-            <span className="font-normal text-ink-600/70">(optional)</span>
+            <span className="font-normal text-ink-400">(optional)</span>
           </span>
-          <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-ink/20 bg-white/60 px-4 py-3 text-sm text-ink-600 transition hover:border-gold/50">
-            <Paperclip className="h-4 w-4 text-gold-dark" />
+          <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-line bg-paper px-4 py-3 text-sm text-ink-600 transition hover:border-brass/50">
+            <Paperclip className="h-4 w-4 text-brass" />
             <span>{fileName ?? "Choose a file (photos, plans, scope)…"}</span>
             <input
               type="file"

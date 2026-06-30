@@ -7,9 +7,9 @@ export const company: Company = {
   legalName: "Vyntra Property Services Pty Ltd",
   tagline: "Premium Property Maintenance & Cleaning Solutions",
 
-  phone: "0451 510 026", // TODO: real phone (E.164)
-  phoneDisplay: "0451 510 026", // TODO: real phone
-  emergencyPhone: "0451 510 026", // TODO: real after-hours line
+  phone: "+61451510026", // TODO: confirm real phone (E.164 for tel: links)
+  phoneDisplay: "0451 510 026", // TODO: confirm real phone
+  emergencyPhone: "+61451510026", // TODO: real after-hours line
   emergencyPhoneDisplay: "0451 510 026", // TODO
 
   email: "info@vyntrapropertyservices.com", // TODO: real inbox

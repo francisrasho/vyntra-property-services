@@ -12,7 +12,7 @@ export function FAQ({ showHeading = true }: { showHeading?: boolean } = {}) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="bg-bg py-24">
+    <section id="faq" className="bg-travertine py-24">
       <Container>
         {showHeading && (
           <SectionHeading
@@ -23,12 +23,12 @@ export function FAQ({ showHeading = true }: { showHeading?: boolean } = {}) {
         )}
 
         <div
-          className={`mx-auto max-w-3xl overflow-hidden rounded-2xl border border-ink/10 bg-surface ${showHeading ? "mt-12" : ""}`}
+          className={`mx-auto max-w-3xl overflow-hidden rounded-2xl border border-line bg-paper ${showHeading ? "mt-12" : ""}`}
         >
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
-              <div key={i} className={cn(i > 0 && "border-t border-ink/10")}>
+              <div key={i} className={cn(i > 0 && "border-t border-line")}>
                 <h3>
                   <button
                     type="button"
@@ -36,10 +36,10 @@ export function FAQ({ showHeading = true }: { showHeading?: boolean } = {}) {
                     aria-expanded={isOpen}
                     className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                   >
-                    <span className="font-semibold text-ink">{f.question}</span>
+                    <span className="font-medium text-ink">{f.question}</span>
                     <ChevronDown
                       className={cn(
-                        "h-5 w-5 shrink-0 text-gold-dark transition-transform duration-300",
+                        "h-5 w-5 shrink-0 text-brass transition-transform duration-300",
                         isOpen && "rotate-180",
                       )}
                     />

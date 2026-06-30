@@ -4,19 +4,21 @@ import Link from "next/link";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "secondary" | "ghost" | "outline";
+type Variant = "primary" | "ondark" | "ghost" | "outline";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:pointer-events-none disabled:opacity-60";
+  "inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-tight transition-[transform,background-color,border-color,color] duration-300 ease-[var(--ease-settle)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:pointer-events-none disabled:opacity-60 motion-safe:hover:-translate-y-0.5";
 
 const variants: Record<Variant, string> = {
+  // Primary on light surfaces — graphite with a warm brass-lit hover.
   primary:
-    "bg-gold text-ink shadow-[var(--shadow-glow)] hover:bg-gold-soft hover:-translate-y-0.5",
-  secondary: "bg-ink text-white hover:bg-ink-700 hover:-translate-y-0.5",
-  ghost: "text-ink hover:bg-ink/5",
+    "bg-graphite text-ondark shadow-[var(--shadow-panel)] hover:shadow-[var(--shadow-lift)]",
+  // Primary on dark surfaces — warm-light fill.
+  ondark: "bg-ondark text-graphite hover:bg-white",
+  ghost: "text-ink hover:bg-graphite/5",
   outline:
-    "border border-ink/15 bg-white/40 text-ink hover:border-gold hover:text-gold-dark",
+    "border border-line text-ink hover:border-graphite hover:bg-graphite/[0.03]",
 };
 
 const sizes: Record<Size, string> = {

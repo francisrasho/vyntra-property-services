@@ -30,7 +30,7 @@ export default function ContactPage() {
           <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr]">
             {/* Form */}
             <div>
-              <h2 className="text-2xl font-bold tracking-tight text-ink">
+              <h2 className="font-serif text-2xl font-medium tracking-tight text-ink">
                 Send us a message
               </h2>
               <p className="mt-2 text-sm text-ink-600">
@@ -44,23 +44,23 @@ export default function ContactPage() {
 
             {/* Details */}
             <div className="space-y-5">
-              <div className="rounded-2xl border border-ink/[0.08] bg-surface p-6">
-                <h3 className="text-sm font-semibold text-ink">Get in touch</h3>
+              <div className="rounded-2xl border border-line bg-paper p-6">
+                <h3 className="text-sm font-medium text-ink">Get in touch</h3>
                 <ul className="mt-4 space-y-3 text-sm">
                   <li className="flex items-start gap-3">
-                    <PhoneCall className="mt-0.5 h-4 w-4 shrink-0 text-gold-dark" />
-                    <a href={`tel:${company.phone}`} className="text-ink hover:text-gold-dark">
+                    <PhoneCall className="mt-0.5 h-4 w-4 shrink-0 text-brass" />
+                    <a href={`tel:${company.phone}`} className="text-ink hover:text-brass">
                       {company.phoneDisplay}
                     </a>
                   </li>
                   <li className="flex items-start gap-3">
-                    <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-dark" />
-                    <a href={`mailto:${company.email}`} className="text-ink hover:text-gold-dark">
+                    <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brass" />
+                    <a href={`mailto:${company.email}`} className="text-ink hover:text-brass">
                       {company.email}
                     </a>
                   </li>
                   <li className="flex items-start gap-3">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-dark" />
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brass" />
                     <span className="text-ink-600">
                       {company.address.suburb}, {company.address.state}{" "}
                       {company.address.postcode}
@@ -69,9 +69,9 @@ export default function ContactPage() {
                 </ul>
               </div>
 
-              <div className="rounded-2xl border border-ink/[0.08] bg-surface p-6">
-                <h3 className="flex items-center gap-2 text-sm font-semibold text-ink">
-                  <Clock className="h-4 w-4 text-gold-dark" /> Business hours
+              <div className="rounded-2xl border border-line bg-paper p-6">
+                <h3 className="flex items-center gap-2 text-sm font-medium text-ink">
+                  <Clock className="h-4 w-4 text-brass" /> Business hours
                 </h3>
                 <ul className="mt-4 space-y-2 text-sm text-ink-600">
                   {company.hours.map((h) => (
@@ -87,7 +87,7 @@ export default function ContactPage() {
           </div>
 
           {/* Map */}
-          <div className="mt-12 overflow-hidden rounded-3xl border border-ink/10">
+          <div className="mt-12 overflow-hidden rounded-3xl border border-line">
             <iframe
               title="Vyntra service area map"
               src={`https://maps.google.com/maps?q=${mapQuery}&t=&z=11&ie=UTF8&iwloc=&output=embed`}

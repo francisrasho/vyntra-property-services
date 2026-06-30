@@ -109,3 +109,57 @@ export interface Faq {
   question: string;
   answer: string;
 }
+
+/* ------------------------------------------------------------------ *\
+   Vyntra OS content — records, people and the live signal.
+   These are the integration boundary: Tier 1 reads typed seed data;
+   Tier 2 swaps the source to live Vyntra OS via lib/repository.
+\* ------------------------------------------------------------------ */
+
+export type Segment = "strata" | "commercial" | "residential";
+
+/** A single completed, documented job — the atom of the whole experience. */
+export interface VyntraRecord {
+  /** OS job id, e.g. "STR-118". */
+  id: string;
+  /** ISO date completed. */
+  date: string;
+  suburb: string;
+  serviceSlug: string;
+  serviceName: string;
+  segment: Segment;
+  /** One-line outcome shown when a record is opened. */
+  summary: string;
+  /** Real asset paths under /public; empty string renders a branded placeholder. */
+  beforeImage: string;
+  afterImage: string;
+  /** Always "verified" for published records. */
+  status: "verified";
+}
+
+/** A live (or settled) operating event in the Signal stream. */
+export interface SignalEvent {
+  /** Display time, e.g. "07:14". */
+  time: string;
+  id: string;
+  suburb: string;
+  /** Short service/action label, e.g. "Common areas". */
+  action: string;
+  status: "verified" | "scheduled" | "en-route" | "on-site";
+}
+
+/** A real human tied to a real record — client, contractor or Vyntra team. */
+export interface VerifiedPerson {
+  kind: "client" | "contractor" | "team";
+  name: string;
+  role: string;
+  company?: string;
+  quote: string;
+  /** Real portrait path under /public; empty string renders a placeholder. */
+  image: string;
+  /** Record this voice is anchored to (client/contractor). */
+  recordId?: string;
+  suburb?: string;
+  /** Mono credential tags (contractor/team). */
+  credentials?: string[];
+}

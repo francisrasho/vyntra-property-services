@@ -1,19 +1,43 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------ *\
+   VYNTRA — Design tokens (locked Final Creative Specification)
+   Two worlds, one brand: the warm physical property + the cool Vyntra OS.
+   Premium by restraint. Trust by documentation.
+\* ------------------------------------------------------------------ */
 @theme {
-  --color-ink: #0f172a;
-  --color-ink-700: #1e293b;
-  --color-ink-600: #334155;
-  --color-gold: #d4af37;
-  --color-gold-soft: #e7cb6b;
-  --color-gold-dark: #b8932b;
-  --color-bg: #f8fafc;
-  --color-surface: #ffffff;
+  /* Core material palette ------------------------------------------- */
+  --color-graphite: #0e0f12; /* base / OS world / dark surfaces        */
+  --color-travertine: #f2ede4; /* archive / light surfaces             */
+  --color-paper: #fbf9f5; /* lightest warm surface                     */
+  --color-brass: #c6a268; /* LIGHT ONLY — glow, lit edges, dusk warmth */
+  --color-brass-soft: #d8bd8e;
+  --color-instrument: #eaf1f4; /* cool OS layer / registration marks    */
+  --color-verified: #5fe0a8; /* status ONLY — always paired icon+text   */
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Ink / text ------------------------------------------------------ */
+  --color-ink: #0e0f12; /* primary text on light                       */
+  --color-ink-600: #4b4f57; /* muted text on light                     */
+  --color-ink-400: #80858e; /* faint text on light                     */
+  --color-ondark: #f5f1ea; /* primary text on graphite (warm white)    */
+  --color-ondark-600: #b9b6af; /* muted text on graphite               */
+  --color-ondark-400: #84827d; /* faint text on graphite               */
 
-  --shadow-glass: 0 8px 32px rgba(15, 23, 42, 0.08);
-  --shadow-glow: 0 0 40px rgba(212, 175, 55, 0.25);
+  /* Hairlines ------------------------------------------------------- */
+  --color-line: rgba(14, 15, 18, 0.1); /* on light                     */
+  --color-line-dark: rgba(245, 241, 234, 0.12); /* on graphite         */
+
+  /* Type — three voices --------------------------------------------- */
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif; /* Property voice  */
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif; /* Working voice */
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace; /* OS voice */
+
+  /* Depth — soft, real shadows (never glow) ------------------------- */
+  --shadow-lift: 0 18px 40px -24px rgba(14, 15, 18, 0.45);
+  --shadow-panel: 0 8px 30px -16px rgba(14, 15, 18, 0.25);
+
+  /* Motion ---------------------------------------------------------- */
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :root {
@@ -21,55 +45,41 @@
 }
 
 html {
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--color-bg);
+  background: var(--color-travertine);
   color: var(--color-ink);
-  font-feature-settings: "cv11", "ss01";
+  font-feature-settings: "ss01", "cv01";
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+/* Tabular, aligned figures for the OS / mono voice (ledgers, readouts) */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
 }
 
-@keyframes glowPulse {
-  0%,
-  100% {
-    box-shadow: 0 0 18px 0 rgba(212, 175, 55, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 32px 7px rgba(212, 175, 55, 0.65);
-  }
-}
-.glow-pulse {
-  animation: glowPulse 2.2s ease-in-out infinite;
+/* The OS "instrument" readout: mono, uppercase, letterspaced. */
+.mono-readout {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
 }
 
-/* Lenis smooth scroll */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
+/* Glass = the Vyntra OS layer ONLY (never decoration). */
+.os-glass {
+  background: color-mix(in srgb, var(--color-graphite) 42%, transparent);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid var(--color-line-dark);
 }
 
-/* Respect users who prefer reduced motion: neutralize animations/transitions. */
+/* Reduced motion is a first-class state across the whole experience. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -84,73 +94,16 @@ html.lenis body {
   }
 }
 
-/* Utility: frosted glass surface used by nav and cards. */
-.glass {
-  background: color-mix(in srgb, var(--color-surface) 70%, transparent);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  border: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
-}
-
-.glass-dark {
-  background: color-mix(in srgb, var(--color-ink) 55%, transparent);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  border: 1px solid color-mix(in srgb, var(--color-gold) 18%, transparent);
-}
-
-/* Extruded 3D gold lettering for the hero heading. */
-.text-3d-gold {
-  text-shadow:
-    0 1px 0 #c9a227,
-    0 2px 0 #b8941f,
-    0 3px 0 #9c7d18,
-    0 4px 0 #836811,
-    0 5px 0 #6b540d,
-    0 7px 16px rgba(0, 0, 0, 0.55);
-}
-
-/* Same extrusion tuned to sit behind the gold-gradient span. */
-.text-3d-gold-soft {
-  text-shadow:
-    0 1px 0 #9c7d18,
-    0 2px 0 #836811,
-    0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* --- Lightweight CSS-3D tower used on mobile (no WebGL) --- */
-@keyframes tower-sway {
+/* The Breath — the single ambient "system is live" pulse. Disabled on reduce. */
+@keyframes vyntra-breath {
   0%,
   100% {
-    transform: rotateX(10deg) rotateY(-20deg);
+    opacity: 0.55;
   }
   50% {
-    transform: rotateX(10deg) rotateY(-8deg);
-  }
-}
-.tower-sway {
-  animation: tower-sway 10s ease-in-out infinite;
-}
-
-@keyframes floor-scan {
-  0%,
-  18%,
-  100% {
-    opacity: 0.35;
-    box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.6);
-  }
-  6% {
     opacity: 1;
-    box-shadow: 0 0 22px rgba(212, 175, 55, 0.55), 0 6px 18px -8px rgba(0, 0, 0, 0.6);
   }
 }
-.floor-scan {
-  animation: floor-scan 6s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tower-sway,
-  .floor-scan {
-    animation: none;
-  }
+.breath {
+  animation: vyntra-breath 6s var(--ease-settle) infinite;
 }

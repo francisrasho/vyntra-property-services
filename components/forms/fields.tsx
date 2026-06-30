@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export const inputBase =
-  "w-full rounded-xl border border-ink/12 bg-white/80 px-4 py-3 text-sm text-ink shadow-sm outline-none transition placeholder:text-ink-600/50 focus:border-gold focus:ring-2 focus:ring-gold/25";
+  "w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm text-ink shadow-sm outline-none transition placeholder:text-ink-400 focus:border-brass focus:ring-2 focus:ring-brass/30";
 
 function FieldShell({
   name,
@@ -28,7 +28,7 @@ function FieldShell({
     <label className={cn("block", className)}>
       <span className="mb-1.5 block text-sm font-medium text-ink">
         {label}
-        {required && <span className="text-gold-dark"> *</span>}
+        {required && <span className="text-brass"> *</span>}
       </span>
       {children}
       {err && <span className="mt-1 block text-xs text-red-500">{err}</span>}
@@ -147,8 +147,8 @@ export function Choice({
       className={cn(
         "rounded-xl border px-4 py-3 text-sm font-medium transition-all",
         selected
-          ? "border-gold bg-gold/10 text-ink shadow-[0_0_0_1px_var(--color-gold)]"
-          : "border-ink/12 bg-white/70 text-ink-600 hover:border-gold/50 hover:text-ink",
+          ? "border-graphite bg-graphite/[0.04] text-ink shadow-[0_0_0_1px_var(--color-graphite)]"
+          : "border-line bg-paper text-ink-600 hover:border-graphite/40 hover:text-ink",
         className,
       )}
     >
