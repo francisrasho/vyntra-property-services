@@ -1,15 +1,20 @@
-import { BuildingScene } from "@/components/three/DynamicBuildingScene";
+import { CinematicHero } from "@/components/sections/CinematicHero";
+import { ServicePanels } from "@/components/sections/ServicePanels";
+import { CleaningShowcase } from "@/components/sections/CleaningShowcase";
 import { Stats } from "@/components/sections/Stats";
-import { Marquee } from "@/components/sections/Marquee";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CTASection } from "@/components/sections/CTASection";
+import { ScrollTriggerBridge } from "@/components/providers/ScrollTriggerBridge";
 
 export default function Home() {
   return (
     <>
-      <BuildingScene />
+      {/* Syncs GSAP ScrollTrigger with Lenis for the cinematic sections below. */}
+      <ScrollTriggerBridge />
+      <CinematicHero />
+      <ServicePanels />
+      <CleaningShowcase />
       <Stats />
-      <Marquee />
       <Testimonials limit={3} showVideoPlaceholder={false} />
       <CTASection />
     </>
